@@ -11,5 +11,5 @@ git commit -m "(nội dung code)"
 # Đẩy code lên github
 git push
 # Đồng bộ Code từ github về máy
-git pull origin master
+git pull origin master hoặc git pull
 
