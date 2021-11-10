@@ -1,6 +1,6 @@
 > 🎈 Welcome to laravel 🎈
 
-![](https://images-cdn.newscred.com/Zz04NjA3ZjljMjQ0ODkxMWViOWRjYzU1OGJkNjI1ZjVkZA==)
+![](https://monophy.com/media/kHlrPbN9zaoOo7KXDo/monophy.gif)
 
 * Vũ Bảo Linh 
 * Nguyễn Vân Anh 
