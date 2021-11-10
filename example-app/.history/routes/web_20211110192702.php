@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/event', function () {
-    event(new Send('Welcome'));
+    event(new Send('Xin vinh biet cu '));
 });

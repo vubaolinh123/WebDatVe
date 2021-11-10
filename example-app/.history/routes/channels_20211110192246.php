@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('channel_name', function () {
+Broadcast::channel('test_name', function () {
     return true;
 });
 

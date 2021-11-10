@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/event', function () {
-    event(new Send('Welcome'));
+Route::get('/runEvent', function () {
+    event(new Send('Xin vinh biet cu '));
 });

@@ -20,8 +20,10 @@
             console.log('Component mounted.')
         },
         created() {
-            Echo.channel('channel_name')
-                .listen('Send' , function(data){})
+            Echo.channel('test_name')
+                .listen('Send' , function(data){
+                    alert('Ban win')
+            })
         }
     }
 </script>

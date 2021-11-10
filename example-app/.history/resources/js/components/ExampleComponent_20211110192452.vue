@@ -20,7 +20,7 @@
             console.log('Component mounted.')
         },
         created() {
-            Echo.channel('channel_name')
+            Echo.channel('test_name')
                 .listen('Send' , function(data){})
         }
     }

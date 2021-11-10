@@ -21,7 +21,9 @@
         },
         created() {
             Echo.channel('channel_name')
-                .listen('Send' , function(data){})
+                .listen('Send' , function(data){
+                    alert('Ban win')
+                })
         }
     }
 </script>

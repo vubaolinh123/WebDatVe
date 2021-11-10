@@ -1,6 +1,5 @@
 <?php
 
-use App\Events\Send;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/event', function () {
-    event(new Send('Welcome'));
 });

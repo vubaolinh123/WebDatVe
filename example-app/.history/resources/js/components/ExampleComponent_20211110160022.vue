@@ -18,10 +18,6 @@
     export default {
         mounted() {
             console.log('Component mounted.')
-        },
-        created() {
-            Echo.channel('channel_name')
-                .listen('Send' , function(data){})
         }
     }
 </script>
