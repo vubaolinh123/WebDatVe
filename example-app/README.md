@@ -1,6 +1,6 @@
 > 🎈 Welcome to laravel 🎈
 
-[](https://images-cdn.newscred.com/Zz04NjA3ZjljMjQ0ODkxMWViOWRjYzU1OGJkNjI1ZjVkZA==)
+![](https://images-cdn.newscred.com/Zz04NjA3ZjljMjQ0ODkxMWViOWRjYzU1OGJkNjI1ZjVkZA==)
 
 * Vũ Bảo Linh 
 * Nguyễn Vân Anh 
