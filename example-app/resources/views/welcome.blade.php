@@ -17,7 +17,7 @@
     <body class="antialiased">
         <div id="app">
             <div>
-                <example></example>
+                <h1>TEST UPDATE FILE</h1>
             </div>
         </div>
     </body>
