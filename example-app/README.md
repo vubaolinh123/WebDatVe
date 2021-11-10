@@ -1,9 +1,6 @@
 > 🎈 Welcome to laravel 🎈
 
-```php 
-<?php  
-    $team = 4 ;
-?>
+[![N|Solid](https://images-cdn.newscred.com/Zz04NjA3ZjljMjQ0ODkxMWViOWRjYzU1OGJkNjI1ZjVkZA==)
 
 * Vũ Bảo Linh 
 * Nguyễn Vân Anh 
