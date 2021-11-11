@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "npm run development",
-        "start:css": "npx tailwindcss-cli@latest build resources/css/tailwind.css -o resources/css/main.css",
+        "start:css": "npx tailwindcss --postcss -i ../src/tailwind.css -o ../css/main.css",
         "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
