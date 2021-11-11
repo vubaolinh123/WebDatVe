@@ -2,6 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "npm run development",
+        "start:css": "npx tailwindcss-cli@latest build resources/css/tailwind.css -o resources/css/main.css",
         "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
@@ -10,16 +11,18 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "autoprefixer": "^10.4.0",
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
         "jquery": "^3.6",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "popper.js": "^1.16.1",
-        "postcss": "^8.1.14",
+        "postcss": "^8.3.11",
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
+        "tailwindcss": "^2.2.19",
         "vue": "^2.6.12",
         "vue-loader": "^15.9.7",
         "vue-template-compiler": "^2.6.12"
@@ -28,5 +31,14 @@
         "laravel-echo": "^1.11.3",
         "pusher-js": "^7.0.3",
         "turbolinks": "^5.2.0"
-    }
+    },
+    "name": "example-app",
+    "description": "> 🎈 Welcome to laravel 🎈",
+    "version": "1.0.0",
+    "main": "webpack.mix.js",
+    "directories": {
+        "test": "tests"
+    },
+    "author": "",
+    "license": "ISC"
 }
