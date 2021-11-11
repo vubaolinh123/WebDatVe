@@ -1,5 +1,14 @@
 module.exports = {
-    purge: [],
+    // mode: "jit",
+    purge: [
+        "./public/**/*.html",
+        "./src/**/*.{js,jsx,ts,tsx,vue}",
+        "./css/**/*.{js,jsx,ts,tsx,vue}",
+        "./src/pages/**/*.{html,js}",
+        "./src/components/**/*.{html,js}",
+        "./src/layouts/**/*.{html,js}",
+        "./src/index.html",
+    ],
     darkMode: false, // or 'media' or 'class'
     theme: {
         color: {
