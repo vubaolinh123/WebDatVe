@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,7 @@
     <title>Laravel index</title>
 </head>
 <body>
-
+    <p>van anhcle</p>
 </body>
 </html>
 
