@@ -17,7 +17,7 @@
         <h2 class="py-4">Trang chủ > Phim > <span class="font-bold">Space Jam: A New Legacy</span></h2>
         <!-- Wrapper -->
         <div class="">
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-3 gap-10">
                 <!-- Thông Tin Chi Tiết Phim  -->
                 <div class="col-span-2">
                     <div class="grid grid-cols-3 gap-7 ">
@@ -51,23 +51,106 @@
                                     </span></span>
                             </div>
                         </div>
-                        <div class="">
-
+                    </div>
+                    <!-- NỘI DUNG PHIM  -->
+                    <div class="">
+                        <span class="text-xl my-5 block font-bold">NỘI DUNG PHIM</span>
+                        <span class="text-base"><strong>The Conjuring: The Devil Made Me Do It</strong> tiếp tục kể về
+                            một
+                            vụ án có
+                            thật từng làm chấn
+                            động thế giới.</span>
+                        <span class="text-base block my-3">Arne đã sát hại Alan Bono, một quản lý cũi nhốt động vật có
+                            mối quan
+                            hệ thân thiết với anh ta. Tuy nhiên, kẻ sát nhân và những người thân khẳng định rằng
+                            "chính ma quỷ đã dẫn dắt làm việc này"</span>
+                        <span class="text-base">Phim mới The Conjuring: The Devil Made Me Do It ra mắt tại các rạp chiếu
+                            phim từ 05.11.2021.</span>
+                    </div>
+                    <!-- END NỘI DUNG PHIM -->
+                    <!-- LỊCH CHIẾU  -->
+                    <div class="py-5">
+                        <span class="text-xl my-5 block font-bold">LỊCH CHIẾU</span>
+                        <div class="grid grid-cols-3 gap-5">
+                            <div class="">
+                                <select name="select-ca-nuoc" id="" class="w-full py-2 px-2 border-black border">
+                                    <option value="">Cả Nước</option>
+                                    <option value="">TEST1</option>
+                                    <option value="">TEST2</option>
+                                    <option value="">TEST3</option>
+                                </select>
+                            </div>
+                            <div class="">
+                                <input type="date" class="w-full py-2 px-2 border-black border">
+                            </div>
+                            <div class="">
+                                <select name="select-ca-rap" id="" class="w-full py-2 px-2 border-black border">
+                                    <option value="">Tất Cả Rạp</option>
+                                    <option value="">TEST1</option>
+                                    <option value="">TEST2</option>
+                                    <option value="">TEST3</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
+                    <!-- END LỊCH CHIẾU -->
+                    <!-- CÁC RẠP ĐANG CHIẾU -->
+                    <div class="">
+                        <div class="py-5">
+                            <span class="inline-block bg-camx text-white px-3 py-2">Galaxy Hà Nội</span>
+                            <div class="px-5 py-6 border border-black">
+                                <div class="mb-8">
+                                    <span class="inline-block mr-5">2D PHỤ ĐỀ</span>
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">19:00</span>
+                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    cursor-pointer">22:30</span>
+                                </div>
+                                <div class="mb-8">
+                                    <span class="inline-block mr-5">3D PHỤ ĐỀ</span>
+                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    cursor-pointer">19:00</span>
+                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    cursor-pointer">22:30</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-5">
+                            <span class="inline-block bg-camx text-white px-3 py-2">Galaxy Hồ Chí Minh</span>
+                            <div class="px-5 py-6 border border-black">
+                                <div class="mb-8">
+                                    <span class="inline-block mr-5">2D PHỤ ĐỀ</span>
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">19:00</span>
+                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    cursor-pointer">22:30</span>
+                                </div>
+                                <div class="mb-8">
+                                    <span class="inline-block mr-5">3D PHỤ ĐỀ</span>
+                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    cursor-pointer">19:00</span>
+                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    cursor-pointer">22:30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END CÁC RẠP ĐANG CHIẾU -->
                 </div>
                 <!-- END THÔNG TIN CHI TIẾT PHIM  -->
                 <!-- DANH SÁCH PHIM BÊN CẠNH  -->
                 <div class="">
                     <h2 class="text-xl mt-6">NHẬN KHUYẾN MÃI</h2>
                     <form action="" class="border-black border p-6 my-8">
-                        <input type="text" placeholder="Email" class="p-2 w-full border mb-3">
+                        <input type="email" placeholder="Email" class="p-2 w-full border mb-3" required>
                         <input type="submit" class="bg-cam block text-white px-3 py-2 w-full cursor-pointer"
                             value="Đăng Ký">
                     </form>
                     <h2 class="text-xl">PHIM ĐANG CHIẾU</h2>
                     <div class="my-4">
-                        <img src="./img/movie1.png" alt="" class="">
+                        <div class="group">
+                            <img src="./img/movie1.png" alt="" class="">
+                        </div>
                         <span class="text-base">THE CONJURING: THE DEVIL MADE ME DO IT</span>
                         <span class="text-gray-400 block text-sm">THE CONJURING: MA XUI QUỶ KHIẾN
                         </span>

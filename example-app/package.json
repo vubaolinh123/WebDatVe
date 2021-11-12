@@ -3,6 +3,7 @@
     "scripts": {
         "dev": "npm run development",
         "start:css": "npx tailwindcss --postcss -i ../src/tailwind.css -o ../css/main.css",
+        "startcss": "TAILWIND_MODE=watch craco start",
         "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
@@ -28,6 +29,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@craco/craco": "^6.4.0",
         "laravel-echo": "^1.11.3",
         "pusher-js": "^7.0.3",
         "turbolinks": "^5.2.0"
