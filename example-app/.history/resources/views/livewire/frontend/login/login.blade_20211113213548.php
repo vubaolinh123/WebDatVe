@@ -56,7 +56,7 @@
         @else
 
             <form wire:submit.prevent="loginAdmin"  action="#">
-                <h1 >Đăng nhập</h1>
+                <h1>Đăng nhập</h1>
 
 
                 <div class="social-container">
@@ -80,7 +80,7 @@
                 </div> --}}
                 {{-- {!! NoCaptcha::renderJs() !!}
                 {!! NoCaptcha::display() !!} --}}
-                <a  wire:click.prevent="resetPassword" href="#">Bạn quên mật khẩu?</a>
+                <a wire:click.prevent="resetPassword" href="#">Bạn quên mật khẩu?</a>
                 <button class="btn btn-striped-shadow btn-striped-shadow--red"><span> Đăng nhập</span></button>
                 <x-error field="errorLogin" class="alert alert-warning" />
             </form>
