@@ -44,7 +44,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['hasAdmin'])->group(function () {
         Route::prefix('/admin')->group(function () {
-            Route::get('/', function () {
+            Route::get('/dashboard', function () {
                 return 'Dashboard';
             });
             Route::get('/logout', function () {

@@ -22,6 +22,10 @@ Route::middleware(['guest'])->group(function () {
         Route::get('/login', function () {
             return view('Backend.login.index');
         });
+        Route::get('/logout', function () {
+            Auth::logout();
+            return redirect('admin/login');
+        });
     });
 
     //Login user
@@ -42,14 +46,10 @@ Route::middleware(['guest'])->group(function () {
         Route::get('/callback-github', [App\Http\Controllers\Socials\LoginGithub::class, 'callback']);
 });
 
-Route::middleware(['hasAdmin'])->group(function () {
+Route::middleware(['auth','hasAdmin'])->group(function () {
         Route::prefix('/admin')->group(function () {
-            Route::get('/', function () {
+            Route::get('/dashboard', function () {
                 return 'Dashboard';
-            });
-            Route::get('/logout', function () {
-                Auth::logout();
-                return redirect('/admin/login');
             });
         });
 });
@@ -60,6 +60,6 @@ Route::get('/logout', function () {
 });
 
 Route::get('/home', function () {
-
+    dd(auth()->user());
      echo 'Home';
 });
