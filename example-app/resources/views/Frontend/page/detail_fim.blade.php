@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('Frontend.layout_web')
+@section('conten.web')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Document</title>
-</head>
-
-<body>
-    <!-- Chi tiet  -->
     <!-- Main Chi Tiết Phim -->
     <div class="py-8 px-36">
         <h2 class="py-4">Trang chủ > Phim > <span class="font-bold">Space Jam: A New Legacy</span></h2>
@@ -23,7 +11,7 @@
                 <div class="col-span-2">
                     <div class="grid grid-cols-3 gap-7 ">
                         <div class="">
-                            <img src="./img/movie.png" alt="">
+                            <img src="{{ asset('frontend/img/movie.png') }}" alt="">
                         </div>
                         <div class="col-span-2 py-4">
                             <h2 class="text-3xl">Space Jam: A New Legacy</h2>
@@ -39,7 +27,8 @@
                                 <span class="text-2xl">129p</span>
                             </div>
                             <div class="my-16">
-                                <span class="text-gray-500 block text-xl">Thể loại: <span class="text-black">Kinh dị, Ly
+                                <span class="text-gray-500 block text-xl">Thể loại: <span class="text-black">Kinh
+                                        dị, Ly
                                         Kì</span></span>
                                 <span class="text-gray-500 block text-xl">Quốc gia: <span
                                         class="text-black">Đức</span></span>
@@ -56,7 +45,8 @@
                     <!-- NỘI DUNG PHIM  -->
                     <div class="">
                         <span class="text-xl my-5 block font-bold">NỘI DUNG PHIM</span>
-                        <span class="text-base"><strong>The Conjuring: The Devil Made Me Do It</strong> tiếp tục kể về
+                        <span class="text-base"><strong>The Conjuring: The Devil Made Me Do It</strong> tiếp tục kể
+                            về
                             một
                             vụ án có
                             thật từng làm chấn
@@ -65,7 +55,8 @@
                             mối quan
                             hệ thân thiết với anh ta. Tuy nhiên, kẻ sát nhân và những người thân khẳng định rằng
                             "chính ma quỷ đã dẫn dắt làm việc này"</span>
-                        <span class="text-base">Phim mới The Conjuring: The Devil Made Me Do It ra mắt tại các rạp chiếu
+                        <span class="text-base">Phim mới The Conjuring: The Devil Made Me Do It ra mắt tại các rạp
+                            chiếu
                             phim từ 05.11.2021.</span>
                     </div>
                     <!-- END NỘI DUNG PHIM -->
@@ -102,15 +93,19 @@
                             <div class="px-5 py-6 border border-black">
                                 <div class="mb-8">
                                     <span class="inline-block mr-5">2D PHỤ ĐỀ</span>
-                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">19:00</span>
-                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">19:00</span>
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
                                     cursor-pointer">22:30</span>
                                 </div>
                                 <div class="mb-8">
                                     <span class="inline-block mr-5">3D PHỤ ĐỀ</span>
-                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
                                     cursor-pointer">19:00</span>
-                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
                                     cursor-pointer">22:30</span>
                                 </div>
                             </div>
@@ -120,15 +115,19 @@
                             <div class="px-5 py-6 border border-black">
                                 <div class="mb-8">
                                     <span class="inline-block mr-5">2D PHỤ ĐỀ</span>
-                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">19:00</span>
-                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">19:00</span>
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
                                     cursor-pointer">22:30</span>
                                 </div>
                                 <div class="mb-8">
                                     <span class="inline-block mr-5">3D PHỤ ĐỀ</span>
-                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
                                     cursor-pointer">19:00</span>
-                                    <span class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
+                                    <span
+                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
                                     cursor-pointer">22:30</span>
                                 </div>
                             </div>
@@ -142,31 +141,33 @@
                     <h2 class="text-xl mt-6">NHẬN KHUYẾN MÃI</h2>
                     <form action="" class="border-black border p-6 my-8">
                         <input type="email" placeholder="Email" class="p-2 w-full border mb-3" required>
-                        <input type="submit" class="bg-cam block text-white px-3 py-2 w-full cursor-pointer" value="Đăng Ký">
+                        <input type="submit" class="bg-cam block text-white px-3 py-2 w-full cursor-pointer"
+                            value="Đăng Ký">
                     </form>
                     <h2 class="text-xl">PHIM ĐANG CHIẾU</h2>
                     <div class="my-4">
                         <div class="group">
-                            <img src="./img/movie1.png" alt="" class="">
+                            <img src="{{ asset('frontend/img/movie1.png') }}" alt="" class="">
                         </div>
                         <span class="text-base">THE CONJURING: THE DEVIL MADE ME DO IT</span>
                         <span class="text-gray-400 block text-sm">THE CONJURING: MA XUI QUỶ KHIẾN
                         </span>
                     </div>
                     <div class="my-4">
-                        <img src="./img/movie1.png" alt="" class="">
+                        <img src="{{ asset('frontend/img/movie1.png') }}" alt="" class="">
                         <span class="text-base">THE CONJURING: THE DEVIL MADE ME DO IT</span>
                         <span class="text-gray-400 block text-sm">THE CONJURING: MA XUI QUỶ KHIẾN
                         </span>
                     </div>
                     <div class="my-4">
-                        <img src="./img/movie1.png" alt="" class="">
+                        <img src="{{ asset('frontend/img/movie1.png') }}" alt="" class="">
                         <span class="text-base">THE CONJURING: THE DEVIL MADE ME DO IT</span>
                         <span class="text-gray-400 block text-sm">THE CONJURING: MA XUI QUỶ KHIẾN
                         </span>
                     </div>
                     <div class="text-right">
-                        <a href="#" class="inline-block my-10 cam border px-7 py-4 border-cam hover:text-white hover:bg-camx">XEM
+                        <a href="#"
+                            class="inline-block my-10 cam border px-7 py-4 border-cam hover:text-white hover:bg-camx">XEM
                             THÊM</a>
                     </div>
                 </div>
@@ -176,6 +177,4 @@
         <!-- END Wrapper  -->
     </div>
     <!-- END Main Chi Tiết Phim  -->
-</body>
-
-</html>
+@endsection
