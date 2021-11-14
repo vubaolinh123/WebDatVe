@@ -3255,12 +3255,13 @@
                 <div class="overlay-panel overlay-left">
                     <h1>Chào mừng trở lại!</h1>
                     <p>Để giữ kết nối với chúng tôi, vui lòng đăng nhập bằng thông tin cá nhân của bạn</p>
-                    <button style="color: #fff !important;" id="signIn" class="ghost btn-arrow-slide-cont btn-arrow-slide-cont--red">
+                    <button style="color: #fff !important;" id="signUp" class="ghost btn-arrow-slide-cont btn-arrow-slide-cont--red">
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                         <span class="btn-arrow-slide-icon btn-arrow-slide-arrow"></span>
                         </span>
-                        <span class="btn-arrow-slide-text"> Đăng nhập </span>
+                        <span class="btn-arrow-slide-text"> Đăng ký </span>
                         </button>
+                    <button class="ghost" id="signIn">Đăng nhập</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <h1>Chào bạn!</h1>

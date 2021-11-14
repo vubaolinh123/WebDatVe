@@ -73,3 +73,25 @@ Route::prefix('')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('/', [BackendController::class, 'dashboard'])->name('admin.dashboard');
 });
+=======
+Route::middleware(['hasAdmin'])->group(function () {
+        Route::prefix('/admin')->group(function () {
+            Route::get('/', function () {
+                return 'Dashboard';
+            });
+            Route::get('/logout', function () {
+                Auth::logout();
+                return redirect('/admin/login');
+            });
+        });
+});
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+});
+
+Route::get('/home', function () {
+
+     echo 'Home';
+});

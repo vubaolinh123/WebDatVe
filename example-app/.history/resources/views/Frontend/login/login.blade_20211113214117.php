@@ -3259,8 +3259,9 @@
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                         <span class="btn-arrow-slide-icon btn-arrow-slide-arrow"></span>
                         </span>
-                        <span class="btn-arrow-slide-text"> Đăng nhập </span>
+                        <span class="btn-arrow-slide-text"> Đăng ký </span>
                         </button>
+                    <button class="ghost" id="signIn">Đăng nhập</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <h1>Chào bạn!</h1>

@@ -56,7 +56,7 @@
         @else
 
             <form wire:submit.prevent="loginAdmin"  action="#">
-                <h1 >Đăng nhập</h1>
+                <h1>Đăng nhập</h1>
 
 
                 <div class="social-container">

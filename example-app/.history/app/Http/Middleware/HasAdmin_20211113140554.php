@@ -19,7 +19,7 @@ class HasAdmin
     public function handle(Request $request, Closure $next)
     {
 
-        if (!Auth::check()) return redirect('/admin/login') ;
+        if (!Auth::check()) return redirect('login') ;
         $check = User::find(Auth::user()->id);
         if($check -> hasOrRoles(['admin','auth']))  return $next($request);
         return redirect('/admin/login');
