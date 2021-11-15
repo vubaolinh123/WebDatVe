@@ -3,7 +3,7 @@
 
     <!-- Main Chi Tiết Phim -->
     <div class="py-8 px-36">
-        <h2 class="py-4">Trang chủ > Phim > <span class="font-bold">Space Jam: A New Legacy</span></h2>
+        <h2 class="py-4">Trang chủ > Phim > <span class="font-bold">{{ $film->name }}</span></h2>
         <!-- Wrapper -->
         <div class="">
             <div class="grid grid-cols-3 gap-10">
@@ -11,10 +11,10 @@
                 <div class="col-span-2">
                     <div class="grid grid-cols-3 gap-7 ">
                         <div class="">
-                            <img src="{{ asset('frontend/img/movie.png') }}" alt="">
+                            <img src="{{ asset("$URL_IMG_FILM/$film->avatar") }}" alt="">
                         </div>
-                        <div class="col-span-2 py-4">
-                            <h2 class="text-3xl">Space Jam: A New Legacy</h2>
+                        <div class="col-span-2 ">
+                            <h1 class="text-3xl">{{ $film->name }}</h1>
                             <div class="my-3">
                                 <i class="fas fa-star cam text-2xl"></i>
                                 <span class="inline-block mx-3 text-2xl">10.0/10</span>
@@ -24,40 +24,40 @@
                             <div class="">
                                 <span class="text-white bg-cam inline-block px-1 py-1 text-2xl">C18</span>
                                 <i class="far fa-clock inline-block mx-2 text-2xl"></i>
-                                <span class="text-2xl">129p</span>
+                                <span class="text-2xl"> {{ date('H:i:s', strtotime($film->time)) }}</span>
                             </div>
                             <div class="my-16">
-                                <span class="text-gray-500 block text-xl">Thể loại: <span class="text-black">Kinh
-                                        dị, Ly
-                                        Kì</span></span>
-                                <span class="text-gray-500 block text-xl">Quốc gia: <span
-                                        class="text-black">Đức</span></span>
-                                <span class="text-gray-500 block text-xl">Đạo diễn: <span class="text-black">Mike P.
-                                        Nelson
-                                    </span></span>
-                                <span class="text-gray-500 block text-xl">Nhà SX: <span class="text-black">Constantin
-                                        Film</span></span>
-                                <span class="text-gray-500 block text-xl">Ngày: <span class="text-black"> 29/10/2021
-                                    </span></span>
+                                <span class="text-gray-500 block text-xl">Thể loại:
+                                    <span class="text-black">
+                                        @foreach ($type_films as $type_film)
+                                            @if ($film->film_type_id == $type_film->id_film_type)
+                                                {{ $type_film->name }}
+                                            @endif
+                                        @endforeach
+                                        {{-- {{ $type_film->name }} --}}
+                                    </span>
+                                </span>
+                                <span class="text-gray-500 block text-xl">Quốc gia:
+                                    <span class="text-black">{{ $film->nation }}</span>
+                                </span>
+
+                                <span class="text-gray-500 block text-xl">Nhà SX:
+                                    <span class="text-black">
+                                        {{ $film->producer }}
+                                    </span>
+                                </span>
+                                <span class="text-gray-500 block text-xl">Ngày chiếu:
+                                    <span class="text-black">
+                                        {{ date('d / m / Y ', strtotime($film->premiere_date)) }}
+                                    </span>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <!-- NỘI DUNG PHIM  -->
                     <div class="">
                         <span class="text-xl my-5 block font-bold">NỘI DUNG PHIM</span>
-                        <span class="text-base"><strong>The Conjuring: The Devil Made Me Do It</strong> tiếp tục kể
-                            về
-                            một
-                            vụ án có
-                            thật từng làm chấn
-                            động thế giới.</span>
-                        <span class="text-base block my-3">Arne đã sát hại Alan Bono, một quản lý cũi nhốt động vật có
-                            mối quan
-                            hệ thân thiết với anh ta. Tuy nhiên, kẻ sát nhân và những người thân khẳng định rằng
-                            "chính ma quỷ đã dẫn dắt làm việc này"</span>
-                        <span class="text-base">Phim mới The Conjuring: The Devil Made Me Do It ra mắt tại các rạp
-                            chiếu
-                            phim từ 05.11.2021.</span>
+                        <div>{!! $film->summary !!}</div>
                     </div>
                     <!-- END NỘI DUNG PHIM -->
                     <!-- LỊCH CHIẾU  -->

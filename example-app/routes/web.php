@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 // front-end
 Route::prefix('')->group(function () {
     Route::get('/', [FrontendController::class, 'homeWeb'])->name('web.home');
-    Route::get('/detail', [FrontendController::class, 'detailFim'])->name('web.detailFim');
+    Route::get('/detail/{id_film}', [FrontendController::class, 'detailFim'])->name('web.detailFim');
 });
 
 
@@ -99,7 +99,10 @@ Route::middleware(['hasAdmin'])->group(function () {
         Route::prefix('film')->group(function () {
             Route::get('/', [FilmController::class, 'index'])->name('admin.film.list');
             Route::get('add-film', [FilmController::class, 'create'])->name('admin.film.addForm');
-            Route::get('save-add-film', [FilmController::class, 'store'])->name('admin.film.addSave');
+            Route::post('save-add-film', [FilmController::class, 'store'])->name('admin.film.addSave');
+            Route::get('delete-film/{id_film}', [FilmController::class, 'destroy'])->name('admin.film.delete');
+            Route::get('edit-film/{id_film}', [FilmController::class, 'edit'])->name('admin.film.editForm');
+            Route::post('save-edit-film/{id_film}', [FilmController::class, 'update'])->name('admin.film.editSave');
         });
     });
 });
