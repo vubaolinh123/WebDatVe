@@ -27,38 +27,30 @@ Route::prefix('')->group(function () {
     Route::get('/detail', [FrontendController::class, 'detailFim'])->name('web.detailFim');
 });
 
+//     // Login admin
+//     Route::prefix('/admin')->group(function () {
+//         Route::get('/login', function () {
+//             return view('Backend.login.index');
+//         });
+//     });
 
+//     //Login user
+//     Route::get('/login', function () {
+//         return view('Frontend.login.login');
+//     })->name('login');
 
+//     /**
+//      * Google
+//      */
 
-
-
-// back-end
-Route::middleware(['guest'])->group(function () {
-
-    // Login admin
-    Route::prefix('/admin')->group(function () {
-        Route::get('/login', function () {
-            return view('Backend.login.index');
-        });
-    });
-
-    //Login user
-    Route::get('/login', function () {
-        return view('Frontend.login.login');
-    })->name('login');
-
-    /**
-     * Google
-     */
-
-    Route::get('/loginToGoogle', [App\Http\Controllers\Socials\LoginGoogle::class, 'redirect']);
-    Route::get('/callback', [App\Http\Controllers\Socials\LoginGoogle::class, 'callback']);
-    /**
-     * Github
-     */
-    Route::get('/loginToGithub', [App\Http\Controllers\Socials\LoginGithub::class, 'redirect']);
-    Route::get('/callback-github', [App\Http\Controllers\Socials\LoginGithub::class, 'callback']);
-});
+//     Route::get('/loginToGoogle', [App\Http\Controllers\Socials\LoginGoogle::class, 'redirect']);
+//     Route::get('/callback', [App\Http\Controllers\Socials\LoginGoogle::class, 'callback']);
+//     /**
+//      * Github
+//      */
+//     Route::get('/loginToGithub', [App\Http\Controllers\Socials\LoginGithub::class, 'redirect']);
+//     Route::get('/callback-github', [App\Http\Controllers\Socials\LoginGithub::class, 'callback']);
+// });
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::middleware(['hasAdmin'])->group(function () {
@@ -75,17 +67,10 @@ Route::middleware(['guest'])->group(function () {
 //     return Redirect::route('login');
 // });
 
-Route::middleware(['hasAdmin'])->group(function () {
-    Route::prefix('/admin')->group(function () {
-        // Route::get('/', function () {
-        //     return '<h1>Trọng</h1>';
+// Route::get('/home', function () {
+//     echo 'Home';
         // });
-        // Route::get('/logout', function () {
-        //     Auth::logout();
-        //     return redirect('/admin/login');
-        // });
-        Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-        Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('admin.logout');
+
 
         Route::prefix('type-film')->group(function () {
             Route::get('/', [FilmTypeController::class, 'index'])->name('admin.typefilm.list');
@@ -96,10 +81,28 @@ Route::middleware(['hasAdmin'])->group(function () {
             Route::post('save-edit-typefilm/{id_film_type}', [FilmTypeController::class, 'update'])->name('admin.typefilm.editSave');
         });
 
-        Route::prefix('film')->group(function () {
-            Route::get('/', [FilmController::class, 'index'])->name('admin.film.list');
-            Route::get('add-film', [FilmController::class, 'create'])->name('admin.film.addForm');
-            Route::get('save-add-film', [FilmController::class, 'store'])->name('admin.film.addSave');
+Route::prefix('admin')->group(function () {
+    Route::get('/', [BackendController::class, 'dashboard'])->name('admin.dashboard');
         });
+=======
+Route::middleware(['hasAdmin'])->group(function () {
+        Route::prefix('/admin')->group(function () {
+            Route::get('/', function () {
+                return 'Dashboard';
+            });
+            Route::get('/logout', function () {
+                Auth::logout();
+                return redirect('/admin/login');
+            });
+        });
+});
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
     });
+
+Route::get('/home', function () {
+
+     echo 'Home';
 });
