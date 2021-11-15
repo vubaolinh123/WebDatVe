@@ -22,8 +22,8 @@ class Film extends Model
         'nation',
         'producer',
         'summary',
-        'status',
-        'deleted',
+        'status',  // 0 hiện  ,1 ẩn
+        'deleted', // 0 đang chiếu  , 1 sắp chiếu
         'film_type_id',
     ];
 }

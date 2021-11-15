@@ -20,7 +20,7 @@
         <span class="nav-text">Quản lý phim</span>
     </a>
     <ul aria-expanded="false">
-        <li><a href="#  ">Danh sách</a></li>
+        <li><a href="{{ route('admin.film.list') }}">Danh sách</a></li>
         <li><a href="{{ route('admin.film.addForm') }}">Thêm </a></li>
     </ul>
 </li>

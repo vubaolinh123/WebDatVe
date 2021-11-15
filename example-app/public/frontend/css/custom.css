@@ -1,9 +1,64 @@
 .cam {
     color: #f26b38;
 }
+
 .bg-cam {
     background: #f26b38;
 }
+
 .border-cam {
     border-color: #f26b38;
+}
+
+
+/* Tab Links */
+
+.tabs {
+    display: flex;
+}
+
+.tablinks {
+    color: #000;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 26px;
+    margin-right: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: 0.2s ease;
+    transform: skew(1.1);
+}
+
+.tablinks:hover {
+    border-bottom: 2px solid #f26b38;
+}
+
+
+/* Tab active */
+
+.tablinks.active {
+    border-bottom: 2px solid #f26b38;
+}
+
+
+/* tab content */
+
+.tabcontent {
+    display: none;
+}
+
+
+/* Text*/
+
+.tabcontent p {
+    color: #333;
+    font-size: 16px;
+}
+
+
+/* tab content active */
+
+.tabcontent.active {
+    display: block;
 }
