@@ -70,7 +70,11 @@
    <!-- Summernote init -->
    <script src="{{ asset('backend/js/plugins-init/summernote-init.js') }}"></script>
 
-   {{--  --}}
+   <script src="{{ asset('backend/vendor/jquery-validation/jquery.validate.min.js') }}"></script>
+   @yield('javascrip.backend')
+
+
+   
    <script>
     function onChangeImg(_this){
         let data = _this.files[0];
@@ -95,3 +99,4 @@
         }
     }
     </script>
+
