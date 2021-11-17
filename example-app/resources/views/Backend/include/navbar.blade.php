@@ -24,6 +24,35 @@
         <li><a href="{{ route('admin.film.addForm') }}">Thêm </a></li>
     </ul>
 </li>
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý phòng chiếu</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.cinemaroom.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.cinemaroom.addForm') }}">Thêm </a></li>
+        <li>
+            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <span class="nav-text">Quản lý ghế</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a href="{{ route('admin.chair.list') }}">Danh sách</a></li>
+                <li><a href="{{ route('admin.chair.addForm') }}">Thêm </a></li>
+            </ul>
+        </li>
+    </ul>
+
+</li>
+
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý loại ghế</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.typechair.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.typechair.addForm') }}">Thêm </a></li>
+    </ul>
+</li>
 
 
 {{-- <li class="nav-label">Apps</li>

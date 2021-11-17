@@ -4,7 +4,7 @@
         <div class="col-xl-12 col-xxl-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="">Thêm thể loại phim</h2>
+                    <h2>Thêm thể loại phim</h2>
                 </div>
                 <div class="card-body">
                     <div class="basic-form">

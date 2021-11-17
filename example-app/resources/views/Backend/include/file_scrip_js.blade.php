@@ -68,3 +68,5 @@
    <script src="{{ asset('backend/vendor/summernote/js/summernote.min.js') }}"></script>
    <!-- Summernote init -->
    <script src="{{ asset('backend/js/plugins-init/summernote-init.js') }}"></script>
+   <script src="{{ asset('backend/vendor/jquery-validation/jquery.validate.min.js') }}"></script>
+   @yield('javascrip.backend')

@@ -33,7 +33,10 @@ class FilmTypeController extends Controller
 
     public function store(Request $request)
     {
-        FilmType::create($request->all());
+
+        FilmType::create(
+            $request->all()
+        );
         return Redirect::route('admin.typefilm.list');
     }
 

@@ -3,9 +3,12 @@
 use App\Events\Send;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BackendController;
+use App\Http\Controllers\ChairController;
+use App\Http\Controllers\CinemaroomController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\FilmTypeController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\TypeChairController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -77,13 +80,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['hasAdmin'])->group(function () {
     Route::prefix('/admin')->group(function () {
-        // Route::get('/', function () {
-        //     return '<h1>Trọng</h1>';
-        // });
-        // Route::get('/logout', function () {
-        //     Auth::logout();
-        //     return redirect('/admin/login');
-        // });
+
         Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('admin.logout');
 
@@ -103,6 +100,25 @@ Route::middleware(['hasAdmin'])->group(function () {
             Route::get('delete-film/{id_film}', [FilmController::class, 'destroy'])->name('admin.film.delete');
             Route::get('edit-film/{id_film}', [FilmController::class, 'edit'])->name('admin.film.editForm');
             Route::post('save-edit-film/{id_film}', [FilmController::class, 'update'])->name('admin.film.editSave');
+        });
+        Route::prefix('cinemaroom')->group(function () {
+            Route::get('/', [CinemaroomController::class, 'index'])->name('admin.cinemaroom.list');
+            Route::get('add-cinemaroom', [CinemaroomController::class, 'create'])->name('admin.cinemaroom.addForm');
+            Route::post('save-add-cinemaroom', [CinemaroomController::class, 'store'])->name('admin.cinemaroom.addSave');
+
+            Route::get('get-row-cinemaroom', [CinemaroomController::class, 'getRowAjax'])->name('admin.cinemaroom.getRowAjax');
+            Route::get('render-row-cinemaroom', [CinemaroomController::class, 'getRowAjax'])->name('admin.cinemaroom.render');
+        });
+
+        Route::prefix('typechair')->group(function () {
+            Route::get('/', [TypeChairController::class, 'index'])->name('admin.typechair.list');
+            Route::get('add-typechair', [TypeChairController::class, 'create'])->name('admin.typechair.addForm');
+            Route::post('save-add-typechair', [TypeChairController::class, 'store'])->name('admin.typechair.addSave');
+        });
+        Route::prefix('chair')->group(function () {
+            Route::get('/', [ChairController::class, 'index'])->name('admin.chair.list');
+            Route::get('add-chair', [ChairController::class, 'create'])->name('admin.chair.addForm');
+            Route::post('save-add-chair', [ChairController::class, 'store'])->name('admin.chair.addSave');
         });
     });
 });
