@@ -8,6 +8,15 @@
 </li>
 <li>
     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý cụm rạp phim , rạp phim </span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('cinema.cluster') }}">Quản lý cụm rạp phim </a></li>
+        <li><a href="{{ route('cinema') }}">Quản lý rạp phim </a></li>
+    </ul>
+</li>
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
         <span class="nav-text">Quản lý thể loại phim</span>
     </a>
     <ul aria-expanded="false">
