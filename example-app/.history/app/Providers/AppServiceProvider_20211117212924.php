@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $URL_IMG_FILM = 'images/film';
         View::share([
             'URL_IMG_FILM' => $URL_IMG_FILM,
-            'citys' => $citys,
+            'citys'
         ]);
     }
 }

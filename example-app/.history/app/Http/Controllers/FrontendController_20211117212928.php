@@ -22,6 +22,8 @@ class FrontendController extends Controller
             )
             ->get();
 
+
+
         $filmHomeDeleted1s = Film::inRandomOrder()->where('status', 0)->where('deleted', 1)
             ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
             ->select(
