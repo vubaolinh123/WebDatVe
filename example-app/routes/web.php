@@ -3,7 +3,7 @@
 use App\Events\Send;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BackendController;
-
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChairController;
 use App\Http\Controllers\CinemaroomController;
 
@@ -143,7 +143,9 @@ Route::middleware(['hasAdmin'])->group(function () {
             Route::delete('/delete/{id}', [Cinema::class, 'destroy'])->name('cinema.delete');
             Route::put('/updated/{id}', [Cinema::class, 'update'])->name('cinema.updated');
         });
-
-
+        Route::prefix('category')->group(function () {
+            Route::get('/list', [CategoryController::class, 'index'])->name('admin.category.list');
+            Route::get('/add', [CategoryController::class, 'create'])->name('admin.category.add');
+        });
     });
 });

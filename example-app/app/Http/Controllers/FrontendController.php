@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cinema;
+use App\Models\Cinemaroom;
+use App\Models\ClusterCinema;
 use App\Models\Film;
 use App\Models\FilmType;
+use App\Models\Showtime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -22,7 +26,7 @@ class FrontendController extends Controller
             )
             ->get();
 
-        $citys = json_decode(Http::get('https://provinces.open-api.vn/api/'));
+
 
         $filmHomeDeleted1s = Film::inRandomOrder()->where('status', 0)->where('deleted', 1)
             ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
@@ -33,20 +37,40 @@ class FrontendController extends Controller
                 'tbl_film.id_film',
             )
             ->get();
+
         return view('Frontend.page.home', compact(
             'filmHomeDeleted0s',
             'filmHomeDeleted1s',
-            'citys'
         ));
     }
     public function detailFim($id_film)
     {
+        $showtimes = Showtime::where('film_id', $id_film)
+            // ->join('tbl_cinema_room', 'tbl_cinema_room.id_cinema_room', 'tbl_showtime.cinema_room_id')
+            ->join('tbl_cinema', 'tbl_cinema.id', 'tbl_showtime.cinema_id')
+            ->get();
+
+        //dổi về mảng
+        // $showtimes = json_decode(json_encode($showtimes), FALSE);
+
+        $clusterCinemas = ClusterCinema::all();
+        $cinemas = Cinema::all();
         $film = Film::find($id_film);
         $type_films = FilmType::all();
-        return view('Frontend.page.detail_film', compact('film', 'type_films'));
+        return view(
+            'Frontend.page.detail_film',
+            compact(
+                'cinemas',
+                'clusterCinemas',
+                'film',
+                'type_films',
+                'showtimes',
+            )
+        );
     }
-    public function getCityAddress($code){
-        Session::put('cityAddress',$code);
+    public function getCityAddress($code)
+    {
+        Session::put('cityAddress', $code);
         return redirect()->back();
     }
 }
