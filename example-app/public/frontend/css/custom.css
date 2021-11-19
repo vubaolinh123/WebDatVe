@@ -33,20 +33,17 @@
     border-bottom: 2px solid #f26b38;
 }
 
-
 /* Tab active */
 
 .tablinks.active {
     border-bottom: 2px solid #f26b38;
 }
 
-
 /* tab content */
 
 .tabcontent {
     display: none;
 }
-
 
 /* Text*/
 
@@ -55,9 +52,8 @@
     font-size: 16px;
 }
 
-
 /* tab content active */
 
 .tabcontent.active {
     display: block;
-
+}
