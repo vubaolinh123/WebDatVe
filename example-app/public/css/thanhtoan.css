@@ -50,6 +50,77 @@
     padding-bottom: 24px;
 }
 
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+td,
+th {
+    text-align: left;
+    padding: 8px;
+    font-weight: 500;
+    padding-bottom: 8px;
+}
+
+.table-type input[type=number] {
+    outline: none;
+    padding: 8px;
+}
+
+.table-type input:focus {
+    outline: none;
+}
+
+#table-type thead,
+#table-combo thead {
+    background-color: rgb(92, 41, 41);
+    color: #fff;
+}
+
+.table-film td {
+    color: #43464b;
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+.table-combo-td {
+    display: flex;
+}
+
+.table-combo tbody {
+    align-items: center;
+}
+
+.table-combo-td img {
+    height: 66px;
+    width: 100px;
+    padding-right: 16px;
+}
+
+.table-combo-td .text p {
+    line-height: 1.5;
+}
+
+.text-light-combo {
+    font-size: 12px;
+}
+
+.view-more {
+    padding: 16px 0;
+    text-align: center;
+}
+
+.ticket-icon {
+    color: #ff0000(223, 43, 43);
+    font-size: 11px;
+}
+
 .view-more button {
     border: 1px solid #F26B38;
     width: 130px;
@@ -151,11 +222,64 @@ button:focus {
     text-align: right;
 }
 
-.table-combo-td,
-.table-type-td {
-    width: 400px;
+form {
+    background-color: #fff;
 }
 
-.table-type-td p {
-    line-height: 1.5;
+.wrapper-film-right .form-dki {
+    background-color: #fff;
+    padding: 16px;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.form-label {
+    width: 200px;
+    display: block
+}
+
+.form-control {
+    height: 40px;
+    padding-left: 10px;
+    width: 335px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.text-margin {
+    width: 200px;
+}
+
+.text-123 {
+    width: 335px;
+    font-size: 12px;
+    text-align: justify;
+}
+
+.text-padding {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    width: 335px;
+}
+
+.btn-thanhtoan {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+    width: 153px;
+    align-items: center;
+    line-height: 40px;
+    height: 40px;
+    background: #f26b38;
+    transition: background-color 0.35s linear;
+}
+
+.btn-thanhtoan:hover {
+    background: #b15837;
 }
