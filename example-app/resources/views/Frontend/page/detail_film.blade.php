@@ -65,23 +65,22 @@
                         <span class="text-xl my-5 block font-bold">LỊCH CHIẾU</span>
                         <div class="grid grid-cols-3 gap-5">
                             <div class="">
-                                <select name="select-ca-nuoc" id="select_city" class="w-full py-2 px-2 border-black border">
+                                <select name="select-ca-nuoc" id="" class="w-full py-2 px-2 border-black border">
+                                    <option value="">Cả Nước</option>
+                                    @foreach ($clusterCinemas as $clusterCinema)
+                                        <option value="{{ $clusterCinema->id }}">{{ $clusterCinema->name }}</option>
 
-                                    @foreach ($citys as $city)
-                                        <option @if (Session::get('cityAddress') == $city->code)
-                                            {{ 'selected' }}
-                                        @endif value="{{ $city->code }}">{{ $city->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="">
-                                <input type="date" value="{{ $_GET['date'] ?? '' }}" id="date_change" class="w-full py-2 px-2 border-black border">
+                                <input type="date" class="w-full py-2 px-2 border-black border">
                             </div>
                             <div class="">
                                 <select name="select-ca-rap" id="" class="w-full py-2 px-2 border-black border">
                                     <option value="">Tất Cả Rạp</option>
-                                    @foreach ($cinemaOfFilms as $cinemaOfFilm)
-                                        <option value="{{ $cinemaOfFilm->id }}">{{ $cinemaOfFilm->name }}</option>
+                                    @foreach ($cinemas as $cinema)
+                                        <option value="{{ $cinema->id_cinema }}">{{ $cinema->name }}</option>
                                     @endforeach
 
                                 </select>
@@ -91,29 +90,43 @@
                     <!-- END LỊCH CHIẾU -->
                     <!-- CÁC RẠP ĐANG CHIẾU -->
                     <div class="">
-                        @foreach ($cinemaOfFilms as $cinemaOfFilm)
-                            <div class="py-5">
-                                <span
-                                    class="inline-block bg-camx text-white px-3 py-2">{{ $cinemaOfFilm->name }}</span>
-                                <div class="px-5 py-6 border border-black">
-                                    @foreach ($cinemaRooms as $cinemaRoom)
-                                    @if ($cinemaRoom -> cinema_id == $cinemaOfFilm->id)
-                                    <div class="mb-12 m-2">
-                                        <span class="inline-block mr-5"> Phòng : {{ $cinemaRoom -> id_cinema_room }}</span>
-                                             @foreach ($cinemaRoom->show_time as $time)
-                                                @if ($film->id_film == $time->film_id)
-                                                    <a href="{{ route('web.book' , ['id' => $cinemaRoom -> id_cinema_room ]) }}"
+                        @php
+                            $arr = [];
+                        @endphp
+                        @foreach ($showtimes as $showtime)
+                            @if (in_array($showtime->cinema_id, $arr))
+                            @else
+                                <?php array_push($arr, $showtime->cinema_id); ?>
+                                <div class="py-5">
+                                    <span class="inline-block bg-camx text-white px-3 py-2">{{ $showtime->name }}</span>
+                                    <div class="px-5 py-6 border border-black">
+                                        <div class="mb-8">
+                                            <span class="inline-block mr-5">2D PHỤ ĐỀ</span>
+                                            @php
+                                                // $countcinema_id = array_count_values($showtimes);
+                                                // echo '<pre>';
+                                                // print_r(array_count_values($countcinema_id));
+                                                // echo '</pre>';
+                                                // die();
+                                            @endphp
+                                            @if ($showtimes)
+
+                                                @foreach ($showtimes as $showtime)
+                                                    <span
                                                         class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">
-                                                        Thời gian
-                                                        {{ date('H:i', strtotime($time->start_time)) }}
-                                                    </a>
-                                                @endif
+                                                        {{ date('H:i', strtotime($showtime->start_time)) }}
+                                                    </span>
                                                 @endforeach
-                                            </div>
-                                    @endif
-                                    @endforeach
+                                            @else
+                                                <span
+                                                    class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">
+                                                    {{ date('H:i', strtotime($showtime->start_time)) }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         @endforeach
                     </div>
                     <!-- END CÁC RẠP ĐANG CHIẾU -->

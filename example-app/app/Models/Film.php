@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
+
 class Film extends Model
 {
     use HasFactory;
@@ -26,7 +26,4 @@ class Film extends Model
         'deleted', // 0 đang chiếu  , 1 sắp chiếu
         'film_type_id',
     ];
-    public function showtime(){
-        return $this->hasMany(Showtime::class,'film_id');
-    }
 }

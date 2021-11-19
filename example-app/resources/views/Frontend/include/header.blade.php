@@ -11,20 +11,10 @@
         </div>
 
         <div class="header-login row">
-            @if (Auth::check())
             <div class="col-sm-6">
                 <i class="far fa-user"></i>
-                <span>{{ Auth::user()->name }}</span>
-                 <a
-                 style="color:white;font-size:10px;background:rgb(132, 132, 132) ;padding:3px; border-radius:10px"
-                 href="logout">Đăng xuất</a>
+                 <a href="#">Đăng nhập</a>
             </div>
-            @else
-            <div class="col-sm-6">
-                <i class="far fa-user"></i>
-                 <a href="login">Đăng nhập</a>
-            </div>
-            @endif
             <div  class="dropdown col-sm-6">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-map-marker-alt"></i>

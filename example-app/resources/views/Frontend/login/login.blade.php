@@ -3237,7 +3237,7 @@
 <body class="p-3">
 
 
-
+    <h2 style="background-color: #fff ; padding:20px ; border-radius:10px">Đăng nhập với chúng tôi ❤️ </h2>
     <x-alert type="success" class="alert alert-success text-center" />
     <div style="width:90% !important ; height:90%" class="container " id="container">
         <div class="form-container sign-up-container p">
@@ -3252,25 +3252,20 @@
         </div>
         <div class="overlay-container">
             <div class="overlay">
-                <div class="overlay-panel overlay-left bg-dark">
-                    <div class="image">
-                        <img src="{{ asset('frontend/img/galaxy-logo 1.png') }}" alt="" />
-                    </div>
+                <div class="overlay-panel overlay-left">
+                    <h1>Chào mừng trở lại!</h1>
                     <p>Để giữ kết nối với chúng tôi, vui lòng đăng nhập bằng thông tin cá nhân của bạn</p>
-                    <button style="color: #fff !important;" id="signIn" class="btn-arrow-slide-cont btn-arrow-slide-cont--black">
+                    <button style="color: #fff !important;" id="signIn" class="ghost btn-arrow-slide-cont btn-arrow-slide-cont--red">
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                         <span class="btn-arrow-slide-icon btn-arrow-slide-arrow"></span>
                         </span>
                         <span class="btn-arrow-slide-text"> Đăng nhập </span>
                         </button>
                 </div>
-                <div class="overlay-panel overlay-right bg-dark">
-                    {{-- <h1>Chào bạn!</h1> --}}
-                    <div class="image">
-                        <img src="{{ asset('frontend/img/galaxy-logo 1.png') }}" alt="" />
-                    </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Chào bạn!</h1>
                     <p>Nhập thông tin cá nhân của bạn và bắt đầu hành trình với chúng tôi</p>
-                    <button style="color: #fff !important;" id="signUp" class="btn-arrow-slide-cont btn-arrow-slide-cont--black">
+                    <button style="color: #fff !important;" id="signUp" class="ghost btn-arrow-slide-cont btn-arrow-slide-cont--red">
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                         <span class="btn-arrow-slide-icon btn-arrow-slide-arrow"></span>
                         </span>

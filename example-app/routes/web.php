@@ -33,12 +33,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['cityAddress'])->group(function () {
     Route::prefix('')->group(function () {
         Route::get('/', [FrontendController::class, 'homeWeb'])->name('web.home');
-        Route::get('/detail/{id_film}/{slug}', [FrontendController::class, 'detailFim'])->name('web.detailFim');
+        Route::get('/detail/{id_film}', [FrontendController::class, 'detailFim'])->name('web.detailFim');
         Route::get('/getCityAddress/{code}', [FrontendController::class, 'getCityAddress'])->name('web.getCityAddress');
-    });
-    Route::middleware(['auth'])->group(function () {
-        Route::get('/book/{id}', [FrontendController::class, 'book'])->name('web.book');
-        Route::get('/book-ghe/{id}', [FrontendController::class, 'book_ghe'])->name('web.book_ghe');
     });
 });
 
@@ -85,10 +81,10 @@ Route::middleware(['guest'])->group(function () {
 //     });
 // });
 
-Route::get('/logout', function () {
-    Auth::logout();
-    return redirect()->back();
-});
+// Route::get('/logout', function () {
+//     Auth::logout();
+//     return Redirect::route('login');
+// });
 
 Route::middleware(['hasAdmin'])->group(function () {
     Route::prefix('/admin')->group(function () {

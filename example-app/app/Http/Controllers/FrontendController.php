@@ -8,11 +8,10 @@ use App\Models\ClusterCinema;
 use App\Models\Film;
 use App\Models\FilmType;
 use App\Models\Showtime;
-use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
-use Carbon\Carbon;
+
 class FrontendController extends Controller
 {
     public function homeWeb()
@@ -43,38 +42,19 @@ class FrontendController extends Controller
             'filmHomeDeleted1s',
         ));
     }
-    public function detailFim(Request $request,$id_film,$slug)
+    public function detailFim($id_film)
     {
+        $showtimes = Showtime::where('film_id', $id_film)
+            // ->join('tbl_cinema_room', 'tbl_cinema_room.id_cinema_room', 'tbl_showtime.cinema_room_id')
+            ->join('tbl_cinema', 'tbl_cinema.id', 'tbl_showtime.cinema_id')
+            ->get();
+
+        //dổi về mảng
+        // $showtimes = json_decode(json_encode($showtimes), FALSE);
 
         $clusterCinemas = ClusterCinema::all();
         $cinemas = Cinema::all();
         $film = Film::find($id_film);
-
-        $cinemaOfFilms = [];
-        $cinemaRooms = [];
-        $checkRoom = [];
-        $checkDG  = [];
-        ( (($request->has('date'))) ?  $time = $request->date  : $time = Carbon::now('Asia/Ho_Chi_Minh')->toDateString());
-        // dd($film->showtime->where('show_date',$time)->where('star_time'  , Carbon::now('Asia/Ho_Chi_Minh')->toTimeString() ) );
-
-        foreach ($film->showtime->where('show_date',$time) as $room){
-
-            if($room->start_time < Carbon::now('Asia/Ho_Chi_Minh')->toTimeString() ) continue ;
-
-            if(!in_array($room->cinema_room->id_cinema_room,$checkRoom)){
-                array_push($cinemaRooms , $room->cinema_room);
-                array_push($checkRoom,$room->cinema_room->id_cinema_room);
-            }
-            if($room->cinema_room->cinema->cluster_cinema->where('city_id',Session::get('cityAddress'))->exists()){
-                if(!in_array($room->cinema_room->cinema->id,$checkDG)){
-                    array_push($cinemaOfFilms , $room->cinema_room->cinema);
-                    array_push($checkDG,$room->cinema_room->cinema->id);
-                }
-            }
-
-        }
-
-        // dd(1);
         $type_films = FilmType::all();
         return view(
             'Frontend.page.detail_film',
@@ -83,9 +63,7 @@ class FrontendController extends Controller
                 'clusterCinemas',
                 'film',
                 'type_films',
-                'cinemaOfFilms',
-                'cinemaRooms'
-                // 'showtimes',
+                'showtimes',
             )
         );
     }
@@ -93,24 +71,5 @@ class FrontendController extends Controller
     {
         Session::put('cityAddress', $code);
         return redirect()->back();
-    }
-    public function book($id){
-        $show_time = Showtime::find($id);
-        $tickets = Ticket::all();
-        return view('Frontend.page.book',[
-            'show_time' => $show_time,
-            'tickets' => $tickets,
-            'id' => $id
-        ]);
-    }
-    public function book_ghe($id) {
-        $show_time = Showtime::find($id);
-        $text = 'A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z';
-        $arr = explode("|", $text);
-        return view('Frontend.page.bookGhe', [
-            'show_time' => $show_time,
-            'id' => $id,
-            'arr' => $arr,
-        ]);
     }
 }

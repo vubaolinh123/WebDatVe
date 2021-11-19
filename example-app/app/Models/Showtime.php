@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
+
 class Showtime extends Model
 {
     use HasFactory;
@@ -17,10 +17,4 @@ class Showtime extends Model
         'film_id',
         'cinema_room_id',
     ];
-    public function cinema_room(){
-        return $this->belongsTo(CinemaRoom::class,'cinema_room_id');
-    }
-    public function film(){
-        return $this -> belongsTo(Film::class,'film_id');
-    }
 }

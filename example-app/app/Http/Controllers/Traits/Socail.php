@@ -29,7 +29,7 @@ trait Socail
             unset($findId->password);
             if ($findId) {
                 Auth::login($findId);
-                if($findId->hasOrRoles(['admin','auth'])) return redirect('/admin');
+                if($findId->hasOrRoles(['admin','auth'])) return redirect('/admin/dashboard');
                 return redirect('/home');
             } else {
                 if ($ac = User::where('email', $user->email)->first()) {

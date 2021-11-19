@@ -28,7 +28,7 @@
 </head>
 
 <body>
-
+    <a href="/home">Home</a>
     <h1 class="p-3 text-center  alert bg-success"> 🎈 Chào mừng bạn đến với trang quảnv trị WEBBANVE 🎈</h1>
     <div class="container">
         <div class="row">

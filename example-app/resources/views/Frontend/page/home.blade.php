@@ -64,7 +64,7 @@
                         @foreach ($filmHomeDeleted0s as $filmHomeDeleted0)
                             <div class="col-xs-2 mb-5">
                                 <div class="item-film">
-                                    <a href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted0->id_film , 'slug' => \Str::slug($filmHomeDeleted0->name)]) }}">
+                                    <a href="{{ route('web.detailFim', [$filmHomeDeleted0->id_film]) }}">
                                         <div class="film_img"
                                             style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted0->avatar") }})">
                                         </div>
@@ -95,7 +95,7 @@
                         @foreach ($filmHomeDeleted1s as $filmHomeDeleted1)
                             <div class="col-xs-2 mb-5">
                                 <div class="item-film">
-                                    <a href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted1->id_film, 'slug' => \Str::slug($filmHomeDeleted1->name)]) }}">
+                                    <a href="{{ route('web.detailFim', [$filmHomeDeleted1->id_film]) }}">
                                         <div class="film_img"
                                             style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted1->avatar") }})">
                                         </div>

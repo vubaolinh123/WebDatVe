@@ -13,16 +13,5 @@ class Cinemaroom extends Model
     public $fillable = [
         'quantity_row',
         'quantity_col',
-        'cinema_id',
-        'vip_col_start',
-        'vip_col_end',
-        'vip_row_start',
-        'vip_row_end',
     ];
-    public function cinema(){
-        return $this->belongsTo(Cinema::class,'cinema_id');
-    }
-    public function show_time(){
-        return $this->hasMany(ShowTime::class,'cinema_room_id');
-    }
 }

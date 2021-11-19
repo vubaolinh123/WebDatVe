@@ -81,7 +81,7 @@
                 {{-- {!! NoCaptcha::renderJs() !!}
                 {!! NoCaptcha::display() !!} --}}
                 <a  wire:click.prevent="resetPassword" href="#">Bạn quên mật khẩu?</a>
-                <button class="btn btn-striped-shadow btn-striped-shadow--black"><span> Đăng nhập</span></button>
+                <button class="btn btn-striped-shadow btn-striped-shadow--red"><span> Đăng nhập</span></button>
                 <x-error field="errorLogin" class="alert alert-warning" />
             </form>
 

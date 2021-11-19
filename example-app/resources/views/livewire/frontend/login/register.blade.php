@@ -53,8 +53,8 @@
         @enderror"
                 type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" />
             <x-error field="confirmPassword" class="text-danger" />
-            <button class="btn btn-striped-shadow btn-striped-shadow--black" wire:loading.remove ><span>Đăng ký</span> </button>
-            <button  class="btn btn-striped-shadow btn-striped-shadow--black" wire:loading
+            <button class="btn btn-striped-shadow btn-striped-shadow--red" wire:loading.remove ><span>Đăng ký</span> </button>
+            <button  class="btn btn-striped-shadow btn-striped-shadow--red" wire:loading
              wire:target="registUser" wire:click.prevent ><span>Đang xử lý ...</span></button>
         </form>
     @endif
