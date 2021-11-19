@@ -26,7 +26,11 @@ class FrontendController extends Controller
             )
             ->get();
 
+<<<<<<< HEAD
+=======
 
+
+>>>>>>> 2bc0e3c2fe00d67c1c5c8eccdbc87dcba6438213
         $filmHomeDeleted1s = Film::inRandomOrder()->where('status', 0)->where('deleted', 1)
             ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
             ->select(
@@ -40,6 +44,10 @@ class FrontendController extends Controller
         return view('Frontend.page.home', compact(
             'filmHomeDeleted0s',
             'filmHomeDeleted1s',
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2bc0e3c2fe00d67c1c5c8eccdbc87dcba6438213
         ));
     }
     public function detailFim($id_film)

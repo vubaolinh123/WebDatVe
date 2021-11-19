@@ -67,9 +67,10 @@
                             <div class="">
                                 <select name="select-ca-nuoc" id="" class="w-full py-2 px-2 border-black border">
                                     <option value="">Cả Nước</option>
-                                    <option value="">TEST1</option>
-                                    <option value="">TEST2</option>
-                                    <option value="">TEST3</option>
+                                    @foreach ($clusterCinemas as $clusterCinema)
+                                        <option value="{{ $clusterCinema->id }}">{{ $clusterCinema->name }}</option>
+
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="">
@@ -78,9 +79,10 @@
                             <div class="">
                                 <select name="select-ca-rap" id="" class="w-full py-2 px-2 border-black border">
                                     <option value="">Tất Cả Rạp</option>
-                                    <option value="">TEST1</option>
-                                    <option value="">TEST2</option>
-                                    <option value="">TEST3</option>
+                                    @foreach ($cinemas as $cinema)
+                                        <option value="{{ $cinema->id_cinema }}">{{ $cinema->name }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </div>
@@ -88,50 +90,44 @@
                     <!-- END LỊCH CHIẾU -->
                     <!-- CÁC RẠP ĐANG CHIẾU -->
                     <div class="">
-                        <div class="py-5">
-                            <span class="inline-block bg-camx text-white px-3 py-2">Galaxy Hà Nội</span>
-                            <div class="px-5 py-6 border border-black">
-                                <div class="mb-8">
-                                    <span class="inline-block mr-5">2D PHỤ ĐỀ</span>
-                                    <span
-                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">19:00</span>
-                                    <span
-                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
-                                    cursor-pointer">22:30</span>
+                        @php
+                            $arr = [];
+                        @endphp
+                        @foreach ($showtimes as $showtime)
+                            @if (in_array($showtime->cinema_id, $arr))
+                            @else
+                                <?php array_push($arr, $showtime->cinema_id); ?>
+                                <div class="py-5">
+                                    <span class="inline-block bg-camx text-white px-3 py-2">{{ $showtime->name }}</span>
+                                    <div class="px-5 py-6 border border-black">
+                                        <div class="mb-8">
+                                            <span class="inline-block mr-5">2D PHỤ ĐỀ</span>
+                                            @php
+                                                // $countcinema_id = array_count_values($showtimes);
+                                                // echo '<pre>';
+                                                // print_r(array_count_values($countcinema_id));
+                                                // echo '</pre>';
+                                                // die();
+                                            @endphp
+                                            @if ($showtimes)
+
+                                                @foreach ($showtimes as $showtime)
+                                                    <span
+                                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">
+                                                        {{ date('H:i', strtotime($showtime->start_time)) }}
+                                                    </span>
+                                                @endforeach
+                                            @else
+                                                <span
+                                                    class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">
+                                                    {{ date('H:i', strtotime($showtime->start_time)) }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-8">
-                                    <span class="inline-block mr-5">3D PHỤ ĐỀ</span>
-                                    <span
-                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
-                                    cursor-pointer">19:00</span>
-                                    <span
-                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
-                                    cursor-pointer">22:30</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="py-5">
-                            <span class="inline-block bg-camx text-white px-3 py-2">Galaxy Hồ Chí Minh</span>
-                            <div class="px-5 py-6 border border-black">
-                                <div class="mb-8">
-                                    <span class="inline-block mr-5">2D PHỤ ĐỀ</span>
-                                    <span
-                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">19:00</span>
-                                    <span
-                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
-                                    cursor-pointer">22:30</span>
-                                </div>
-                                <div class="mb-8">
-                                    <span class="inline-block mr-5">3D PHỤ ĐỀ</span>
-                                    <span
-                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
-                                    cursor-pointer">19:00</span>
-                                    <span
-                                        class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx
-                                    cursor-pointer">22:30</span>
-                                </div>
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
                     <!-- END CÁC RẠP ĐANG CHIẾU -->
                 </div>
