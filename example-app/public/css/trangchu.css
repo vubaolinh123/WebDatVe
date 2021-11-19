@@ -23,6 +23,7 @@ html {
     grid-template-columns: 400px 420px 1fr;
     align-items: center;
     gap: 40px;
+    width: 100%;
 }
 
 .header-logo img {
@@ -97,6 +98,7 @@ html {
     box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
     opacity: 0;
     visibility: hidden;
+    z-index: 10;
 }
 
 .menu-level-2::before {
@@ -104,8 +106,9 @@ html {
     width: 150px;
     position: absolute;
     top: -40px;
+    left: 0;
     height: 40px;
-    background-color: transparent;
+    background-color: tran;
 }
 
 .menu-level-1-item:hover>.menu-level-2 {
@@ -126,12 +129,70 @@ html {
 .menu-level-2 li {
     padding: 6px !important;
     display: block !important;
+    z-index: 10;
 }
 
 .menu-level-2 a {
     color: #fff !important;
     font-weight: 400 !important;
 }
+
+
+.menu-level-2 a:hover {
+    color: #F26B38;
+}
+
+.menu-level-1:hover {
+    color: #F26B38;
+}
+
+.item-film {
+    margin: 20px 0;
+    transition: all 0.2s ease-out;
+    background-color: black;
+}
+
+.item-film .img_film {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all 0.299s linear;
+}
+
+.item-film:hover .img_film {
+    opacity: 0.5;
+}
+
+.item-text-film .item_link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    line-height: 40px;
+    margin: auto;
+    text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #ffff;
+    border: 1px solid #ffff;
+    padding: 0 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s linear;
+    cursor: pointer;
+}
+
+.item-text-film .item_link:hover {
+    background-color: #f26b38;
+    border: 1px solid #f26b38;
+}
+
+.item-film:hover .item_link {
+    visibility: visible;
+    opacity: 1;
+}
+
 
 .menu-level-1 .menu-level-2 a:hover {
     color: #f26b38;
@@ -206,8 +267,8 @@ html {
 
 .view-more button,
 .view-more-discount button {
-    border: 1px solid #f26b38;
-    color: #f26b38;
+    border: 1px solid #F26B38;
+    color: #F26B38;
     align-items: center;
     background-color: transparent;
     transition: background-color 0.11s linear;
@@ -265,9 +326,6 @@ html {
 }
 
 .item-discout {
-    /* display: flex;
-    width: 90%;
-    justify-content: space-around; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 32px;

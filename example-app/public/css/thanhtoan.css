@@ -1,0 +1,285 @@
+@font-face {
+    font-family: Roboto;
+    src: url(../font/Roboto-Regular.ttf);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    margin: auto;
+    padding: 32px 40px;
+    font-family: Roboto;
+    display: grid;
+    grid-template-columns: 900px 1fr;
+    gap: 40px;
+}
+
+.container-fluid {
+    padding-right: 50px;
+    padding-left: 50px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-md-4 {
+    width: 33.33333333%;
+}
+
+.col-md-4 {
+    width: 33.33333333%;
+}
+
+.main {
+    background-color: #F26B38;
+    padding: 16px;
+}
+
+.wrapper-film-right h2 {
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 500;
+    padding-bottom: 24px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+td,
+th {
+    text-align: left;
+    padding: 8px;
+    font-weight: 500;
+    padding-bottom: 8px;
+}
+
+.table-type input[type=number] {
+    outline: none;
+    padding: 8px;
+}
+
+.table-type input:focus {
+    outline: none;
+}
+
+#table-type thead,
+#table-combo thead {
+    background-color: rgb(92, 41, 41);
+    color: #fff;
+}
+
+.table-film td {
+    color: #43464b;
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+.table-combo-td {
+    display: flex;
+}
+
+.table-combo tbody {
+    align-items: center;
+}
+
+.table-combo-td img {
+    height: 66px;
+    width: 100px;
+    padding-right: 16px;
+}
+
+.table-combo-td .text p {
+    line-height: 1.5;
+}
+
+.text-light-combo {
+    font-size: 12px;
+}
+
+.view-more {
+    padding: 16px 0;
+    text-align: center;
+}
+
+.ticket-icon {
+    color: #ff0000(223, 43, 43);
+    font-size: 11px;
+}
+
+.view-more button {
+    border: 1px solid #F26B38;
+    width: 130px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #F26B38;
+    color: #fff;
+}
+
+.box-detail {
+    padding: 0 16px;
+    background-color: #e6e6e6;
+    font-size: 13px;
+}
+
+.box-detail img {
+    width: 100%;
+    margin: auto;
+    height: auto;
+}
+
+.img-film {
+    padding: 0 0 4px 0;
+    font-size: 14px !important;
+}
+
+.img-film p {
+    line-height: 1.5;
+}
+
+.view-more button:hover {
+    background-color: #ca5b32;
+    color: #fff;
+}
+
+.ticket-icon {
+    border-bottom: 1px dotted #43464b;
+    padding-bottom: 8px;
+}
+
+.ticket-info p {
+    border-bottom: 1px dotted #43464b;
+    padding: 10px 0;
+}
+
+.text-regulary {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #a0a3a7;
+}
+
+.ticket-price-total {
+    padding: 8px 0;
+}
+
+.ticket-price-total {
+    font-size: 18px;
+}
+
+.ticket-price-total .money {
+    color: #F26B38;
+    font-size: 22px;
+}
+
+.input-booking button {
+    border-radius: 50%;
+    background-color: #43464b;
+    color: #fff;
+    height: 20px;
+    width: 20px;
+}
+
+.input-group {
+    padding: 6px 12px;
+    text-align: center;
+}
+
+.input-type {
+    text-align: center;
+}
+
+.input-type input[type=number] {
+    width: 60px;
+    padding: 6px 12px;
+    height: 34px;
+    border: 1px solid #43464b;
+}
+
+input:focus {
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+.gia {
+    border: none;
+    text-align: right;
+}
+
+form {
+    background-color: #fff;
+}
+
+.wrapper-film-right .form-dki {
+    background-color: #fff;
+    padding: 16px;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.form-label {
+    width: 200px;
+    display: block
+}
+
+.form-control {
+    height: 40px;
+    padding-left: 10px;
+    width: 335px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.text-margin {
+    width: 200px;
+}
+
+.text-123 {
+    width: 335px;
+    font-size: 12px;
+    text-align: justify;
+}
+
+.text-padding {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    width: 335px;
+}
+
+.btn-thanhtoan {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+    width: 153px;
+    align-items: center;
+    line-height: 40px;
+    height: 40px;
+    background: #f26b38;
+    transition: background-color 0.35s linear;
+}
+
+.btn-thanhtoan:hover {
+    background: #b15837;
+}

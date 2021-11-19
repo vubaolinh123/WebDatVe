@@ -171,3 +171,6 @@ button:focus{
 .table-type-td p{
     line-height: 1.5;
 }
+.text{
+    padding-left: 16px;
+}
