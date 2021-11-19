@@ -2,14 +2,12 @@
     font-family: Roboto;
     src: url(../font/Roboto-Regular.ttf);
 }
-
-* {
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-
-.container {
+.container{
     margin: auto;
     padding: 32px 40px;
     font-family: Roboto;
@@ -17,40 +15,75 @@
     grid-template-columns: 900px 1fr;
     gap: 40px;
 }
-
-.container-fluid {
-    padding-right: 50px;
-    padding-left: 50px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.row {
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.col-md-4 {
-    width: 33.33333333%;
-}
-
-.col-md-4 {
-    width: 33.33333333%;
-}
-
-.main {
+.main{
     background-color: #F26B38;
     padding: 16px;
 }
-
-.wrapper-film-right h2 {
+.wrapper-film-right h2{
     text-transform: uppercase;
     color: #fff;
     font-weight: 500;
     padding-bottom: 24px;
 }
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    font-size: 14px;
+  }
+  
+  td, th {
+    text-align: left;
+    padding: 8px;
+    font-weight: 500;
+    padding-bottom: 8px;
+  }
+  .table-type input[type=number]{
+      outline: none;
+      padding: 8px;
+  }
+  .table-type input:focus{
+    outline: none;
+}
+  #table-type thead, #table-combo thead{
+      background-color: rgb(92, 41, 41);
+      color: #fff;
+  }
+  .table-film td{
+      
+    color: #43464b;
+  }
+  .text-bold{
+      font-weight: 600;
+  }
+  .table-combo-td{
+      display: flex;
+  }
+  .table-combo tbody{
+      align-items:center;
+  }
+  .table-combo-td img{
+      height: 66px;
+      width: 100px;
+      padding-right: 16px;
+  }
+  .table-combo-td .text p{
+    line-height: 1.5;
+  }
+  .text-light-combo{
+      font-size: 12px;
+  }
 
-.view-more button {
+  .view-more{
+    padding: 16px 0;
+    text-align: center;
+}
+.ticket-icon{
+    color: #ff0000(223, 43, 43);
+    font-size: 11px;
+}
+.view-more button{
     border: 1px solid #F26B38;
     width: 130px;
     padding: 8px;
@@ -58,104 +91,86 @@
     background-color: #F26B38;
     color: #fff;
 }
-
-.box-detail {
+.box-detail{
     padding: 0 16px;
     background-color: #e6e6e6;
     font-size: 13px;
 }
-
-.box-detail img {
+.box-detail img{
     width: 100%;
     margin: auto;
     height: auto;
 }
-
-.img-film {
+.img-film{
     padding: 0 0 4px 0;
     font-size: 14px !important;
 }
-
-.img-film p {
+.img-film p{
     line-height: 1.5;
 }
-
-.view-more button:hover {
+.view-more button:hover{
     background-color: #ca5b32;
     color: #fff;
 }
-
-.ticket-icon {
+.ticket-icon{
     border-bottom: 1px dotted #43464b;
     padding-bottom: 8px;
 }
-
-.ticket-info p {
+.ticket-info p{
     border-bottom: 1px dotted #43464b;
     padding: 10px 0;
 }
-
-.text-regulary {
+.text-regulary{
     text-transform: uppercase;
     font-weight: 600;
     color: #a0a3a7;
 }
-
-.ticket-price-total {
+.ticket-price-total{
     padding: 8px 0;
 }
-
-.ticket-price-total {
+.ticket-price-total{
     font-size: 18px;
 }
-
-.ticket-price-total .money {
+.ticket-price-total .money{
     color: #F26B38;
-    font-size: 22px;
+    font-size: 22px ;
 }
-
-.input-booking button {
+.input-booking button{
     border-radius: 50%;
     background-color: #43464b;
     color: #fff;
     height: 20px;
     width: 20px;
 }
-
-.input-group {
+.input-group{
     padding: 6px 12px;
     text-align: center;
 }
-
-.input-type {
+.input-type{
     text-align: center;
 }
-
-.input-type input[type=number] {
+.input-type input[type=number]{
     width: 60px;
     padding: 6px 12px;
     height: 34px;
     border: 1px solid #43464b;
 }
-
-input:focus {
+input:focus{
     outline: none;
 }
-
-button:focus {
+button:focus{
     outline: none;
 }
-
-.gia {
+.gia{
     border: none;
     text-align: right;
 }
-
-.table-combo-td,
-.table-type-td {
+.table-combo-td, .table-type-td{
     width: 400px;
 }
-
-.table-type-td p {
+.table-type-td p{
     line-height: 1.5;
+}
+.text{
+    padding-left: 16px;
 }
