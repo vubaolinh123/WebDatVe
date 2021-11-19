@@ -10,7 +10,6 @@
     border-color: #f26b38;
 }
 
-
 /* Tab Links */
 
 .tabs {
@@ -61,4 +60,4 @@
 
 .tabcontent.active {
     display: block;
-}
+
