@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/trangchu.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+    @yield('css.web')
 </head>
 
 <body>
@@ -35,17 +35,15 @@
 
 
     @yield('javascrip.web')
-
-
     <script src="{{ asset('frontend/js/custom.js') }}"></script>
     <script>
-    var count = 1;
-    setInterval(() => {
-        document.getElementById('radio' + count).checked = true;
-        count++;
-        if (count > 4) {
-            count = 1;
-        }
-    }, 2000);
+        var count = 1;
+        setInterval(() => {
+            document.getElementById('radio' + count).checked = true;
+            count++;
+            if (count > 4) {
+                count = 1;
+            }
+        }, 2000);
     </script>
 </body>

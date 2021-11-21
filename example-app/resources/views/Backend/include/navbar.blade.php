@@ -62,15 +62,6 @@
         <li><a href="{{ route('admin.typechair.addForm') }}">Thêm </a></li>
     </ul>
 </li>
-<li>
-    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-        <span class="nav-text">Quản lý danh mục</span>
-    </a>
-    <ul aria-expanded="false">
-        <li><a href="{{ route('admin.category.list') }}">Danh sách</a></li>
-        <li><a href="{{ route('admin.category.add') }}">Thêm </a></li>
-    </ul>
-</li>
 
 
 {{-- <li class="nav-label">Apps</li>
