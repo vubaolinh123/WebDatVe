@@ -188,7 +188,7 @@
             }
             renderChair();
             render();
-            const countVip = {{ $countVip ?? 0 }};
+            const countVip = {{ $countVip }};
             const countNormal = {{ $countNormal ?? 0 }};
             const color = 'rgb(125, 199, 29)';
             let countVipFlag = 0;

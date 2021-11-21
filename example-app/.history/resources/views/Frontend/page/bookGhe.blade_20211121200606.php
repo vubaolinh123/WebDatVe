@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('Frontend.layout_web')
+@section('css.web')
 
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+=======
+>>>>>>> main
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="../css/book.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Document</title>
-</head>
-
-<body>
     <style>
         .cinema-selected::before {
             background-color: #7dc71d;
@@ -47,6 +46,7 @@
         }
 
     </style>
+<<<<<<< HEAD
     <div class="container">
         <div class="main overflow-auto">
             <h2 class="text-white text-3xl my-2">CHỌN GHẾ
@@ -58,7 +58,7 @@
                             if ($key == 'ticket') {
                                 foreach ($value as $k => $v) {
                                     $ticket = \App\Models\Ticket::where('id_price_ticket', $k)->first();
-                                    ($ticket -> status == 1) ? $countVip = $v :  $countNormal = $v;
+                                    ($ticket -> status == 1) ? $countVip = $v : $countNormal = $v ;
                                     echo '<br><small  style="font-size:12px;background-color:rgb(255, 187, 0) ; border-radius:10px ; padding:3px"> Bạn có ' . $v . ' lượt chọn ' .$ticket-> name .'</small>';
                                 }
                             }
@@ -99,28 +99,68 @@
                                                 }
                                             @endphp-400">{{ $i }}
                                         </button>
+=======
 
-                                    @endfor
-                                </div>
-                                <!-- END 1 - 12 -->
+@endsection
+@section('conten.web')
+    <div class="conten m-10">
+        <div class="row ">
+
+
+            <div class="col-xs-8">
+                <div class="main overflow-auto">
+                    <h2 class="text-white text-3xl my-2">CHỌN GHẾ</h2>
+                    <div class="w-full h-600px bg-white px-5 py-10">
+                        <div class="w-10/12 my-0 mx-auto ">
+                            <div class="grid grid-cols-12 gap-y-3 gap-x-5">
+                                <!-- ROW 1  -->
+                                @for ($j = 0; $j < $show_time->cinema_room->quantity_col; $j++)
+                                    <div class="border border-black text-center">{{ $arr[$j] }}</div>
+                                    <div class="col-span-10">
+                                        <!-- CÁC HÀNG TỪ 1 - 12 -->
+                                        <div class="grid grid-cols-{{ $show_time->cinema_room->quantity_row }} gap-x-1">
+                                            @for ($i = 1; $i <= $show_time->cinema_room->quantity_row; $i++)
+>>>>>>> main
+
+                                                <div
+                                                    class="border border-black text-center bg-@php
+                                            if ($i >=  $show_time->cinema_room->vip_row_start&&
+                                                $i <= $show_time->cinema_room->vip_row_end&&
+                                                $j >=  $show_time->cinema_room->vip_col_start&&
+                                                $j <= $show_time->cinema_room->vip_col_end
+                                                ) {
+                                              echo 'red';
+                                            }else {
+                                                echo 'gray';
+                                            }
+                                        @endphp-400">
+                                                    {{ $i }}
+                                                </div>
+
+                                            @endfor
+                                        </div>
+                                        <!-- END 1 - 12 -->
+                                    </div>
+                                    <div class="border border-black text-center">{{ $arr[$j] }}</div>
+                                @endfor
                             </div>
-                            <div class="border border-black text-center">{{ $arr[$j] }}</div>
-                        @endfor
-                    </div>
-                    <!-- END ROW  -->
-                    <!-- Màn HÌNH  -->
-                    <div class="text-center my-5 px-24">
-                        <span class="border-b-4 border-black block">Màn Hình</span>
-                    </div>
-                    <!-- END MÀN HÌNH  -->
-                    <div class="text-center my-14 seat-cinema">
-                        <span class="mr-5 cinema-selected">Ghế Đang Chọn</span>
-                        <span class="mr-5 cinema-unavailable">Ghế VIP</span>
-                        <span class="mr-5 cinema-normal">Có Thể Chọn</span>
-                        <span class="mr-5 cinema-area">Không Thể Chọn</span>
+                            <!-- END ROW  -->
+                            <!-- Màn HÌNH  -->
+                            <div class="text-center my-5 px-24">
+                                <span class="border-b-4 border-black block">Màn Hình</span>
+                            </div>
+                            <!-- END MÀN HÌNH  -->
+                            <div class="text-center my-14 seat-cinema">
+                                <span class="mr-5 cinema-selected">Ghế Đang Chọn</span>
+                                <span class="mr-5 cinema-unavailable">Ghế VIP</span>
+                                <span class="mr-5 cinema-normal">Có Thể Chọn</span>
+                                <span class="mr-5 cinema-area">Không Thể Chọn</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </div>
         <div class="main-left">
             <div class="detail-film">
@@ -145,11 +185,44 @@
                     <div id="show_history_chair"></div>
                     <div class="view-more">
                         <button id="nextSubmit" type="button">Tiếp tục <i class="fas fa-arrow-right"></i></button>
+=======
+            <div class="col-xs-4">
+                <div class="main-left">
+                    <div class="detail-film">
+                        <div class="box-detail">
+                            <div class="img-film">
+                                <img style="height:350px !important" height="100"
+                                    src="{{ asset("$URL_IMG_FILM/" . $show_time->film->avatar) }} " alt="">
+                                <p class="text-bold">{{ $show_time->film->name }}</p>
+                                <p class="text-regulary">{{ $show_time->film->cast }}</p>
+                            </div>
+                            {{-- <div class="ticket-icon">
+                    <i class="icon-c18"></i>
+                    <span style="color:red;">(*) Phim chỉ dành cho khán giả từ 18 tuổi trở lên</span>
+                </div> --}}
+                            <div class="ticket-info">
+                                <p><b>Rạp : </b>{{ $show_time->cinema_room->cinema->cluster_cinema->name }} -
+                                    {{ $show_time->cinema_room->cinema->name }}</p>
+                                <p><b>Suất chiếu : </b>{{ date('h:i', strtotime($show_time->start_time)) }} | Ngày
+                                    :
+                                    {{ $show_time->show_date }} </p>
+                            </div>
+                            <div class="ticket-price-total">
+                                <p class="total-text">Ghế : <span class="money"><label
+                                            id="tongtien3"></label></span>
+                                </p>
+                            </div>
+                            <div class="view-more">
+                                <button>Tiếp tục <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+>>>>>>> main
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <script>
         $(document).ready(function() {
             $('#nextSubmit').on('click', function(e){
@@ -188,8 +261,8 @@
             }
             renderChair();
             render();
-            const countVip = {{ $countVip ?? 0 }};
-            const countNormal = {{ $countNormal ?? 0 }};
+            const countVip = {{ $countVip }};
+            const countNormal = {{ $countNormal }};
             const color = 'rgb(125, 199, 29)';
             let countVipFlag = 0;
             let countNormalFlag = 0;
@@ -258,5 +331,10 @@
         })
     </script>
 </body>
+=======
+>>>>>>> main
 
-</html>
+@endsection
+@section('javascrip.web')
+
+@endsection

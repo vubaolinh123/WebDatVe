@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,12 +9,10 @@
     <title>Book</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('frontend/css/book.css') }}">
 
-</head>
-<body>
     <div class="container">
         <div class="main">
             <div class="wrapper-film-right">
@@ -203,8 +202,12 @@
     </div>
 
 
+@endsection
 
 
+
+
+@section('javascrip.web')
 
     <script>
         $(document).ready(function(){
@@ -284,5 +287,109 @@
             })
         })
     </script>
+
+{{-- <script>
+    var gia = document.getElementsByClassName("gia");
+    var tt = document.getElementsByClassName("tt");
+    var sl = document.getElementsByClassName("sl");
+
+    function updateSL(i) {
+        tt[i].innerHTML = gia[i].value * sl[i].value;
+        tongtien1();
+    }
+
+        function updateSL(i) {
+            tt[i].innerHTML = gia[i].value * sl[i].value;
+            tongtien1();
+        }
+
+        function updateSlcombo(i) {
+            tt[i].innerHTML = gia[i].value * sl[i].value;
+            tongtien2();
+        }
+
+        function tongtien1() {
+            let tongtien = 0;
+            for (j = 0; j < gia.length; j++) {
+                tt[j].innerHTML = gia[j].value * sl[j].value
+                tongtien += Number(tt[j].innerHTML);
+            }
+            document.getElementById("tongtien").innerHTML = tongtien;
+            document.getElementById('tongtien3').innerHTML = Number(document.getElementById("tongtien").innerHTML) + Number(
+                document.getElementById("tongtien2").innerHTML)
+
+        }
+
+        function tongtien2() {
+            let tongtien = 0;
+            for (j = 0; j < gia.length; j++) {
+                tt[j].innerHTML = gia[j].value * sl[j].value
+                tongtien += Number(tt[j].innerHTML);
+            }
+            document.getElementById("tongtien2").innerHTML = tongtien;
+            document.getElementById('tongtien3').innerHTML = Number(document.getElementById("tongtien").innerHTML) + Number(
+                document.getElementById("tongtien2").innerHTML)
+        }
+        window.onload = function() {
+            let tongtiendau = 0;
+            for (i = 0; i < gia.length; i++) {
+                tt[i].innerHTML = gia[i].value * sl[i].value
+                tongtiendau += Number(tt[i].innerHTML);
+            }
+            document.getElementById("tongtien").innerHTML = tongtiendau;
+            document.getElementById('tongtien3').innerHTML = Number(document.getElementById("tongtien").innerHTML) +
+                Number(document.getElementById("tongtien2").innerHTML)
+        }
+        document.getElementById("tongtien").innerHTML = tongtiendau;
+        document.getElementById('tongtien3').innerHTML = Number(document.getElementById("tongtien").innerHTML) +
+            Number(document.getElementById("tongtien2").innerHTML)
+    }
+</script> --}}
+
+{{-- <script>
+    const tongtien1 = document.querySelector('#tongtien1');
+    const tongtien2 = document.querySelector('#tongtien2');
+    const tongtien3 = document.querySelector('#tongtien3');
+    const tongItem1 = document.querySelectorAll('.tongItem1');
+    const tongItem2 = document.querySelectorAll('.tongItem2');
+    const input1 = document.querySelectorAll('.input1');
+    const input2 = document.querySelectorAll('.input2');
+    const gia1 = document.querySelectorAll('.gia1');
+    const gia2 = document.querySelectorAll('.gia2');
+
+        for (let i = 0; i < input1.length; i++) {
+            input1[i].addEventListener('change', () => {
+                tongItem1[i].innerHTML = Number(gia1[i].value) * Number(input1[i].value)
+                tong1()
+            })
+        }
+        for (let i = 0; i < input2.length; i++) {
+            input2[i].addEventListener('change', () => {
+                tongItem2[i].innerHTML = Number(gia2[i].value) * Number(input2[i].value)
+                tong2()
+            })
+        }
+
+        function tong1() {
+            let tong = 0;
+            for (let i = 0; i < tongItem1.length; i++) {
+                tong += Number(tongItem1[i].innerHTML)
+            }
+            tongtien1.innerHTML = tong
+            tongtien3.innerHTML = Number(tongtien1.innerHTML) + Number(tongtien2.innerHTML)
+        }
+
+        function tong2() {
+            let tong = 0;
+            for (let i = 0; i < tongItem2.length; i++) {
+                tong += Number(tongItem2[i].innerHTML)
+            }
+            tongtien2.innerHTML = tong
+            tongtien3.innerHTML = Number(tongtien1.innerHTML) + Number(tongtien2.innerHTML)
+        }
+        tongtien2.innerHTML = tong
+        tongtien3.innerHTML = Number(tongtien1.innerHTML) + Number(tongtien2.innerHTML)
+    }
+</script> --}}
 </body>
 </html>
