@@ -1,157 +1,190 @@
+
 @extends('Frontend.layout_web')
 @section('css.web')
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/book.css') }}">
 @endsection
 @section('conten.web')
     <div class="container">
+        <div class="main">
+            <div class="wrapper-film-right">
+                <h2>chọn vé/thức ăn</h2>
+                <div class="table-film">
+                    <table id="table-type">
+                        <thead>
+                            <th>Loại vé</th>
+                            <th style="text-align: center;">Số lượng</th>
+                            <th style="text-align: right;">Giá (VNĐ)</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($tickets as $ticket)
+                                <tr style="width: 350px;">
+                                    <td class="table-type-td">
+                                        <p class="text-bold">{{ $ticket->name }}</p>
+                                        <small>{{ $ticket->detail }}</small>
+                                    </td>
+                                    <td class="input-type">
+                                        <span class="input-group input-booking">
+                                            <button class="pre"  data-id="{{ $ticket -> id_price_ticket }}">
+                                                <span>
+                                                    <i class="fas fa-minus"></i>
+                                                </span>
+                                            </button>
+                                        </span>
+                                        <input
+                                            data-id="{{ $ticket->id_price_ticket }}"
+                                            data-type="ticket"
+                                            name="s1"
+                                            class="sl_{{  $ticket -> id_price_ticket }}"
+                                            type="number"
+                                            min="0"
+                                            value="@php  if(session()->has('book1')){
+                                                    foreach (session()->get('book1' )as $key => $value)
+                                                    {if($key == 'ticket') foreach ($value as $k => $v){ if($k == $ticket -> id_price_ticket) echo $v;}}
+                                                }else{echo 0 ;} @endphp"
+                                            name="s1"
+                                        >
+                                        <span class="input-group input-booking">
+                                            <button class="next" data-id="{{ $ticket -> id_price_ticket }}">
+                                                <span>
+                                                    <i class="fas fa-plus"></i>
+                                                </span>
+                                            </button>
+                                        </span>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <input type="hidden" value="{{ $ticket->unit_price }}" class="price_{{  $ticket -> id_price_ticket }}" >
+                                        {{ number_format($ticket->unit_price) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
-        <div class="row">
-            <div class="conten m-10">
-
-                <div class="col-xs-12 offset-1 ">
-                    <div class="row">
-
-                        <div class="col-xs-8">
-                            <div class="main">
-                                <div class="wrapper-film-right">
-                                    <h2 class="pt-5">chọn vé/thức ăn</h2>
-                                    <div class="table-film">
-                                        <table id="table-type">
-                                            <thead>
-                                                <th>Loại vé</th>
-                                                <th style="text-align: center;">Số lượng</th>
-                                                <th style="text-align: right;">Giá (VNĐ)</th>
-                                                <th style="text-align: right;">Tổng (VNĐ)</th>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($tickets as $ticket)
-                                                    <tr style="width: 350px;">
-                                                        <td class="table-type-td">
-                                                            <p class="text-bold">{{ $ticket->name }}</p>
-                                                            <small>{{ $ticket->detail }}</small>
-                                                        </td>
-                                                        <td style="display: flex;justify-content: center;"
-                                                            class="input-type">
-                                                            <span class="input-group input-booking">
-                                                                <button class="pre"
-                                                                    data-id="{{ $ticket->id_price_ticket }}">
-                                                                    <span>
-                                                                        <i class="fas fa-minus"></i>
-                                                                    </span>
-                                                                </button>
-                                                            </span>
-                                                            <input class="sl_{{ $ticket->id_price_ticket }}" type="number"
-                                                                min="0" value="0" name="s1">
-                                                            <span class="input-group input-booking">
-                                                                <button class="next"
-                                                                    data-id="{{ $ticket->id_price_ticket }}">
-                                                                    <span>
-                                                                        <i class="fas fa-plus"></i>
-                                                                    </span>
-                                                                </button>
-                                                            </span>
-                                                        </td>
-                                                        <td style="text-align: right;">
-                                                            <input type="hidden" value="{{ $ticket->unit_price }}"
-                                                                class="price_{{ $ticket->id_price_ticket }}">
-                                                            {{ number_format($ticket->unit_price) }}
-                                                        </td>
-                                                        <td style="text-align: right;">
-                                                            <div class="show_{{ $ticket->id_price_ticket }}"></div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        <table id="table-combo">
-                                            <thead>
-                                                <th>Combo</th>
-                                                <th style="text-align: center;">Số lượng</th>
-                                                <th style="text-align: right;">Giá (VNĐ)</th>
-                                                <th style="text-align: right;">Tổng (VNĐ)</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr style="text-align: center;">
-                                                    <td style="display: flex;  align-items: center;" class="table-combo-td">
-                                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWAw170DRgRqAMmLL0iE5AfchWUNPqgGsN0YGpi6nRCzsORjiWiASRAsjF8WD2ifWWm4Q&usqp=CAU"
-                                                            alt="">
-                                                        <div class="text">
-                                                            <p class="text-bold">Combo 2 Big</p>
-                                                            <p class="text-light-combo">1 BẮP + 2 NƯỚC NGỌT 32 OZ</p>
-                                                        </div>
-                                                    </td>
-                                                    <td class="input-type">
-                                                        <span class="input-group input-booking">
-                                                            <button disabled="disabled">
-                                                                <span>
-                                                                    <i class="fas fa-minus"></i>
-                                                                </span>
-                                                            </button>
-                                                        </span>
-                                                        <input class="sl" type="number" min="0" value="0"
-                                                            name="s1" onchange="updateSlcombo(0)">
-                                                        <span class="input-group input-booking">
-                                                            <button>
-                                                                <span>
-                                                                    <i class="fas fa-plus"></i>
-                                                                </span>
-                                                            </button>
-                                                        </span>
-                                                    </td>
-                                                    <td style="text-align: right;"><input type="text" readonly
-                                                            class="gia" value="65000">
-                                                    </td>
-                                                    <td style="text-align: right;"><label class="tt"></label>
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
+                    <table id="table-combo">
+                        <thead>
+                            <th>Combo</th>
+                            <th style="text-align: center;">Số lượng</th>
+                            <th style="text-align: right;">Giá (VNĐ)</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($foods as $food)
+                            @if ($food->type_food->id_type_food == 3)
+                            <tr style="text-align: center;">
+                                <td class="table-combo-td">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWAw170DRgRqAMmLL0iE5AfchWUNPqgGsN0YGpi6nRCzsORjiWiASRAsjF8WD2ifWWm4Q&usqp=CAU" alt="">
+                                    <div class="text">
+                                        <p class="text-bold">{{ $food->name }}</p>
+                                        <p class="text-light-combo">{{ $food->type_food->name }}</p>
                                     </div>
-                                </div>
-                            </div>
+                                </td>
+                                <td   class="input-type">
+                                    <span class="input-group input-booking">
+                                        <button disabled="disabled">
+                                            <span>
+                                                <i class="fas fa-minus"></i>
+                                            </span>
+                                        </button>
+                                    </span>
+                                    <input
+                                        data-id="{{ $food->id_food }}"
+                                        data-type="food"
+                                        class="sl"
+                                        type="number"
+                                        min="0"
+                                        value="@php  if(session()->has('book1')){
+                                            foreach (session()->get('book1' )as $key => $value)
+                                            { if($key == 'food') foreach ($value as $k => $v){ if($k == $food -> id_food) echo $v; } }
+                                        }else{ echo 0 ;}   @endphp"
+                                        name="s1"
+                                    >
+                                    <span class="input-group input-booking">
+                                        <button>
+                                            <span>
+                                                <i class="fas fa-plus"></i>
+                                            </span>
+                                        </button>
+                                    </span>
+                                </td>
+                                <td style="text-align: right;">{{ $food->price }}</td>
+                            </tr>
+                            @endif
+                            @endforeach
+                        </tbody>
+                    </table>
 
-                        </div>
-                        <div class="col-xs-4">
-                            <div class="main-left">
-                                <div class="detail-film">
-                                    <div class="box-detail">
-                                        <div class="img-film">
-                                            <img style="height:350px !important" height="100"
-                                                src="{{ asset("$URL_IMG_FILM/" . $show_time->film->avatar) }} " alt="">
-                                            <p class="text-bold">{{ $show_time->film->name }}</p>
-                                            <p class="text-regulary">{{ $show_time->film->cast }}</p>
-                                        </div>
-                                        {{-- <div class="ticket-icon">
-                                <i class="icon-c18"></i>
-                                <span style="color:red;">(*) Phim chỉ dành cho khán giả từ 18 tuổi trở lên</span>
-                            </div> --}}
-                                        <div class="ticket-info">
-                                            <p><b>Rạp : </b>{{ $show_time->cinema_room->cinema->cluster_cinema->name }} -
-                                                {{ $show_time->cinema_room->cinema->name }}</p>
-                                            <p><b>Suất chiếu : </b>{{ date('h:i', strtotime($show_time->start_time)) }} |
-                                                Ngày :
-                                                {{ $show_time->show_date }} </p>
-                                            {{-- <p><b>Combo : </b>Galaxy Hanoi</p>
-                                <p><b>Ghế : </b>Galaxy Hanoi</p> --}}
-                                        </div>
-                                        <div class="ticket-price-total">
-                                            <p class="total-text">Tổng: <input type="text" disabled="disabled"
-                                                    id="showTien" value="0">
-                                                </span></p>
-                                        </div>
-                                        <div class="view-more">
-                                            <button id="clickNext">Tiếp tục <i class="fas fa-arrow-right"></i></button>
-                                        </div>
+                    <table id="table-combo">
+                        <thead>
+                            <th>Đồ ăn & đồ uống</th>
+                            <th style="text-align: center;">Số lượng</th>
+                            <th style="text-align: right;">Giá (VNĐ)</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($foods as $food)
+                            @if ($food->type_food->id_type_food != 3)
+                            <tr style="text-align: center;">
+                                <td class="table-combo-td">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWAw170DRgRqAMmLL0iE5AfchWUNPqgGsN0YGpi6nRCzsORjiWiASRAsjF8WD2ifWWm4Q&usqp=CAU" alt="">
+                                    <div class="text">
+                                        <p class="text-bold">{{ $food->name }}</p>
+                                        <p class="text-light-combo">{{ $food -> type_food -> name}}</p>
                                     </div>
-                                </div>
-                            </div>
+                                </td>
+                                <td   class="input-type">
+                                    <span class="input-group input-booking">
+                                        <button disabled="disabled">
+                                            <span>
+                                                <i class="fas fa-minus"></i>
+                                            </span>
+                                        </button>
+                                    </span>
+                                    <input
+                                        data-id="{{ $food->id_food }}"
+                                        data-type="food"
+                                         class="sl"
+                                         type="number"
+                                         min="0"
+                                         value="@php  if(session()->has('book1')){
+                                            foreach (session()->get('book1' )as $key => $value) {
+                                               if($key == 'food') foreach ($value as $k => $v){if($k == $food -> id_food)  echo $v;}
+                                            }
+                                        }else{ echo 0 ;}   @endphp"
+                                         name="s1"
+                                      >
+                                    <span class="input-group input-booking">
+                                        <button>
+                                            <span>
+                                                <i class="fas fa-plus"></i>
+                                            </span>
+                                        </button>
+                                    </span>
+                                </td>
+                                <td style="text-align: right;"> {{ $food->price }}</td>
+                            </tr>
+                            @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="main-left">
+            <div class="detail-film">
+                <div class="box-detail">
+                    <div class="img-film">
+                        <img style="height:350px !important" height="100"
+                            src="{{ asset("$URL_IMG_FILM/" . $show_time->film->avatar) }} " alt="">
+                        <p class="text-bold">{{ $show_time->film->name }}</p>
+                        <p class="text-regulary">{{ $show_time->film->cast }}</p>
+                    </div>
+                    <div class="ticket-info">
+                        <p><b>Rạp : </b>{{ $show_time->cinema_room->cinema->cluster_cinema->name }} -
+                            {{ $show_time->cinema_room->cinema->name }}</p>
+                        <p><b>Suất chiếu : </b>{{ date('h:i', strtotime($show_time->start_time)) }} | Ngày :
+                            {{ $show_time->show_date }} </p>
+                    </div>
+                    <div id="show_book" class="ticket-price-total">
 
-                        </div>
+                    </div>
+                    <div class="view-more">
+                        <button id="clickNext" >Tiếp tục <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -167,8 +200,23 @@
 @section('javascrip.web')
 
     <script>
-        $(document).ready(function() {
-            $('.pre').on('click', function() {
+        $(document).ready(function(){
+            render();
+            function render() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: ("{{ route('web.render_book_show') }}"),
+                    method: "GET",
+                    success: function(data){
+                         $('#show_book').html(data);
+                    }
+                })
+            }
+            $('.pre').on('click', function(){
                 let id = $(this).data('id');
                 let count = $('.sl_' + id).val() - 1;
                 let price = $('.price_' + id).val();
@@ -191,21 +239,54 @@
                 $('.sl_' + id).val(count);
                 $('.show_' + id).html(priceNew);
             });
-            $('#clickNext').on('click', function() {
-                let showTIen = Number($('#showTien').val());
-                if (showTIen == 0) {
-                    alert('Mời bạn chọn vé')
-                } else {
-                    window.location = "/book-ghe/{{ $id }}";
-                }
+            $('#clickNext').on('click', function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: ("{{ route('web.check_render_book') }}"),
+                    method: "GET",
+                    success: function(data){
+                        if(data == 0){
+                            alert('Chọn vé đi bro :>');
+                        }else{
+                            window.location = "/book-ghe/{{ $id }}";
+                        }
+                    }
+                })
+            });
+            $("input[name='s1']").on('change',function(e){
+                let value = e.target.value;
+                let id = $(this).data('id');
+                let type = $(this).data('type');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: ("{{ route('web.render_book') }}"),
+                    method: "POST",
+                    data :{value : value , type : type , id : id},
+                    success: function(data){
+                        render();
+                    }
+                })
             })
         })
     </script>
 
-    <script>
-        var gia = document.getElementsByClassName("gia");
-        var tt = document.getElementsByClassName("tt");
-        var sl = document.getElementsByClassName("sl");
+{{-- <script>
+    var gia = document.getElementsByClassName("gia");
+    var tt = document.getElementsByClassName("tt");
+    var sl = document.getElementsByClassName("sl");
+
+    function updateSL(i) {
+        tt[i].innerHTML = gia[i].value * sl[i].value;
+        tongtien1();
+    }
 
         function updateSL(i) {
             tt[i].innerHTML = gia[i].value * sl[i].value;
@@ -249,18 +330,22 @@
             document.getElementById('tongtien3').innerHTML = Number(document.getElementById("tongtien").innerHTML) +
                 Number(document.getElementById("tongtien2").innerHTML)
         }
-    </script>
+        document.getElementById("tongtien").innerHTML = tongtiendau;
+        document.getElementById('tongtien3').innerHTML = Number(document.getElementById("tongtien").innerHTML) +
+            Number(document.getElementById("tongtien2").innerHTML)
+    }
+</script> --}}
 
-    <script>
-        const tongtien1 = document.querySelector('#tongtien1');
-        const tongtien2 = document.querySelector('#tongtien2');
-        const tongtien3 = document.querySelector('#tongtien3');
-        const tongItem1 = document.querySelectorAll('.tongItem1');
-        const tongItem2 = document.querySelectorAll('.tongItem2');
-        const input1 = document.querySelectorAll('.input1');
-        const input2 = document.querySelectorAll('.input2');
-        const gia1 = document.querySelectorAll('.gia1');
-        const gia2 = document.querySelectorAll('.gia2');
+ {{-- <script>
+    const tongtien1 = document.querySelector('#tongtien1');
+    const tongtien2 = document.querySelector('#tongtien2');
+    const tongtien3 = document.querySelector('#tongtien3');
+    const tongItem1 = document.querySelectorAll('.tongItem1');
+    const tongItem2 = document.querySelectorAll('.tongItem2');
+    const input1 = document.querySelectorAll('.input1');
+    const input2 = document.querySelectorAll('.input2');
+    const gia1 = document.querySelectorAll('.gia1');
+    const gia2 = document.querySelectorAll('.gia2');
 
         for (let i = 0; i < input1.length; i++) {
             input1[i].addEventListener('change', () => {
@@ -292,5 +377,5 @@
             tongtien2.innerHTML = tong
             tongtien3.innerHTML = Number(tongtien1.innerHTML) + Number(tongtien2.innerHTML)
         }
-    </script>
+    </script> --}}
 @endsection
