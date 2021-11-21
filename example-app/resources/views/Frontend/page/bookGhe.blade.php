@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+@extends('Frontend.layout_web')
+@section('css.web')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="../css/book.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Document</title>
-</head>
-
-<body>
     <style>
         .cinema-selected::before {
             background-color: #7dc71d;
@@ -100,24 +91,41 @@
                                             @endphp-400">{{ $i }}
                                         </button>
 
-                                    @endfor
-                                </div>
-                                <!-- END 1 - 12 -->
+                                                <div
+                                                    class="border border-black text-center bg-@php
+                                            if ($i >=  $show_time->cinema_room->vip_row_start&&
+                                                $i <= $show_time->cinema_room->vip_row_end&&
+                                                $j >=  $show_time->cinema_room->vip_col_start&&
+                                                $j <= $show_time->cinema_room->vip_col_end
+                                                ) {
+                                              echo 'red';
+                                            }else {
+                                                echo 'gray';
+                                            }
+                                        @endphp-400">
+                                                    {{ $i }}
+                                                </div>
+
+                                            @endfor
+                                        </div>
+                                        <!-- END 1 - 12 -->
+                                    </div>
+                                    <div class="border border-black text-center">{{ $arr[$j] }}</div>
+                                @endfor
                             </div>
-                            <div class="border border-black text-center">{{ $arr[$j] }}</div>
-                        @endfor
-                    </div>
-                    <!-- END ROW  -->
-                    <!-- Màn HÌNH  -->
-                    <div class="text-center my-5 px-24">
-                        <span class="border-b-4 border-black block">Màn Hình</span>
-                    </div>
-                    <!-- END MÀN HÌNH  -->
-                    <div class="text-center my-14 seat-cinema">
-                        <span class="mr-5 cinema-selected">Ghế Đang Chọn</span>
-                        <span class="mr-5 cinema-unavailable">Ghế VIP</span>
-                        <span class="mr-5 cinema-normal">Có Thể Chọn</span>
-                        <span class="mr-5 cinema-area">Không Thể Chọn</span>
+                            <!-- END ROW  -->
+                            <!-- Màn HÌNH  -->
+                            <div class="text-center my-5 px-24">
+                                <span class="border-b-4 border-black block">Màn Hình</span>
+                            </div>
+                            <!-- END MÀN HÌNH  -->
+                            <div class="text-center my-14 seat-cinema">
+                                <span class="mr-5 cinema-selected">Ghế Đang Chọn</span>
+                                <span class="mr-5 cinema-unavailable">Ghế VIP</span>
+                                <span class="mr-5 cinema-normal">Có Thể Chọn</span>
+                                <span class="mr-5 cinema-area">Không Thể Chọn</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -259,4 +267,7 @@
     </script>
 </body>
 
-</html>
+@endsection
+@section('javascrip.web')
+
+@endsection
