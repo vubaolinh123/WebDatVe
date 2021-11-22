@@ -58,7 +58,7 @@
                             if ($key == 'ticket') {
                                 foreach ($value as $k => $v) {
                                     $ticket = \App\Models\Ticket::where('id_price_ticket', $k)->first();
-                                    ($ticket -> status == 1) ? $countVip = $v :  $countNormal = $v;
+                                    ($ticket -> status == 1) ? $countVip = $v : ($countNormal = $v) ?? $countNormal = 0 ;
                                     echo '<br><small  style="font-size:12px;background-color:rgb(255, 187, 0) ; border-radius:10px ; padding:3px"> Bạn có ' . $v . ' lượt chọn ' .$ticket-> name .'</small>';
                                 }
                             }
@@ -188,8 +188,8 @@
             }
             renderChair();
             render();
-            const countVip = {{ $countVip ?? 0 }};
-            const countNormal = {{ $countNormal ?? 0 }};
+            const countVip = {{ $countVip }};
+            const countNormal = {{ $countNormal }};
             const color = 'rgb(125, 199, 29)';
             let countVipFlag = 0;
             let countNormalFlag = 0;
