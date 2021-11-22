@@ -23,7 +23,4 @@ class Showtime extends Model
     public function film(){
         return $this -> belongsTo(Film::class,'film_id');
     }
-    public function receipt_details(){
-        return $this->hasMany(Receipt_Detail::class,'showtime_id');
-    }
 }

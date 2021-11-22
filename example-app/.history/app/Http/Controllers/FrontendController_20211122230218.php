@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\PayMail;
 use App\Models\Cinema;
 use App\Models\Cinemaroom;
 use App\Models\ClusterCinema;
@@ -20,7 +19,6 @@ use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -287,9 +285,10 @@ class FrontendController extends Controller
         foreach($request->session()->get('book1') as $key => $value){
             if($key == 'ticket'){
                 foreach($value as $k => $v){
+                    if($request->session()->has('chair')){
                         foreach($request->session()->get('chair') as $value){
                             $ticket = Ticket::where('id_price_ticket',$k)->first();
-                           if($ticket->status == $value['status']){
+                           if($ticket->status == 1){
                                Receipt_Detail::create([
                                    'quantity' => $v,
                                    'ticket_id' => $k,
@@ -297,9 +296,19 @@ class FrontendController extends Controller
                                    'showtime_id' => $id,
                                    'receipt_id' =>$token
                                 ]);
-
+                           }else{
+                                Receipt_Detail::create([
+                                    'quantity' => $v,
+                                    'ticket_id' => $k,
+                                    'chair_code' => $value['chair'] ,
+                                    'showtime_id' => $id,
+                                    'receipt_id' =>$token
+                                ]);
                            }
                         }
+                    }
+
+
                 }
             }
         };
@@ -313,9 +322,5 @@ class FrontendController extends Controller
                     }
             }
         }
-        Mail::to(Auth::user()->email)->send(new PayMail($id));
-        $request->session()->forget('chair');
-        $request->session()->forget('book1');
-        return redirect('/');
     }
 }

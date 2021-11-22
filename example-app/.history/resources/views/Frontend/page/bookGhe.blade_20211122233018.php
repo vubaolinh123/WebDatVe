@@ -70,6 +70,7 @@
                 <div class="w-10/12 my-0 mx-auto ">
                     <div class="grid grid-cols-12 gap-y-3 gap-x-5">
                         <!-- ROW 1  -->
+                        @dd( $show_time ->receipt_details)
                         @for ($j = 0; $j < $show_time->cinema_room->quantity_col; $j++)
                             <div class="border border-black text-center">{{ $arr[$j] }}</div>
                             <div class="col-span-10">

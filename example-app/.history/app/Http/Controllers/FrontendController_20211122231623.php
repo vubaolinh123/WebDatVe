@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\PayMail;
 use App\Models\Cinema;
 use App\Models\Cinemaroom;
 use App\Models\ClusterCinema;
@@ -20,7 +19,6 @@ use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -289,7 +287,7 @@ class FrontendController extends Controller
                 foreach($value as $k => $v){
                         foreach($request->session()->get('chair') as $value){
                             $ticket = Ticket::where('id_price_ticket',$k)->first();
-                           if($ticket->status == $value['status']){
+                           if($ticket->status == $value['statis']){
                                Receipt_Detail::create([
                                    'quantity' => $v,
                                    'ticket_id' => $k,
@@ -313,9 +311,5 @@ class FrontendController extends Controller
                     }
             }
         }
-        Mail::to(Auth::user()->email)->send(new PayMail($id));
-        $request->session()->forget('chair');
-        $request->session()->forget('book1');
-        return redirect('/');
     }
 }
