@@ -314,8 +314,6 @@ class FrontendController extends Controller
             }
         }
         Mail::to(Auth::user()->email)->send(new PayMail($id));
-        $request->session()->forget('chair');
-        $request->session()->forget('book1');
         return redirect('/');
     }
 }
