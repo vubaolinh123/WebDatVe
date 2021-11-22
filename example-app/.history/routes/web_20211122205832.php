@@ -45,7 +45,6 @@ Route::middleware(['cityAddress'])->group(function () {
         Route::get('/check-chair', [FrontendController::class, 'check_chair'])->name('web.check_chair');
         Route::get('/render-check-chair', [FrontendController::class, 'render_check_chair'])->name('web.render_check_chair');
         Route::get('/pay-ticket/{id}', [FrontendController::class, 'pay_ticket'])->name('web.pay_ticket');
-        Route::get('/pay-success/{id}', [FrontendController::class, 'pay_success'])->name('web.pay_success');
         Route::post('/get-chair', [FrontendController::class, 'get_chair'])->name('web.get_chair');
     });
 });

@@ -14,7 +14,7 @@
     <style>
         .container {
             display: grid;
-            grid-template-columns: 1000px 1fr;
+            grid-template-columns: 1200px 1fr;
         }
     </style>
 </head>

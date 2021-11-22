@@ -166,7 +166,7 @@
                         if(data == 0){
                             alert('Vui lòng chọn ít nhất một ghế , đừng phung phí tiền hãy chọn đủ ghế :))')
                         }else{
-                            window.location = '/pay-ticket/{{ $id }}';
+                            window.location = '/thanhtoan';
                         }
                     }
                 })

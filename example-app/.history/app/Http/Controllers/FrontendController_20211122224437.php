@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\PayMail;
 use App\Models\Cinema;
 use App\Models\Cinemaroom;
 use App\Models\ClusterCinema;
 use App\Models\Film;
 use App\Models\FilmType;
 use App\Models\Foods;
-use App\Models\Receipt;
-use App\Models\Receipt_Detail;
-use App\Models\Receipt_Food;
 use App\Models\Showtime;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -19,8 +15,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session as SessionSession;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -255,67 +249,7 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function pay_success(Request $request,$id) {
-        $prFoods = 0;
-        $prTicket = 0 ;
-        if($request->session()->has('book1')){
-            foreach($request->session()->get('book1') as $key => $value){
-                if($key == 'ticket'){
-                    foreach($value as $k => $v){
-                        $ticket = Ticket::where('id_price_ticket',$k)->first();
-                        $prTicket += $ticket->unit_price * $v;
-                    }
-                }
-            };
-            foreach($request->session()->get('book1') as $key => $value){
-                if($key == 'food'){
-                    foreach($value as  $k => $v){
-                            $food = Foods::where('id_food',$k)->first();
-                            $prFoods += $food->price * $v;
-                        }
-                }
-            }
-        }
-        $total = $prFoods + $prTicket;
-        $token = uniqid() . time();
-        Receipt::create([
-            'id_receipt' => $token,
-            'user_id' => Auth::user()->id,
-            'date_pay' => Carbon::now('Asia/Ho_Chi_Minh'),
-            'total' => $total
-        ]);
-        foreach($request->session()->get('book1') as $key => $value){
-            if($key == 'ticket'){
-                foreach($value as $k => $v){
-                        foreach($request->session()->get('chair') as $value){
-                            $ticket = Ticket::where('id_price_ticket',$k)->first();
-                           if($ticket->status == $value['status']){
-                               Receipt_Detail::create([
-                                   'quantity' => $v,
-                                   'ticket_id' => $k,
-                                   'chair_code' => $value['chair'] ,
-                                   'showtime_id' => $id,
-                                   'receipt_id' =>$token
-                                ]);
+    public function pay_success($id) {
 
-                           }
-                        }
-                }
-            }
-        };
-        foreach($request->session()->get('book1') as $key => $value){
-            if($key == 'food'){
-                foreach($value as  $k => $v){
-                        Receipt_Food::create([
-                            'food_id' => $k,
-                            'receipt_id' => $token
-                        ]);
-                    }
-            }
-        }
-        Mail::to(Auth::user()->email)->send(new PayMail($id));
-        $request->session()->forget('chair');
-        $request->session()->forget('book1');
-        return redirect('/');
     }
 }

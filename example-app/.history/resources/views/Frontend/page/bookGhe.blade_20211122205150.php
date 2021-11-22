@@ -144,7 +144,7 @@
                     <div id="show_book" class="ticket-price-total"></div>
                     <div id="show_history_chair"></div>
                     <div class="view-more">
-                        <button id="nextSubmit" type="button">Đặt vé<i class="fas fa-arrow-right"></i></button>
+                        <button id="nextSubmit" type="button">Thanh toán<i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -166,7 +166,7 @@
                         if(data == 0){
                             alert('Vui lòng chọn ít nhất một ghế , đừng phung phí tiền hãy chọn đủ ghế :))')
                         }else{
-                            window.location = '/pay-ticket/{{ $id }}';
+                            window.location = '/thanhtoan';
                         }
                     }
                 })
