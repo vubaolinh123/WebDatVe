@@ -1,0 +1,52 @@
+@extends('Backend.layout_admin')
+@section('conten.admin')
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Danh sách hóa đơn đã mua vé </h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="thead-primary">
+                            <tr>
+                                <th scope="col">Mã hóa đơn </th>
+                                <th scope="col">Người mua hàng </th>
+                                <th scope="col">Số tiền đã thanh toán </th>
+                                <th scope="col">Ngày mua hàng </th>
+                                <th scope="col">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($receipts as $receipt)
+                               <tr>
+
+                                    <td>{!! $receipt -> id_receipt !!}</td>
+                                    <td>{!! $receipt -> user -> name !!} #{!! $receipt -> user -> email !!}</td>
+                                    <td>{!! number_format( $receipt -> total) !!}  .VND </td>
+                                    <td>{{ $receipt -> date_pay }}
+                                    @if ($receipt -> date_pay < \Carbon\Carbon::now('Asia/Ho_Chi_Minh'))
+                                        <span class="alert alert-danger">{{ 'Đã hết hạn' }}</span>
+                                    @elseif($receipt -> user_view_success == 1)
+                                        <span class="alert alert-success">{{ 'Đã thanh toán ' }}</span>
+                                    @elseif($receipt -> user_view_success == 2)
+                                        <span class="alert alert-info">{{ 'Khách hàng gặp vấn đề ' }}</span>
+                                    @else
+                                        <select data-id="{!! $receipt -> id_receipt !!}" name="" class="form-control receipt_success " id="">
+                                            <option  > Cộng tác viên chọn  </option>
+                                            <option value="1">Xác nhận khách hàng đã đến xem phim </option>
+                                            <option value="2">Khách hàng gặp vấn đề </option>
+                                        </select>
+                                    @endif</td>
+                               </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
