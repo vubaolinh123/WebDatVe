@@ -8,46 +8,8 @@
 
 
 
-    {{-- <div class="category-film">
-        <div class="title-film">
-            <div class="title-item">
-                <a href="#">phim đang chiếu</a>
-            </div>
-            <div class="title-item">
-                <a href="#">phim sắp chiếu</a>
-            </div>
-        </div>
 
-        <div class="film">
-            <div class="container-fluid">
-                <div class="row">
-                    @foreach ($filmHomeDeleteds as $filmHomeDeleted)
-                        <div class="col-xs-2">
-                            <div class="item-film">
-                                <a href="{{ route('web.detailFim') }}">
-                                    <div class="film_img"
-                                        style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted->avatar") }})">
-                                    </div>
-                                </a>
-                                <div class="text-film">
-                                    <a href="#"><button>Mua vé</button></a>
-                                </div>
-                                <p class="text-black">THE CONJURING: THE DEVIL MADE ME DO IT
-                                </p>
-                                <p class="text-gray">THE CONJURING: MA XUI QUỶ KHIẾN
-                                </p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-            </div>
-
-        </div>
-
-
-    </div> --}}
-    <div class="container pt-4">
+    <div class=" pt-4">
 
         <!-- Tab links -->
         <div class="tabs">
@@ -64,7 +26,8 @@
                         @foreach ($filmHomeDeleted0s as $filmHomeDeleted0)
                             <div class="col-xs-2 mb-5">
                                 <div class="item-film">
-                                    <a href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted0->id_film , 'slug' => \Str::slug($filmHomeDeleted0->name)]) }}">
+                                    <a
+                                        href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted0->id_film, 'slug' => \Str::slug($filmHomeDeleted0->name)]) }}">
                                         <div class="film_img"
                                             style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted0->avatar") }})">
                                         </div>
@@ -95,7 +58,8 @@
                         @foreach ($filmHomeDeleted1s as $filmHomeDeleted1)
                             <div class="col-xs-2 mb-5">
                                 <div class="item-film">
-                                    <a href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted1->id_film, 'slug' => \Str::slug($filmHomeDeleted1->name)]) }}">
+                                    <a
+                                        href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted1->id_film, 'slug' => \Str::slug($filmHomeDeleted1->name)]) }}">
                                         <div class="film_img"
                                             style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted1->avatar") }})">
                                         </div>

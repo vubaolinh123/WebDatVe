@@ -36,8 +36,11 @@ Route::middleware(['cityAddress'])->group(function () {
         Route::get('/', [FrontendController::class, 'homeWeb'])->name('web.home');
         Route::get('/detail/{id_film}/{slug}', [FrontendController::class, 'detailFim'])->name('web.detailFim');
         Route::get('/getCityAddress/{code}', [FrontendController::class, 'getCityAddress'])->name('web.getCityAddress');
+        Route::get('/ordreFilm', [FrontendController::class, 'ordreFilm'])->name('web.ordreFilm');
     });
     Route::middleware(['auth'])->group(function () {
+        Route::get('/ordreFilm/detail/{id_receipt}', [FrontendController::class, 'detailOrderFilm'])->name('web.detailOrderFilm');
+
         Route::get('/book/{id}', [FrontendController::class, 'book'])->name('web.book');
         Route::get('/book-ghe/{id}', [FrontendController::class, 'book_ghe'])->name('web.book_ghe');
         Route::post('/render-book', [FrontendController::class, 'render_book'])->name('web.render_book');
