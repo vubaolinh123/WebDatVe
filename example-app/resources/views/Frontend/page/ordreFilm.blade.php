@@ -10,7 +10,7 @@
         @else
 
             <h1 style="text-align: center">Danh sách phim bạn đã đặt vé</h1>
-            {{-- <table class="table table-hover table-inverse table-responsive">
+            <table class="table table-hover table-inverse table-responsive">
                 <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
@@ -19,30 +19,45 @@
                         <th>Ngày chiếu</th>
                         <th>Giờ chiếu</th>
                         <th>Mã ghế</th>
+                        <th>Tổng tiền</th>
                     </tr>
                 </thead>
+                {{-- 0 => "Venom: Đối Mặt Tử Thù"
+                1 => 7
+                2 => 285000
+                3 => "1636950971_46_img.jpg"
+                4 => "2021-11-30"
+                5 => "23:00:21"
+                6 => "F2"
+                7 => "2021-11-30"
+                8 => "F3" --}}
                 <tbody>
                     @php
                         $stt = 1;
                     @endphp
-                    @foreach ($receipts as $receipt)
+                    @foreach ($receiptsVl as $receipt)
+
+
                         <tr>
                             <td scope="row">{{ $stt++ }}</td>
                             <td>
-                                <img style="width:100%" src="{{ asset("$URL_IMG_FILM/$receipt->img_film") }}" alt="">
+                                <img style="width:100%" src="{{ asset("$URL_IMG_FILM/$receipt[3]") }}" alt="">
                             </td>
-                            <td>{{ $receipt->name_film }}</td>
-                            <td>{{ $receipt->show_date }}</td>
-                            <td>{{ $receipt->start_time }}</td>
-                            <td>{{ $receipt->chair_code }}</td>
+                            <td><a
+                                    href="{{ route('web.detailFim', ['id_film' => $receipt[1], 'slug' => \Str::slug($receipt[0])]) }}">{{ $receipt[0] }}</a>
+                            </td>
+                            <td>{{ $receipt[4] }}</td>
+                            <td>{{ $receipt[5] }}</td>
+                            <td>{{ $receipt[6] }} / {{ $receipt[8] }}</td>
+                            <td>{{ number_format($receipt[2], 0, ',', '.') }} VND</td>
                         </tr>
 
                     @endforeach
 
                 </tbody>
-            </table> --}}
+            </table>
 
-            <table class="table table-hover table-inverse table-responsive">
+            {{-- <table class="table table-hover table-inverse table-responsive">
                 <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
@@ -72,7 +87,7 @@
                     @endforeach
 
                 </tbody>
-            </table>
+            </table> --}}
         @endif
     </div>
 @endsection

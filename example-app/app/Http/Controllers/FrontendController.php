@@ -27,25 +27,25 @@ class FrontendController extends Controller
 {
     public function homeWeb()
     {
-        $filmHomeDeleted0s = Film::inRandomOrder()->where('status', 0)->where('deleted', 0)
-            ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
-            ->select(
-                'tbl_film_type.name as nameTypeFilm',
-                'tbl_film.name',
-                'tbl_film.avatar',
-                'tbl_film.id_film',
-            )
+        $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)
+            // ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
+            // ->select(
+            //     'tbl_film_type.name as nameTypeFilm',
+            //     'tbl_film.name',
+            //     'tbl_film.avatar',
+            //     'tbl_film.id_film',
+            // )
             ->get();
 
 
-        $filmHomeDeleted1s = Film::inRandomOrder()->where('status', 0)->where('deleted', 1)
-            ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
-            ->select(
-                'tbl_film_type.name as nameTypeFilm',
-                'tbl_film.name',
-                'tbl_film.avatar',
-                'tbl_film.id_film',
-            )
+        $filmHomeDeleted1s = Film::where('status', 0)->where('deleted', 1)
+            // ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
+            // ->select(
+            //     'tbl_film_type.name as nameTypeFilm',
+            //     'tbl_film.name',
+            //     'tbl_film.avatar',
+            //     'tbl_film.id_film',
+            // )
             ->get();
 
         return view('Frontend.page.home', compact(
@@ -359,60 +359,56 @@ Hóa đơn ...
             return view('Frontend.page.ordreFilm', compact('null'));
         } else {
             $id_user = Auth::user()->id;
-            // $receipts = Receipt::where('user_id', $id_user)
-            //     ->rightJoin('tbl_receipt_details as receiptDetail', 'receiptDetail.receipt_id', 'tbl_receipt.id_receipt')
-            //     ->join('tbl_showtime', 'tbl_showtime.id_showtime', 'receiptDetail.showtime_id')
-            //     ->leftJoin('tbl_film as film', 'film.id_film', 'tbl_showtime.film_id')
-            //     ->select(
-            //         'film.avatar as img_film',
-            //         'film.name as name_film',
-            //         'tbl_showtime.show_date',
-            //         'tbl_showtime.start_time',
-            //         'receiptDetail.chair_code',
-            //     )
-            //     ->get();
-            // $receipts = json_decode(json_encode($receipts), True);
-            // $receipts =  array_unique($receipts, SORT_REGULAR);
-            // $receipts = (object)$receipts;
-            // dd($receipts);
-
             $receipts = Receipt::where('user_id', $id_user)
-                // ->join('tbl_receipt_details as receiptDetail', 'receiptDetail.receipt_id', 'tbl_receipt.id_receipt')
+                // ->pluck(
+                //     'id_receipt',
+                //     'date_pay',
+                //     'total',
+                //     'user_view_success',
+                //     'showtime_id'
+                // );
+                ->join('tbl_receipt_details as receiptDetail', 'receiptDetail.receipt_id', 'tbl_receipt.id_receipt')
+                ->leftJoin('tbl_showtime', 'tbl_showtime.id_showtime', 'receiptDetail.showtime_id')
+                ->join('tbl_film as film', 'film.id_film', 'tbl_showtime.film_id')
+                ->select(
+                    'film.avatar as img_film',
+                    'film.name as name_film',
+                    'tbl_showtime.show_date',
+                    'tbl_showtime.start_time',
+                    'receiptDetail.chair_code',
+                    'tbl_receipt.total',
+                    'film.id_film',
+                )
+
                 ->get();
             // dd($receipts);
+            $receiptsVl = [];
 
-            return view('Frontend.page.ordreFilm', compact('receipts'));
-
-            //date_pay ngày thanh toám
+            foreach ($receipts as $key => $receipt) {
+                // echo  $receipt->show_date;
+                if (!in_array($receipt->name_film, $receiptsVl)) {
+                    array_push($receiptsVl, $receipt->name_film);
+                }
+                if (!in_array($receipt->id_film, $receiptsVl)) {
+                    array_push($receiptsVl, $receipt->id_film);
+                }
+                if (!in_array($receipt->total, $receiptsVl)) {
+                    array_push($receiptsVl, $receipt->total);
+                }
+                if (!in_array($receipt->img_film, $receiptsVl)) {
+                    array_push($receiptsVl, $receipt->img_film);
+                }
+                array_push($receiptsVl, $receipt->show_date);
+                if (!in_array($receipt->start_time, $receiptsVl)) {
+                    array_push($receiptsVl, $receipt->start_time);
+                }
+                if (!in_array($receipt->chair_code, $receiptsVl)) {
+                    array_push($receiptsVl, $receipt->chair_code);
+                }
+            }
+            $receiptsVl = array_chunk($receiptsVl, 9);
+            // dd($receiptsVl);
+            return view('Frontend.page.ordreFilm', compact('receiptsVl'));
         }
-    }
-    public function detailOrderFilm($id_receipt)
-    {
-        $receiptDetails = Receipt_Detail::where('receipt_id', $id_receipt)->get();
-
-        dd($receiptDetails);
-        // $result = array();
-        // foreach ($receiptDetails as $key =>  $receiptDetail) {
-        //     if (!in_array($receiptDetail, $result))
-        //         // $result[$key] = $receiptDetail;
-        //         echo '<prev>';
-        //     print_r($result[$key] = $receiptDetail);
-        //     echo '</prev>';
-        //     die;
-        // }
-        // $receipts = json_decode(json_encode($receiptDetails), True);
-        // $receiptDetails =  array_unique($receiptDetails, SORT_REGULAR);
-
-        // echo '<prev>';
-        // print_r($arrRemoved);
-        // echo '</prev>';
-        // die;
-        // dd($receiptDetails);
-        // $arr = [];
-        // foreach ($receiptDetails as $receiptDetail) {
-        //     if (in_array($receiptDetail->id_receipt_detail, $receiptDetail->ticket_id, $arr));
-        // };
-        //  foreach , xong if(in_array($biến cần lọc trùng , $arr){}else{ array_push($arr , $biến cần lọc trùng ) ; chạy code dưới này } 
-        return view('Frontend.page.detailOrdreFilm', compact('receiptDetails'));
     }
 }
