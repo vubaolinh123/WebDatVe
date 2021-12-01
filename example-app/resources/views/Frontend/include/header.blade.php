@@ -2,7 +2,9 @@
     <div class="header-top">
         <div class="header-logo">
             <div class="image">
-                <img src="{{ asset('frontend/img/galaxy-logo 1.png') }}" alt="" />
+                <a href="{{ route('web.home') }}">
+                    <img src="{{ asset('frontend/img/galaxy-logo 1.png') }}" alt="" />
+                </a>
             </div>
         </div>
         <div class="header-search">
@@ -10,25 +12,48 @@
             <i class="fas fa-search"></i>
         </div>
 
-        <div class="header-login row">
-            @if (Auth::check())
-            <div class="col-sm-6">
-                <i class="far fa-user"></i>
-                <span>{{ Auth::user()->name }}</span>
-                 <a
-                 style="color:white;font-size:10px;background:rgb(132, 132, 132) ;padding:3px; border-radius:10px"
-                 href="logout">Đăng xuất</a>
+
+        <div class=" row">
+            <div class="col-xs-4">
+                <div class="row">
+
+                    @if (Auth::check())
+                        <div class="col-xs-12">
+                            <div style="">
+
+                                <div><i class="far fa-user"></i>
+                                    <span>{{ Auth::user()->name }}</span>
+                                </div>
+                                <a style="color:white;font-size:10px;background:rgb(132, 132, 132) ;padding:3px; border-radius:10px;
+                margin-left: 20px;
+            " href="logout">Đăng xuất</a>
+                            </div>
+                        </div>
+                    @else
+                        <div class="col-xs-12">
+                            <div style="display: flex;justify-content: center;align-items: center;">
+
+                                <i class="far fa-user"></i>
+                                <a href="login">Đăng nhập</a>
+                            </div>
+                        </div>
+                    @endif
+                </div>
             </div>
-            @else
-            <div class="col-sm-6">
-                <i class="far fa-user"></i>
-                 <a href="login">Đăng nhập</a>
+            <div class="col-xs-4">
+                <div>
+                    {{--  --}}
+                    <a href=" {{ route('web.ordreFilm') }}">
+                        <i class="icofont-fax"></i>
+                        Hóa đơn
+                    </a>
+                </div>
             </div>
-            @endif
-            <div  class="dropdown col-sm-6">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="dropdown col-sm-4">
+                <button style="padding: 0" class="btn btn-secondary dropdown-toggle" type="button"
+                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-map-marker-alt"></i>
-                    @foreach($citys as $city)
+                    @foreach ($citys as $city)
                         @if (Session::get('cityAddress') == $city->code)
                             {{ $city->name }}
                         @endif
@@ -36,11 +61,26 @@
                 </button>
                 <ul style="height:400px ; overflow:auto" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     @foreach ($citys as $city)
-                        <li><a class="dropdown-item" href="{{ route('web.getCityAddress',['code'=>$city->code]) }}">{{ $city->name }}</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ route('web.getCityAddress', ['code' => $city->code]) }}">{{ $city->name }}</a>
+                        </li>
                     @endforeach
                 </ul>
-              </div>
+            </div>
+
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
     </div>
     <div class="header-menu">

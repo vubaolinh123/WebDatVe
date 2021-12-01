@@ -8,46 +8,8 @@
 
 
 
-    {{-- <div class="category-film">
-        <div class="title-film">
-            <div class="title-item">
-                <a href="#">phim đang chiếu</a>
-            </div>
-            <div class="title-item">
-                <a href="#">phim sắp chiếu</a>
-            </div>
-        </div>
 
-        <div class="film">
-            <div class="container-fluid">
-                <div class="row">
-                    @foreach ($filmHomeDeleteds as $filmHomeDeleted)
-                        <div class="col-xs-2">
-                            <div class="item-film">
-                                <a href="{{ route('web.detailFim') }}">
-                                    <div class="film_img"
-                                        style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted->avatar") }})">
-                                    </div>
-                                </a>
-                                <div class="text-film">
-                                    <a href="#"><button>Mua vé</button></a>
-                                </div>
-                                <p class="text-black">THE CONJURING: THE DEVIL MADE ME DO IT
-                                </p>
-                                <p class="text-gray">THE CONJURING: MA XUI QUỶ KHIẾN
-                                </p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-            </div>
-
-        </div>
-
-
-    </div> --}}
-    <div class="container pt-4">
+    <div style="padding: 0 32px" class="pt-4">
 
         <!-- Tab links -->
         <div class="tabs">
@@ -57,62 +19,60 @@
 
         <!-- Tab content -->
         <div style="margin-top: 30px" class="wrapper_tabcontent ">
-            <div id="filmHomeDeleted0s" class="px-36 tabcontent active">
-                <div class="container-fluid">
-                    <div class="row">
+            <div id="filmHomeDeleted0s" class="tabcontent active">
+                <div class="row">
 
-                        @foreach ($filmHomeDeleted0s as $filmHomeDeleted0)
-                            <div class="col-xs-2 mb-5">
-                                <div class="item-film">
-                                    <a href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted0->id_film , 'slug' => \Str::slug($filmHomeDeleted0->name)]) }}">
-                                        <div class="film_img"
-                                            style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted0->avatar") }})">
-                                        </div>
-                                    </a>
+                    @foreach ($filmHomeDeleted0s as $filmHomeDeleted0)
+                        <div class="col-xs-2 mb-5">
+                            <div class="item-film">
+                                <a
+                                    href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted0->id_film, 'slug' => \Str::slug($filmHomeDeleted0->name)]) }}">
+                                    <div class="film_img"
+                                        style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted0->avatar") }})">
+                                    </div>
+                                </a>
 
-                                    <p class="text-black">
-                                        {{ $filmHomeDeleted0->name }}
-                                    </p>
-                                    <a href="#" class="text-gray">
-                                        {{ $filmHomeDeleted0->nameTypeFilm }}
-                                    </a>
-                                </div>
+                                <p class="text-black">
+                                    {{ $filmHomeDeleted0->name }}
+                                </p>
+                                <a href="#" class="text-gray">
+                                    {{ $filmHomeDeleted0->nameTypeFilm }}
+                                </a>
                             </div>
-                        @endforeach
-                    </div>
-
+                        </div>
+                    @endforeach
                 </div>
+
                 <div class="view-more">
                     <button>Xem thêm <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
 
-            <div id="filmHomeDeleted1s" class="px-36 tabcontent ">
-                <div class="container-fluid">
-                    <div class="row">
+            <div id="filmHomeDeleted1s" class=" tabcontent ">
+                <div class="row">
 
-                        @foreach ($filmHomeDeleted1s as $filmHomeDeleted1)
-                            <div class="col-xs-2 mb-5">
-                                <div class="item-film">
-                                    <a href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted1->id_film, 'slug' => \Str::slug($filmHomeDeleted1->name)]) }}">
-                                        <div class="film_img"
-                                            style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted1->avatar") }})">
-                                        </div>
-                                        <p class="text-black">
-                                            {{ $filmHomeDeleted1->name }}
-                                        </p>
-                                        <a href="#" class="text-gray">
-                                            {{ $filmHomeDeleted0->nameTypeFilm }}
-                                        </a>
+                    @foreach ($filmHomeDeleted1s as $filmHomeDeleted1)
+                        <div class="col-xs-2 mb-5">
+                            <div class="item-film">
+                                <a
+                                    href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted1->id_film, 'slug' => \Str::slug($filmHomeDeleted1->name)]) }}">
+                                    <div class="film_img"
+                                        style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted1->avatar") }})">
+                                    </div>
+                                    <p class="text-black">
+                                        {{ $filmHomeDeleted1->name }}
+                                    </p>
+                                    <a href="#" class="text-gray">
+                                        {{ $filmHomeDeleted0->nameTypeFilm }}
                                     </a>
+                                </a>
 
-                                </div>
                             </div>
-                        @endforeach
-                    </div>
-
+                        </div>
+                    @endforeach
                 </div>
+
                 <div class="view-more">
                     <button>Xem thêm <i class="fas fa-arrow-right"></i></button>
                 </div>
