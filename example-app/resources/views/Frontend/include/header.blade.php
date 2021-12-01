@@ -2,7 +2,9 @@
     <div class="header-top">
         <div class="header-logo">
             <div class="image">
-                <img src="{{ asset('frontend/img/galaxy-logo 1.png') }}" alt="" />
+                <a href="{{ route('web.home') }}">
+                    <img src="{{ asset('frontend/img/galaxy-logo 1.png') }}" alt="" />
+                </a>
             </div>
         </div>
         <div class="header-search">
