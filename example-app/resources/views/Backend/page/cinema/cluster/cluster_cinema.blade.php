@@ -4,7 +4,7 @@
         <div class="col-xl-12 col-xxl-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="">Quản lý rạp phim </h2>
+                    <h2 class="">Quản lý cụm rạp phim </h2>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                         <th scope="col">Rạp </th>
                         <th scope="col">Logo rạp</th>
                         <th scope="col">Khu vực</th>
-                        <th scope="col"  colspan="2">
+                        <th scope="col" colspan="2">
 
                             <div>
                                 <button type="button" class="btn btn-primary btn-rounded" data-toggle="modal"
@@ -113,8 +113,9 @@
                                                 {{--  --}}
                                                 <div class="card-body">
                                                     <div class="basic-form">
-                                                        <form action="{{ route('cinema.cluster.updated' , ['id' => $cluster_cinema -> id]) }}" method="POST"
-                                                            enctype="multipart/form-data">
+                                                        <form
+                                                            action="{{ route('cinema.cluster.updated', ['id' => $cluster_cinema->id]) }}"
+                                                            method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('put')
                                                             <div class="row">
@@ -134,7 +135,8 @@
                                                                         <img style=" width:150px ; height : 150px ; border-radius:50%"
                                                                             class="showImg_2_{{ $cluster_cinema->id }}"
                                                                             src="{{ URL::to('images/cinema/' . $cluster_cinema->logo) }}">
-                                                                        <input type="hidden" name="logo_hidden" value="{{ $cluster_cinema->logo }}" >
+                                                                        <input type="hidden" name="logo_hidden"
+                                                                            value="{{ $cluster_cinema->logo }}">
                                                                         <input type="file" name="logo" id=""
                                                                             data-id="{{ $cluster_cinema->id }}"
                                                                             class="form-control"
@@ -147,53 +149,47 @@
                                                                         <label for="">Thuộc khu vực</label>
                                                                         <select class="form-control" name="city_id" id="">
                                                                             @foreach ($citys as $city)
-                                                                                <option
-                                                                                    @if ($cluster_cinema-> city_id == $city -> code )
-                                                                                        {{ 'selected' }}
-                                                                                    @endif
-                                                                                    value="{{ $city->code }}">
-                                                                                    {{ $city->name }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="p-3">
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Lưu</button>
-
-                                                                    <button type="button" class="btn btn-info"
-                                                                        data-dismiss="modal">Quay
-                                                                        lại</button>
-                                                                </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                {{--  --}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- Update --}}
-                            </td>
-                            <td>
-                                <form action="{{ route('cinema.cluster.delete', ['id' => $cluster_cinema->id]) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button onclick="return confirm(' Bạn có có chắc chắn không')"
-                                            type="submit"
-                                            class="btn btn-danger btn-rounded">
-                                            Xóa
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                                                                                <option @if ($cluster_cinema->city_id == $city->code)
+                                                                                    {{ 'selected' }}
+                                                                            @endif
+                                                                            value="{{ $city->code }}">
+                                                                            {{ $city->name }}
+                                                                            </option>
                     @endforeach
-                </tbody>
-
-            </table>
-            {!! $cluster_cinemas->links() !!}
+                    </select>
         </div>
+    </div>
+    <div class="p-3">
+        <button type="submit" class="btn btn-primary">Lưu</button>
+
+        <button type="button" class="btn btn-info" data-dismiss="modal">Quay
+            lại</button>
+    </div>
+    </form>
+    </div>
+    </div>
+    {{--  --}}
+    </div>
+    </div>
+    </div>
+    </div>
+    {{-- Update --}}
+    </td>
+    <td>
+        <form action="{{ route('cinema.cluster.delete', ['id' => $cluster_cinema->id]) }}" method="post">
+            @csrf
+            @method('delete')
+            <button onclick="return confirm(' Bạn có có chắc chắn không')" type="submit" class="btn btn-danger btn-rounded">
+                Xóa
+            </button>
+        </form>
+    </td>
+    </tr>
+    @endforeach
+    </tbody>
+
+    </table>
+    {!! $cluster_cinemas->links() !!}
+    </div>
     </div>
 @endsection

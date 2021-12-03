@@ -89,11 +89,11 @@
             <li class="menu-level-1-item"><a href="">Mua vé</a></li>
             <li class="menu-level-1-item"><a href="">Phim</a></li>
             <li class="menu-level-1-item">
-                <a href="">điện ảnh</a>
+                <a href="">góc điện ảnh</a>
                 <ul class="menu-level-2">
-                    <li><a href="">Thể loại</a></li>
-                    <li><a href="">bình luận</a></li>
-                    <li><a href="">blog điện ảnh</a></li>
+                    @foreach ($type_blogs as $type_blog)
+                        <li><a href="">{{ $type_blog->name }}</a></li>
+                    @endforeach
                 </ul>
             </li>
             <li class="menu-level-1-item"><a href="">rạp/giá vé</a></li>

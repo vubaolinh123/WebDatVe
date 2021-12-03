@@ -3,6 +3,7 @@
 use App\Events\Send;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BackendController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChairController;
 use App\Http\Controllers\CinemaroomController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\FilmTypeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Receipt;
+use App\Http\Controllers\ShowtimefilmController;
+use App\Http\Controllers\TypeBlogController;
 use App\Http\Controllers\TypeChairController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -87,15 +90,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/callback-github', [App\Http\Controllers\Socials\LoginGithub::class, 'callback']);
 });
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::middleware(['hasAdmin'])->group(function () {
-//         Route::prefix('/admin')->group(function () {
-//             Route::get('/dashboard', function () {
-//                 return '';
-//             });
-//         });
-//     });
-// });
 
 Route::get('/logout', function () {
     Auth::logout();
@@ -171,6 +165,30 @@ Route::middleware(['hasAdmin'])->group(function () {
             Route::post('/change-pay-receipt', [Receipt::class, 'change_pay'])->name('admin.receipt.change_pay');
             Route::delete('/remove-receipt/{id}', [Receipt::class, 'destroy'])->name('receipt.delete');
             // Route::get('/add', [Receipt::class, 'create'])->name('admin.category.add');
+        });
+        Route::prefix('timeshowfilm')->group(function () {
+            Route::get('/list', [ShowtimefilmController::class, 'index'])->name('admin.timeshowfilm.list');
+            Route::get('/add', [ShowtimefilmController::class, 'create'])->name('admin.timeshowfilm.add');
+            Route::post('/save-add', [ShowtimefilmController::class, 'store'])->name('admin.timeshowfilm.saveadd');
+            Route::get('/edit', [ShowtimefilmController::class, 'edit'])->name('admin.timeshowfilm.edit');
+            Route::post('/save-edit', [ShowtimefilmController::class, 'update'])->name('admin.timeshowfilm.saveedit');
+            Route::get('/delete', [ShowtimefilmController::class, 'destroy'])->name('admin.timeshowfilm.destroy');
+        });
+        Route::prefix('blog')->group(function () {
+            Route::get('/list', [BlogController::class, 'index'])->name('admin.blog.list');
+            Route::get('/add', [BlogController::class, 'create'])->name('admin.blog.add');
+            Route::post('/save-add', [BlogController::class, 'store'])->name('admin.blog.saveadd');
+            Route::get('/edit', [BlogController::class, 'edit'])->name('admin.blog.edit');
+            Route::post('/save-edit', [BlogController::class, 'update'])->name('admin.blog.saveedit');
+            Route::get('/delete', [BlogController::class, 'destroy'])->name('admin.blog.destroy');
+        });
+        Route::prefix('type_blog')->group(function () {
+            Route::get('/list', [TypeBlogController::class, 'index'])->name('admin.type_blog.list');
+            Route::get('/add', [TypeBlogController::class, 'create'])->name('admin.type_blog.add');
+            Route::post('/save-add', [TypeBlogController::class, 'store'])->name('admin.type_blog.saveadd');
+            Route::get('/edit', [TypeBlogController::class, 'edit'])->name('admin.type_blog.edit');
+            Route::post('/save-edit', [TypeBlogController::class, 'update'])->name('admin.type_blog.saveedit');
+            Route::get('/delete', [TypeBlogController::class, 'destroy'])->name('admin.type_blog.destroy');
         });
     });
 });

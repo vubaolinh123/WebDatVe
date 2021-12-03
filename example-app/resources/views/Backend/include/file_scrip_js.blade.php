@@ -4,6 +4,7 @@
    <script src="{{ asset('backend/js/quixnav-init.js') }}"></script>
    <script src="{{ asset('backend/js/custom.min.js') }}"></script>
 
+   <script src="{{ asset('backend/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
    <!-- Vectormap -->
    <script src="{{ asset('backend/vendor/raphael/raphael.min.js') }}"></script>
    <script src="{{ asset('backend/vendor/morris/morris.min.js') }}"></script>
@@ -72,159 +73,184 @@
 
    <script src="{{ asset('backend/vendor/jquery-validation/jquery.validate.min.js') }}"></script>
    @yield('javascrip.backend')
-    {{-- Receipt --}}
+   {{-- Receipt --}}
+
    <script>
-       $(document).ready(function(){
-//
-$(document).on('change' , '.receipt_success', function(){
-                let id = $(this).data('id');
-                let value = $(this).val();
+       $(document).ready(function() {
+           $('#tableData').DataTable();
+       });
+   </script>
+   <script>
+       $(document).ready(function() {
+           //
+           $(document).on('change', '.receipt_success', function() {
+               let id = $(this).data('id');
+               let value = $(this).val();
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                        url: ("{{ route('admin.receipt.change_pay') }}"),
-                        method: "POST",
-                        data: {  value:value  , id:id},
-                        success: function(data){
-                            window.location.reload();
-                        }
-                })
+               $.ajaxSetup({
+                   headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   }
+               });
+               $.ajax({
+                   url: ("{{ route('admin.receipt.change_pay') }}"),
+                   method: "POST",
+                   data: {
+                       value: value,
+                       id: id
+                   },
+                   success: function(data) {
+                       window.location.reload();
+                   }
+               })
            });
-//
-            $('input[name="checkBox"]').on('change' , function(){
-                var value = $("input[type='checkbox']").val();
-                var showtimes = (function() {
-                    var a = [];
-                    $(".checkD:checked").each(function() {
-                            a.push(this.value);
-                        });
-                        return a;
-                })();
+           //
+           $('input[name="checkBox"]').on('change', function() {
+               var value = $("input[type='checkbox']").val();
+               var showtimes = (function() {
+                   var a = [];
+                   $(".checkD:checked").each(function() {
+                       a.push(this.value);
+                   });
+                   return a;
+               })();
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                        url: ("{{ route('admin.receipt.render') }}"),
-                        method: "POST",
-                        data: {showtimes:showtimes},
-                        success: function(data){
-                            $('#render-list').html(data);
-                        }
-                })
-            })
-           function fectList(){
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                        url: ("{{ route('admin.receipt.render') }}"),
-                        method: "POST",
-                        success: function(data){
-                             $('#render-list').html(data);
-                        }
-                })
+               $.ajaxSetup({
+                   headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   }
+               });
+               $.ajax({
+                   url: ("{{ route('admin.receipt.render') }}"),
+                   method: "POST",
+                   data: {
+                       showtimes: showtimes
+                   },
+                   success: function(data) {
+                       $('#render-list').html(data);
+                   }
+               })
+           })
+
+           function fectList() {
+               $.ajaxSetup({
+                   headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   }
+               });
+               $.ajax({
+                   url: ("{{ route('admin.receipt.render') }}"),
+                   method: "POST",
+                   success: function(data) {
+                       $('#render-list').html(data);
+                   }
+               })
            };
            fectList();
 
-           $('#sr-li-re').on('input',function(){
+           $('#sr-li-re').on('input', function() {
                let data = $(this).val();
                console.log(data);
                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                        url: ("{{ route('admin.receipt.render') }}"),
-                        method: "POST",
-                        data: {data:data},
-                        success: function(data){
-                            $('#render-list').html(data);
-                        }
-                })
+                   headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   }
+               });
+               $.ajax({
+                   url: ("{{ route('admin.receipt.render') }}"),
+                   method: "POST",
+                   data: {
+                       data: data
+                   },
+                   success: function(data) {
+                       $('#render-list').html(data);
+                   }
+               })
            })
 
-           $('.now').on('click' , function(){
-                let type = $(this).data('type');
-                $('.now').css({'background' : ''});
-                $(this).css({'background' : 'red'});
+           $('.now').on('click', function() {
+               let type = $(this).data('type');
+               $('.now').css({
+                   'background': ''
+               });
+               $(this).css({
+                   'background': 'red'
+               });
                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                        url: ("{{ route('admin.receipt.render') }}"),
-                        method: "POST",
-                        data: {type:type},
-                        success: function(data){
-                            $('#render-list').html(data);
-                        }
-                })
+                   headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   }
+               });
+               $.ajax({
+                   url: ("{{ route('admin.receipt.render') }}"),
+                   method: "POST",
+                   data: {
+                       type: type
+                   },
+                   success: function(data) {
+                       $('#render-list').html(data);
+                   }
+               })
            })
 
 
        })
    </script>
-   {{-- Chair  --}}
+   {{-- Chair --}}
    <script>
-    $(document).ready(function(){
-     $('.changeChair').on('change' , function(){
-         let type = $(this).data('type');
-         let size = $(this).data('size');
-         let id = $(this).data('id');
+       $(document).ready(function() {
+           $('.changeChair').on('change', function() {
+               let type = $(this).data('type');
+               let size = $(this).data('size');
+               let id = $(this).data('id');
 
-         let value = $(this).val();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                    url: ("{{ route('admin.chair.create_chair_vip') }}"),
-                    method: "POST",
-                    data: {type:type , value:value , size:size , id:id},
-                    success: function(data){
-                        if(data == 0){
-                            alert('Hiện tại cột kết thúc và cột bắt đầu đang chên lệnh nhau !');
-                        }
-                    }
-            })
-     })
-    })
-    </script>
+               let value = $(this).val();
+               $.ajaxSetup({
+                   headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   }
+               });
+               $.ajax({
+                   url: ("{{ route('admin.chair.create_chair_vip') }}"),
+                   method: "POST",
+                   data: {
+                       type: type,
+                       value: value,
+                       size: size,
+                       id: id
+                   },
+                   success: function(data) {
+                       if (data == 0) {
+                           alert('Hiện tại cột kết thúc và cột bắt đầu đang chên lệnh nhau !');
+                       }
+                   }
+               })
+           })
+       })
+   </script>
 
-  <script>
-    function onChangeImg(_this){
-        let data = _this.files[0];
-        if(data){
-            let render = new FileReader();
-            render.onload = function(){
-                $('#showImg').show();
-                $('#showImg').attr('src',this.result);
-            };
-            render.readAsDataURL(data);
-        }
-    }
-    function onChangeImg_2(_this){
-        let id = _this.dataset.id;
-        let data = _this.files[0];
-        if(data){
-            let render = new FileReader();
-            render.onload = function(){
-                $('.showImg_2_'+id).attr('src',this.result);
-            };
-            render.readAsDataURL(data);
-        }
-    }
-    </script>
+   <script>
+       function onChangeImg(_this) {
+           let data = _this.files[0];
+           if (data) {
+               let render = new FileReader();
+               render.onload = function() {
+                   $('#showImg').show();
+                   $('#showImg').attr('src', this.result);
+               };
+               render.readAsDataURL(data);
+           }
+       }
 
+       function onChangeImg_2(_this) {
+           let id = _this.dataset.id;
+           let data = _this.files[0];
+           if (data) {
+               let render = new FileReader();
+               render.onload = function() {
+                   $('.showImg_2_' + id).attr('src', this.result);
+               };
+               render.readAsDataURL(data);
+           }
+       }
+   </script>

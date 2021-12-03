@@ -32,6 +32,7 @@
                                             <a href="#" class="btn btn-rounded btn-success">Sửa</a>
 
                                             <a href="#" class="btn btn-rounded btn-danger">Xóa</a>
+
                                         </td>
                                     </tr>
                                 @endforeach
