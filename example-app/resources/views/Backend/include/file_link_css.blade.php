@@ -19,13 +19,16 @@
   <link rel="stylesheet" href="{{ asset('backend/vendor/pickadate/themes/default.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/vendor/pickadate/themes/default.date.css') }}">
 
+  <link href="{{ asset('backend/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+
   <!-- Summernote -->
   <link href="{{ asset('backend/vendor/summernote/summernote.css') }}" rel="stylesheet">
 
   <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
   {{-- Links pagination --}}
   <style>
-    nav svg {
-        height: 20px;
-    }
-</style>
+      nav svg {
+          height: 20px;
+      }
+
+  </style>
