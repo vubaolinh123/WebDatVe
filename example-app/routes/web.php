@@ -14,6 +14,7 @@ use App\Http\Controllers\ClusterCinema;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\FilmTypeController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Receipt;
 use App\Http\Controllers\ShowtimefilmController;
 use App\Http\Controllers\TypeBlogController;
@@ -190,6 +191,14 @@ Route::middleware(['hasAdmin'])->group(function () {
             Route::get('/edit', [TypeBlogController::class, 'edit'])->name('admin.type_blog.edit');
             Route::post('/save-edit', [TypeBlogController::class, 'update'])->name('admin.type_blog.saveedit');
             Route::get('/delete', [TypeBlogController::class, 'destroy'])->name('admin.type_blog.destroy');
+        });
+        Route::prefix('news')->group(function () {
+            Route::get('/list', [NewsController::class, 'index'])->name('admin.news.list');
+            Route::get('/add', [NewsController::class, 'create'])->name('admin.news.add');
+            Route::post('/save-add', [NewsController::class, 'store'])->name('admin.news.saveadd');
+            Route::get('/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
+            Route::post('/save-edit', [NewsController::class, 'update'])->name('admin.news.saveedit');
+            Route::get('/delete', [NewsController::class, 'destroy'])->name('admin.news.destroy');
         });
     });
 });

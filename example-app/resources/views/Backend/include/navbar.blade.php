@@ -100,3 +100,12 @@
         <li><a href="{{ route('admin.type_blog.add') }}">Thêm </a></li>
     </ul>
 </li>
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý tin tức</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.news.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.news.add') }}">Thêm </a></li>
+    </ul>
+</li>
