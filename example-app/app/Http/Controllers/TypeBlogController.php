@@ -43,6 +43,7 @@ class TypeBlogController extends Controller
         // dd($request->all());
         Type_Blog::create([
             'name' => $request->name,
+            'active' => $request->active,
         ]);
 
         return Redirect::route('admin.type_blog.list');
@@ -84,6 +85,7 @@ class TypeBlogController extends Controller
         $id_type_blog = $_GET['id_type_blog'];
         Type_Blog::find($id_type_blog)->update([
             'name' => $request->name,
+            'active' => $request->active,
         ]);
         return Redirect::route('admin.type_blog.list');
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\PayTicketEmail;
 use App\Mail\PayMail;
+use App\Models\Blog;
 use App\Models\Cinema;
 use App\Models\Cinemaroom;
 use App\Models\ClusterCinema;
@@ -15,6 +16,7 @@ use App\Models\Receipt_Detail;
 use App\Models\Receipt_Food;
 use App\Models\Showtime;
 use App\Models\Ticket;
+use App\Models\Type_Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -28,29 +30,26 @@ class FrontendController extends Controller
     public function homeWeb()
     {
         $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)
-            // ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
-            // ->select(
-            //     'tbl_film_type.name as nameTypeFilm',
-            //     'tbl_film.name',
-            //     'tbl_film.avatar',
-            //     'tbl_film.id_film',
-            // )
+
             ->get();
 
 
         $filmHomeDeleted1s = Film::where('status', 0)->where('deleted', 1)
-            // ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
-            // ->select(
-            //     'tbl_film_type.name as nameTypeFilm',
-            //     'tbl_film.name',
-            //     'tbl_film.avatar',
-            //     'tbl_film.id_film',
-            // )
+
             ->get();
 
+
+
+        $typeBlogs = Type_Blog::where('active', 0)->get();
+        // $blogs = Type_Blog::where('active', 0)->with('blogss')->get();
+
+
+        // dd($blogs);
+        // dd($typeBlogs);
         return view('Frontend.page.home', compact(
             'filmHomeDeleted0s',
             'filmHomeDeleted1s',
+            'typeBlogs',
         ));
     }
     public function detailFim(Request $request, $id_film, $slug)
@@ -85,9 +84,13 @@ class FrontendController extends Controller
 
         // dd(1);
         $type_films = FilmType::all();
+
+        $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)->take(3)
+            ->get();
         return view(
             'Frontend.page.detail_film',
             compact(
+                'filmHomeDeleted0s',
                 'cinemas',
                 'clusterCinemas',
                 'film',
@@ -410,5 +413,13 @@ Hóa đơn ...
             // dd($receiptsVl);
             return view('Frontend.page.ordreFilm', compact('receiptsVl'));
         }
+    }
+    public function detailBlog(Request $request)
+    {
+        $id_blog = $_GET['id_blog'];
+        $blog = Blog::find($id_blog);
+        $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)->take(3)
+            ->get();
+        return view('Frontend.page.detail_blog', compact('blog', 'filmHomeDeleted0s'));
     }
 }

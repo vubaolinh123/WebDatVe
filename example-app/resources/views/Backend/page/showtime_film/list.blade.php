@@ -14,6 +14,7 @@
                                     <th scope="col">#</th>
                                     <th style="width:130px">Ảnh phim</th>
                                     <th scope="col">Tên phim</th>
+                                    <th scope="col">Thời gian chiếu phim này</th>
                                     <th scope="col">Ngày chiếu</th>
                                     <th scope="col">Thời gian bắt đầu</th>
                                     <th scope="col">Thời gian kết thúc</th>
@@ -33,6 +34,24 @@
                                                 src="{{ asset("$URL_IMG_FILM/$showtimeFilm->imgFilm") }}" alt="">
                                         </th>
                                         <th>{{ $showtimeFilm->nameFilm }}</th>
+                                        <th>
+                                            {{-- @if ((date('d-m-Y ', strtotime($showtimeFilm->show_date)))>$today)
+                                            chưa chiếu
+                                        @else
+                                            đã chiếu
+                                @endif --}}
+                                            <?php
+                                            if ($showtimeFilm->show_date > $today) {
+                                                echo '<button class="btn btn-rounded btn-danger">Chưa chiếu</button>';
+                                            } elseif ($showtimeFilm->show_date = $today || ($showtimeFilm->start_time = $time)) {
+                                                echo '<button class="btn btn-rounded btn-info">Đang chiếu </button>';
+                                            } else {
+                                                echo '<button class="btn btn-rounded btn-primary">Đã chiếu</button>';
+                                            }
+                                            
+                                            ?>
+                                            {{-- <button class="btn btn-rounded btn-danger">Chưa chiếu</button> --}}
+                                        </th>
                                         <th>{{ date('d-m-Y ', strtotime($showtimeFilm->show_date)) }}</th>
                                         <th>{{ date('H:i', strtotime($showtimeFilm->start_time)) }}</th>
                                         <th>{{ date('H:i', strtotime($showtimeFilm->time_ends)) }}</th>

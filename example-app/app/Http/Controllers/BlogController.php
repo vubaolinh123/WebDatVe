@@ -100,6 +100,8 @@ class BlogController extends Controller
             $filename = time() . '_' . rand(01, 99) . '_img.' . $image->getClientOriginalExtension();
             $request->mainimg_blog->move(public_path("$this->URL_IMG_BLOG"), $filename);
             $mainimg_blog = $filename;
+        } else {
+            $mainimg_blog = $blog->mainimg_blog;
         }
         Blog::find($id_blog)->update([
             'title_blog' => $request->title_blog,

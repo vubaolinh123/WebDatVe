@@ -17,6 +17,7 @@ class Showtime extends Model
         'show_date',
         'film_id',
         'cinema_room_id',
+        'status_showtime',
     ];
 
     public $timestamps = false;

@@ -13,6 +13,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Tên thể loại</th>
+                                    <th scope="col">Trạng thái trang chủ</th>
                                     <th scope="col">Ngày thêm</th>
                                     <th scope="col">Ngày sửa</th>
                                     <th>Thao tác</th>
@@ -26,6 +27,7 @@
                                     <tr>
                                         <th>{{ $stt++ }}</th>
                                         <th>{{ $type_Blog->name }}</th>
+                                        <th>{{ $type_Blog->active == 0 ? 'Hiện' : 'Ẩn' }}</th>
                                         <th>{{ date('d-m-Y H:i:s', strtotime($type_Blog->created_at)) }}</th>
                                         <th>{{ date('d-m-Y H:i:s', strtotime($type_Blog->updated_at)) }}</th>
                                         <th>

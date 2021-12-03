@@ -264,12 +264,47 @@ html {
     display: grid;
     grid-template-columns: 230px 1fr;
     gap: 16px;
+    margin-bottom: 30px;
 }
 
-.text-comment {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 8px;
+.item-comment .item-comment_image {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 150px;
+}
+
+.item-comment .item-comment_conten {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.comment-conten {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.item-comment .text {
+    color: #a0a3a7;
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 2;
+    -moz-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    text-align: justify;
+    max-height: 42px;
+    margin-bottom: 10px;
+}
+
+.title-comment {
+    overflow: hidden;
+    /* height: 50px; */
+    max-height: 50px;
 }
 
 .title-comment a {
@@ -371,4 +406,28 @@ html {
 .text-detail p {
     padding-top: 16px;
     line-height: 1.5;
+}
+
+.film .group {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 270px;
+}
+
+.film .film_item {
+    margin-bottom: 30px;
+}
+
+.film .film_item h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #43464b;
+    text-transform: uppercase;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0;
+    padding: 10px 0 0 0;
 }

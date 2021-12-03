@@ -38,6 +38,7 @@ Route::middleware(['cityAddress'])->group(function () {
     Route::prefix('')->group(function () {
         Route::get('/', [FrontendController::class, 'homeWeb'])->name('web.home');
         Route::get('/detail/{id_film}/{slug}', [FrontendController::class, 'detailFim'])->name('web.detailFim');
+        Route::get('/detail-blog', [FrontendController::class, 'detailBlog'])->name('web.detailBlog');
         Route::get('/getCityAddress/{code}', [FrontendController::class, 'getCityAddress'])->name('web.getCityAddress');
         Route::get('/ordreFilm', [FrontendController::class, 'ordreFilm'])->name('web.ordreFilm');
     });

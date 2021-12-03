@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Cinemaroom;
 use App\Models\Film;
 use App\Models\Showtime;
@@ -17,10 +18,9 @@ class ShowtimefilmController extends Controller
      */
     public function index()
     {
-        // start_time
-        // time_ends
-        // show_date
-        // cinema_room_id
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
+        $time = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i');
+        // dd($today);
         $showtimeFilms = Showtime::join('tbl_film as film', 'film.id_film', 'tbl_showtime.film_id')
             ->select(
                 'film.id_film as id_film',
@@ -38,7 +38,9 @@ class ShowtimefilmController extends Controller
         return view(
             'Backend.page.showtime_film.list',
             compact(
-                'showtimeFilms'
+                'showtimeFilms',
+                'today',
+                'time',
             )
         );
     }

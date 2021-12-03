@@ -112,9 +112,7 @@
                                                     <span class="inline-block mr-5"> Phòng :
                                                         {{ $cinemaRoom->id_cinema_room }}</span>
                                                     @foreach ($cinemaRoom->show_time as $time)
-                                                        @if ($film->id_film == $time->film_id
-                                                        && $time ->show_date >= \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->toDateString()
-                                                        &&$time ->start_time >= \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->toTimeString())
+                                                        @if ($film->id_film == $time->film_id && $time->show_date >= \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->toDateString() && $time->start_time >= \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->toTimeString())
                                                             <a href="{{ route('web.book', ['id' => $cinemaRoom->id_cinema_room]) }}"
                                                                 class="inline-block border border-cam px-2 py-1 mr-3 hover:text-white hover:bg-camx cursor-pointer">
                                                                 Thời gian
@@ -141,27 +139,24 @@
                         <input type="submit" class="bg-cam block text-white px-3 py-2 w-full cursor-pointer"
                             value="Đăng Ký">
                     </form>
-                    <h2 class="text-xl">PHIM ĐANG CHIẾU</h2>
-                    <div class="my-4">
-                        <div class="group">
-                            <img src="{{ asset('frontend/img/movie1.png') }}" alt="" class="">
-                        </div>
-                        <span class="text-base">THE CONJURING: THE DEVIL MADE ME DO IT</span>
-                        <span class="text-gray-400 block text-sm">THE CONJURING: MA XUI QUỶ KHIẾN
-                        </span>
+                    <div class="film">
+                        <h2 class="text-3xl">PHIM ĐANG CHIẾU</h2>
+                        @foreach ($filmHomeDeleted0s as $filmHomeDeleted0)
+                            <div class="film_item my-4">
+                                <a
+                                    href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted0->id_film, 'slug' => \Str::slug($filmHomeDeleted0->name)]) }}">
+
+                                    <div class="group"
+                                        style="background-image: url({{ asset("$URL_IMG_FILM/$filmHomeDeleted0->avatar") }})">
+
+                                    </div>
+                                    <h3 class="">{{ $filmHomeDeleted0->name }}</h3>
+                                </a>
+
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="my-4">
-                        <img src="{{ asset('frontend/img/movie1.png') }}" alt="" class="">
-                        <span class="text-base">THE CONJURING: THE DEVIL MADE ME DO IT</span>
-                        <span class="text-gray-400 block text-sm">THE CONJURING: MA XUI QUỶ KHIẾN
-                        </span>
-                    </div>
-                    <div class="my-4">
-                        <img src="{{ asset('frontend/img/movie1.png') }}" alt="" class="">
-                        <span class="text-base">THE CONJURING: THE DEVIL MADE ME DO IT</span>
-                        <span class="text-gray-400 block text-sm">THE CONJURING: MA XUI QUỶ KHIẾN
-                        </span>
-                    </div>
+
                     <div class="text-right">
                         <a href="#"
                             class="inline-block my-10 cam border px-7 py-4 border-cam hover:text-white hover:bg-camx">XEM

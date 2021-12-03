@@ -10,11 +10,11 @@ class Type_Blog extends Model
     use HasFactory;
     protected $table = "tbl_type_blog";
     protected $primaryKey = "id_type_blog";
-    public $fillable = ['name'];
+    public $fillable = ['name', 'active'];
     protected $guarded = [];
     // public $timestamps = true;
-    // public function blogss()
-    // {
-    //     return $this->hasMany(Blog::class, 'typeblog_id', 'id_type_blog');
-    // }
+    public function blogss()
+    {
+        return $this->hasMany(Blog::class, 'typeblog_id', 'id_type_blog');
+    }
 }

@@ -5,10 +5,6 @@
 
     </div>
 
-
-
-
-
     <div style="padding: 0 32px" class="pt-4">
 
         <!-- Tab links -->
@@ -81,197 +77,53 @@
         </div>
     </div>
 
-    <div class="blog-comment">
-        <div class="comment-film">
-            <div class="title-film">
-                <div class="title-item">
-                    <a href="#">Bình luận phim</a>
-                </div>
-            </div>
-            <div class="comment">
-                <div class="comment-film">
-                    <div class="item-comment">
-                        <div class="image-item-comment">
-                            <img src="{{ asset('frontend/img/Thiên thần hộ mệnh.png') }}" alt="">
-                        </div>
-                        <div class="text-comment">
-                            <div class="title-comment">
-                                <a href="#">[Review] Thiên Thần Hộ Mệnh: Victor Vũ Và Nỗ Lực Trẻ Hóa "Vũ Trụ Bùa
-                                    Ngải"</a>
-                            </div>
-                            <div class="like">
-                                <img src="{{ asset('frontend/img/like.png') }}" alt="">
-                                <img src="{{ asset('frontend/img/view.png') }}" alt="">
-                                <i style="color: gold" class="fas fa-star"></i> 8.7/10(882)
-                            </div>
-                            <div class="text">
-                                <p><b>Thiên Thần Hộ Mệnh</b> phức tạp, nhiều twist và rõ nhất là trẻ hơn!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment-film">
+    <div class="blog-container">
+        <div class="row">
+            @foreach ($typeBlogs as $typeBlog)
+                <div class="col-xs-6 mb-5">
+                    <div class="blog-item">
 
-                    <div class="item-comment">
-                        <div class="image-item-comment">
-                            <img src="{{ asset('frontend/img/Thiên thần hộ mệnh.png') }}" alt="">
-                        </div>
-                        <div class="text-comment">
-                            <div class="title-comment">
-                                <a href="#">[Review] Thiên Thần Hộ Mệnh: Victor Vũ Và Nỗ Lực Trẻ Hóa "Vũ Trụ Bùa
-                                    Ngải"</a>
-                            </div>
-                            <div class="like">
-                                <img src="{{ asset('frontend/img/like.png') }}" alt="">
-                                <img src="{{ asset('frontend/img/view.png') }}" alt="">
-                                <i style="color: gold" class="fas fa-star"></i> 8.7/10(882)
-                            </div>
-                            <div class="text">
-                                <p><b>Thiên Thần Hộ Mệnh</b> phức tạp, nhiều twist và rõ nhất là trẻ hơn!</p>
+                        <div class="title-film">
+                            <div class="title-item">
+                                <a href="#">{{ $typeBlog->name }}</a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="comment-film">
+                        <div class="comment-conten">
+                            @foreach ($typeBlog->blogss as $blog)
+                                <div class="item-comment ">
+                                    <a href="{{ route('web.detailBlog', ['id_blog' => $blog->id_blog]) }}">
+                                        <div style="background-image: url({{ asset("$URL_IMG_BLOG/$blog->mainimg_blog") }})"
+                                            class="item-comment_image">
+                                        </div>
+                                    </a>
+                                    <div class="item-comment_conten">
+                                        <div class="title-comment">
+                                            <a href="{{ route('web.detailBlog', ['id_blog' => $blog->id_blog]) }}">
+                                                {!! $blog->title_blog !!}
+                                            </a>
+                                        </div>
+                                        <div id="fb-root"></div>
+                                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0"
+                                                                                nonce="J9qJac5o"></script>
+                                        <div class="fb-like"
+                                            data-href="https://developers.facebook.com/docs/plugins/" data-width=""
+                                            data-layout="standard" data-action="like" data-size="small" data-share="true">
+                                        </div>
+                                        <div class="text">
+                                            {!! $blog->conten_blog !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
 
-                    <div class="item-comment">
-                        <div class="image-item-comment">
-                            <img src="{{ asset('frontend/img/Thiên thần hộ mệnh.png') }}" alt="">
-                        </div>
-                        <div class="text-comment">
-                            <div class="title-comment">
-                                <a href="#">[Review] Thiên Thần Hộ Mệnh: Victor Vũ Và Nỗ Lực Trẻ Hóa "Vũ Trụ Bùa
-                                    Ngải"</a>
-                            </div>
-                            <div class="like">
-                                <img src="{{ asset('frontend/img/like.png') }}" alt="">
-                                <img src="{{ asset('frontend/img/view.png') }}" alt="">
-                                <i style="color: gold" class="fas fa-star"></i> 8.7/10(882)
-                            </div>
-                            <div class="text">
-                                <p><b>Thiên Thần Hộ Mệnh</b> phức tạp, nhiều twist và rõ nhất là trẻ hơn!</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div class="comment-film">
-
-                    <div class="item-comment">
-                        <div class="image-item-comment">
-                            <img src="{{ asset('frontend/img/Thiên thần hộ mệnh.png') }}" alt="">
-                        </div>
-                        <div class="text-comment">
-                            <div class="title-comment">
-                                <a href="#">[Review] Thiên Thần Hộ Mệnh: Victor Vũ Và Nỗ Lực Trẻ Hóa "Vũ Trụ Bùa
-                                    Ngải"</a>
-                            </div>
-                            <div class="like">
-                                <img src="{{ asset('frontend/img/like.png') }}" alt="">
-                                <img src="{{ asset('frontend/img/view.png') }}" alt="">
-                                <i style="color: gold" class="fas fa-star"></i> 8.7/10(882)
-                            </div>
-                            <div class="text">
-                                <p><b>Thiên Thần Hộ Mệnh</b> phức tạp, nhiều twist và rõ nhất là trẻ hơn!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
 
-        <div class="blog-film">
-            <div class="title-film">
-                <div class="title-item">
-                    <a href="#">Bình luận phim</a>
-                </div>
-            </div>
-            <div class="blog">
-                <div class="blog-film">
+    </div>
 
-                    <div class="item-comment">
-                        <div class="image-item-comment">
-                            <img src="{{ asset('frontend/img/Thiên thần hộ mệnh.png') }}" alt="">
-                        </div>
-                        <div class="text-comment">
-                            <div class="title-comment">
-                                <a href="#">[Review] Thiên Thần Hộ Mệnh: Victor Vũ Và Nỗ Lực Trẻ Hóa "Vũ Trụ Bùa
-                                    Ngải"</a>
-                            </div>
-                            <div class="like">
-                                <img src="{{ asset('frontend/img/like.png') }}" alt="">
-                                <img src="{{ asset('frontend/img/view.png') }}" alt="">
-                            </div>
-                            <div class="text">
-                                <p><b>Thiên Thần Hộ Mệnh</b> phức tạp, nhiều twist và rõ nhất là trẻ hơn!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-film">
-
-                    <div class="item-comment">
-                        <div class="image-item-comment">
-                            <img src="{{ asset('frontend/img/Thiên thần hộ mệnh.png') }}" alt="">
-                        </div>
-                        <div class="text-comment">
-                            <div class="title-comment">
-                                <a href="#">[Review] Thiên Thần Hộ Mệnh: Victor Vũ Và Nỗ Lực Trẻ Hóa "Vũ Trụ Bùa
-                                    Ngải"</a>
-                            </div>
-                            <div class="like">
-                                <img src="{{ asset('frontend/img/like.png') }}" alt="">
-                                <img src="{{ asset('frontend/img/view.png') }}" alt="">
-                            </div>
-                            <div class="text">
-                                <p><b>Thiên Thần Hộ Mệnh</b> phức tạp, nhiều twist và rõ nhất là trẻ hơn!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-film">
-
-                    <div class="item-comment">
-                        <div class="image-item-comment">
-                            <img src="{{ asset('frontend/img/Thiên thần hộ mệnh.png') }}" alt="">
-                        </div>
-                        <div class="text-comment">
-                            <div class="title-comment">
-                                <a href="#">[Review] Thiên Thần Hộ Mệnh: Victor Vũ Và Nỗ Lực Trẻ Hóa "Vũ Trụ Bùa
-                                    Ngải"</a>
-                            </div>
-                            <div class="like">
-                                <img src="{{ asset('frontend/img/like.png') }}" alt="">
-                                <img src="{{ asset('frontend/img/view.png') }}" alt="">
-                            </div>
-                            <div class="text">
-                                <p><b>Thiên Thần Hộ Mệnh</b> phức tạp, nhiều twist và rõ nhất là trẻ hơn!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-film">
-
-                    <div class="item-comment">
-                        <div class="image-item-comment">
-                            <img src="{{ asset('frontend/img/Thiên thần hộ mệnh.png') }}" alt="">
-                        </div>
-                        <div class="text-comment">
-                            <div class="title-comment">
-                                <a href="#">[Review] Thiên Thần Hộ Mệnh: Victor Vũ Và Nỗ Lực Trẻ Hóa "Vũ Trụ Bùa
-                                    Ngải"</a>
-                            </div>
-                            <div class="like">
-                                <img src="{{ asset('frontend/img/like.png') }}" alt="">
-                                <img src="{{ asset('frontend/img/view.png') }}" alt="">
-                            </div>
-                            <div class="text">
-                                <p><b>Thiên Thần Hộ Mệnh</b> phức tạp, nhiều twist và rõ nhất là trẻ hơn!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="discout">
