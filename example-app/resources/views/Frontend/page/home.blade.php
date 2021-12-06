@@ -407,7 +407,7 @@
 
     </div>
 
-    {{-- <div class="discout">
+    <div class="discout">
         <div class="title-film">
             <div class="title-item">
                 <a href="#">Tin khuyến mãi</a>
@@ -430,6 +430,6 @@
             @endforeach
             
         </div>
-    </div> --}}
+    </div>
 
 @endsection

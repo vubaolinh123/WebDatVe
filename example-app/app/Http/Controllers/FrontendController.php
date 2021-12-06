@@ -81,10 +81,12 @@ class FrontendController extends Controller
                 'tbl_film.id_film',
             )
             ->get();
+            $news = News::get() ->take(4);
         return view('Frontend.page.home', [
             'typeBlogs' => $typeBlogs,
             'filmHomeDeleted0s' => $arrFilm,
             'clusterCinema' => $clusterCinema,
+            'news' => $news,
             'filmHomeDeleted1s' => $arrFilm1s
         ]);
     }
@@ -326,6 +328,7 @@ class FrontendController extends Controller
 
     public function news(){
         $id_news = $_GET['id_news'];
+        // dd($id_news);
         $news = News::find($id_news);
         $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)->take(3)
             ->get();
