@@ -12,6 +12,10 @@ use App\Http\Controllers\ClusterCinema;
 
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\FilmTypeController;
+use App\Http\Controllers\food;
+use App\Http\Controllers\TypeFood;
+use App\Http\Controllers\SizeFood;
+
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\TypeChairController;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +37,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['cityAddress'])->group(function () {
     Route::prefix('')->group(function () {
         Route::get('/', [FrontendController::class, 'homeWeb'])->name('web.home');
-        Route::get('/home', [FrontendController::class, 'homeWeb'])->name('web.home');
+        // Route::get('/home', [FrontendController::class, 'homeWeb'])->name('web.home');
         Route::get('/detail/{id_film}/{slug}', [FrontendController::class, 'detailFim'])->name('web.detailFim');
         Route::get('/getCityAddress/{code}', [FrontendController::class, 'getCityAddress'])->name('web.getCityAddress');
     });
@@ -159,6 +163,31 @@ Route::middleware(['hasAdmin'])->group(function () {
         Route::prefix('category')->group(function () {
             Route::get('/list', [CategoryController::class, 'index'])->name('admin.category.list');
             Route::get('/add', [CategoryController::class, 'create'])->name('admin.category.add');
+        });
+        Route::prefix('food')->group(function () {
+            Route::get('/list', [food::class, 'index'])->name('admin.food.list');
+            Route::get('/add', [food::class, 'create'])->name('admin.food.add');
+            Route::get('/edit/{id}', [food::class, 'edit'])->name('admin.food.edit');
+            Route::post('/store', [food::class, 'store'])->name('admin.food.store');
+            Route::delete('/delete/{id}', [food::class, 'delete'])->name('admin.food.delete');
+            Route::put('/updated/{id}', [food::class, 'update'])->name('admin.food.updated');
+        });
+        Route::prefix('typefood')->group(function () {
+            Route::get('/list', [TypeFood::class, 'index'])->name('admin.type_food.list');
+            Route::get('/add', [TypeFood::class, 'create'])->name('admin.type_food.add');
+            Route::get('/edit/{id}', [TypeFood::class, 'edit'])->name('admin.type_food.edit');
+            Route::post('/store', [TypeFood::class, 'store'])->name('admin.type_food.store');
+            Route::delete('/delete/{id}', [TypeFood::class, 'delete'])->name('admin.type_food.delete');
+            Route::put('/updated/{id}', [TypeFood::class, 'update'])->name('admin.type_food.updated');
+        });
+
+        Route::prefix('sizefood')->group(function () {
+            Route::get('/list', [SizeFood::class, 'index'])->name('admin.size_food.list');
+            Route::get('/add', [SizeFood::class, 'create'])->name('admin.size_food.add');
+            Route::get('/edit/{id}', [SizeFood::class, 'edit'])->name('admin.size_food.edit');
+            Route::post('/store', [SizeFood::class, 'store'])->name('admin.size_food.store');
+            Route::delete('/delete/{id}', [SizeFood::class, 'delete'])->name('admin.size_food.delete');
+            Route::put('/updated/{id}', [SizeFood::class, 'update'])->name('admin.size_food.updated');
         });
     });
 });

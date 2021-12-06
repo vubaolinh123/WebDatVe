@@ -63,6 +63,38 @@
     </ul>
 </li>
 
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý Đồ Ăn</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.food.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.food.add') }}">Thêm </a></li>
+    </ul>
+</li>
+
+
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý Loại Đồ Ăn</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.type_food.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.type_food.add') }}">Thêm </a></li>
+    </ul>
+</li>
+
+
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý Size Đồ Ăn</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.size_food.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.size_food.add') }}">Thêm </a></li>
+    </ul>
+</li>
+
 
 {{-- <li class="nav-label">Apps</li>
 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-app-store"></i><span

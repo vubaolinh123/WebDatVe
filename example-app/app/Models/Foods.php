@@ -13,10 +13,13 @@ class Foods extends Model
     protected $primaryKey = "id_food";
     protected $guarded = [];
 
-    public function size_food(){
-        return $this->belongsTo(SizeFoods::class,'size_food_id');
+
+    public function size_food()
+    {
+        return $this->belongsTo(SizeFoods::class, 'size_food_id');
     }
-    public function type_food(){
-        return $this->belongsTo(TypeFoods::class,'type_food_id');
+    public function type_food()
+    {
+        return $this->belongsTo(TypeFoods::class, 'type_food_id');
     }
 }
