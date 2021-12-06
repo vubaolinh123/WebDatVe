@@ -105,6 +105,70 @@
     <a class="has-arrow" href="{{ route('admin.comment.start.cinema') }}" >
         <span class="nav-text">Quản lý bình luận , đánh giá </span>
     </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.typechair.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.typechair.addForm') }}">Thêm </a></li>
+    </ul>
+</li>
+
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý Đồ Ăn</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.food.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.food.add') }}">Thêm </a></li>
+    </ul>
+</li>
+
+
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý Loại Đồ Ăn</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.type_food.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.type_food.add') }}">Thêm </a></li>
+    </ul>
+</li>
+
+
+<li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <span class="nav-text">Quản lý Size Đồ Ăn</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('admin.size_food.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.size_food.add') }}">Thêm </a></li>
+    </ul>
+</li>
+
+
+{{-- <li class="nav-label">Apps</li>
+<li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-app-store"></i><span
+            class="nav-text">Apps</span></a>
+    <ul aria-expanded="false">
+        <li><a href="./app-profile.html">Profile</a></li>
+        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
+            <ul aria-expanded="false">
+                <li><a href="./email-compose.html">Compose</a></li>
+                <li><a href="./email-inbox.html">Inbox</a></li>
+                <li><a href="./email-read.html">Read</a></li>
+            </ul>
+        </li>
+        <li><a href="./app-calender.html">Calendar</a></li>
+    </ul>
+</li>
+<li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-chart-bar-33"></i><span
+            class="nav-text">Charts</span></a>
+    <ul aria-expanded="false">
+        <li><a href="./chart-flot.html">Flot</a></li>
+        <li><a href="./chart-morris.html">Morris</a></li>
+        <li><a href="./chart-chartjs.html">Chartjs</a></li>
+        <li><a href="./chart-chartist.html">Chartist</a></li>
+        <li><a href="./chart-sparkline.html">Sparkline</a></li>
+        <li><a href="./chart-peity.html">Peity</a></li>
+    </ul>
 </li>
 @hasAdmin('admin')
 <li>

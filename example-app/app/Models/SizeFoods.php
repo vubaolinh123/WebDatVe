@@ -12,4 +12,5 @@ class SizeFoods extends Model
     protected $table = "tbl_size_food";
     protected $primaryKey = "id_size_food";
     protected $guarded = [];
+    public $timestamps = false;
 }
