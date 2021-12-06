@@ -20,15 +20,19 @@ use App\Models\StartCinema;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Str ;
+// use Str;
+use Illuminate\Support\Str;
+
 class FrontendController extends Controller
 {
-    use Book,AjaxSelect,AjaxBook,PayBook;
+    use Book, AjaxSelect, AjaxBook, PayBook;
 
     public function homeWeb()
     {
         return view('Frontend.page.home');
     }
+
+
     public function detailFim(Request $request, $id_film, $slug)
     {
 
@@ -92,56 +96,52 @@ class FrontendController extends Controller
         } else {
             $id_user = Auth::user()->id;
             $receipts = Receipt::where('user_id', $id_user)
-                // ->pluck(
-                //     'id_receipt',
-                //     'date_pay',
-                //     'total',
-                //     'user_view_success',
-                //     'showtime_id'
-                // );
-                ->join('tbl_receipt_details as receiptDetail', 'receiptDetail.receipt_id', 'tbl_receipt.id_receipt')
-                ->leftJoin('tbl_showtime', 'tbl_showtime.id_showtime', 'receiptDetail.showtime_id')
-                ->join('tbl_film as film', 'film.id_film', 'tbl_showtime.film_id')
-                ->select(
-                    'film.avatar as img_film',
-                    'film.name as name_film',
-                    'tbl_showtime.show_date',
-                    'tbl_showtime.start_time',
-                    'receiptDetail.chair_code',
-                    'tbl_receipt.total',
-                    'film.id_film',
-                )
-
+                // ->with('showtime')
+                // ->join('tbl_receipt_details as receiptDetail', 'receiptDetail.receipt_id', 'tbl_receipt.id_receipt')
+                // ->leftJoin('tbl_showtime', 'tbl_showtime.id_showtime', 'receiptDetail.showtime_id')
+                // ->join('tbl_film as film', 'film.id_film', 'tbl_showtime.film_id')
+                // ->select(
+                //     'film.avatar as img_film',
+                //     'film.name as name_film',
+                //     'tbl_showtime.show_date',
+                //     'tbl_showtime.start_time',
+                //     'receiptDetail.chair_code',
+                //     'tbl_receipt.total',
+                //     'tbl_receipt.id_receipt',
+                //     'film.id_film',
+                // )
                 ->get();
+            // dump($id_user);
             // dd($receipts);
-            $receiptsVl = [];
+            // $receiptsVl = [];
 
-            foreach ($receipts as $key => $receipt) {
-                // echo  $receipt->show_date;
-                if (!in_array($receipt->name_film, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->name_film);
-                }
-                if (!in_array($receipt->id_film, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->id_film);
-                }
-                if (!in_array($receipt->total, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->total);
-                }
-                if (!in_array($receipt->img_film, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->img_film);
-                }
-                array_push($receiptsVl, $receipt->show_date);
-                if (!in_array($receipt->start_time, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->start_time);
-                }
-                if (!in_array($receipt->chair_code, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->chair_code);
-                }
-            }
-            $receiptsVl = array_chunk($receiptsVl, 9);
+            // foreach ($receipts as $key => $receipt) {
+
+            //     // echo  $receipt->show_date;
+            //     // if (!in_array($receipt->name_film, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->name_film);
+            //     // }
+            //     // if (!in_array($receipt->id_film, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->id_film);
+            //     // }
+            //     // if (!in_array($receipt->total, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->total);
+            //     // }
+            //     // if (!in_array($receipt->img_film, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->img_film);
+            //     // }
+            //     // array_push($receiptsVl, $receipt->show_date);
+            //     // if (!in_array($receipt->start_time, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->start_time);
+            //     // }
+            //     // if (!in_array($receipt->chair_code, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->chair_code);
+            //     // }
+            // }
+            // // $receiptsVl = array_chunk($receiptsVl, 9);
             // dd($receiptsVl);
-            dd($receiptsVl);
-            return view('Frontend.page.ordreFilm', compact('receiptsVl'));
+            // dd($receiptsVl);
+            return view('Frontend.page.ordreFilm', compact('receipts'));
         }
     }
     public function detailBlog(Request $request)
@@ -155,18 +155,18 @@ class FrontendController extends Controller
 
     public function change_name(Request $request)
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             User::find(Auth::user()->id)->update(['name' => $request->value]);
         }
     }
-    public function showCinema(Request $request , $id, $slug)
+    public function showCinema(Request $request, $id, $slug)
     {
         $clusterCinema = ClusterCinema::where('city_id', Session::get('cityAddress'))->get();
-        $cinema = Cinema::where('id',$id)->first();
-        $countStart = StartCinema::where('cinema_id',$id)->count();
-        $numStart = StartCinema::where('cinema_id',$id)->sum('start');
+        $cinema = Cinema::where('id', $id)->first();
+        $countStart = StartCinema::where('cinema_id', $id)->count();
+        $numStart = StartCinema::where('cinema_id', $id)->sum('start');
 
-        return view('Frontend.page.show_cinema',[
+        return view('Frontend.page.show_cinema', [
             'cinema' => $cinema,
             'clusterCinema' => $clusterCinema,
             'countStart' => $countStart,
@@ -178,94 +178,93 @@ class FrontendController extends Controller
     public function change_pass(Request $request)
     {
 
-        if(Auth::attempt([ 'email' => Auth::user()->email ,'password' => $request->passwordOld])){
-            User::find(Auth::user()->id)->update(['password' => Hash::make($request->passwordConfirm) ]);
+        if (Auth::attempt(['email' => Auth::user()->email, 'password' => $request->passwordOld])) {
+            User::find(Auth::user()->id)->update(['password' => Hash::make($request->passwordConfirm)]);
             return 'Đổi mật khẩu hoàn tất ';
-        }else{
+        } else {
             return 'Mật khẩu không chính xác !';
         }
     }
 
     public function comment_cinema(Request $request)
     {
-        if(Auth::check()){
-            if(StartCinema::where('user_id' , auth() -> user() -> id)->where('cinema_id' , $request -> cinema_id)->exists()){
+        if (Auth::check()) {
+            if (StartCinema::where('user_id', auth()->user()->id)->where('cinema_id', $request->cinema_id)->exists()) {
                 return 1;
-            }else{
+            } else {
                 $flag = false;
-                $cinema = Cinema::where('id' , $request->cinema_id)->first();
-                foreach ($cinema -> cinema_room as $ci){
-                    foreach($ci -> show_time as $show){
-                        foreach($show -> receipts as $receipt){
-                            if(auth() -> user() -> id == $receipt -> user_id){
-                                $flag= true ;
+                $cinema = Cinema::where('id', $request->cinema_id)->first();
+                foreach ($cinema->cinema_room as $ci) {
+                    foreach ($ci->show_time as $show) {
+                        foreach ($show->receipts as $receipt) {
+                            if (auth()->user()->id == $receipt->user_id) {
+                                $flag = true;
                                 break;
                             }
                         }
                     }
-                    if($flag) break;
+                    if ($flag) break;
                 }
-                if($flag == true){
+                if ($flag == true) {
                     StartCinema::create([
-                        'content' => $request->content ,
-                        'start' => $request->start ,
-                        'user_id' => auth() -> user()->id ,
-                        'cinema_id' => $request -> cinema_id
+                        'content' => $request->content,
+                        'start' => $request->start,
+                        'user_id' => auth()->user()->id,
+                        'cinema_id' => $request->cinema_id
                     ]);
-                    return 0 ;
+                    return 0;
                 }
                 return 3;
             }
         }
-
-
     }
 
     public function comment_cinema_show(Request $request)
     {
-        $start_cinema = StartCinema::where('cinema_id' , $request->id_cinema)->orderBy('id' , 'desc')->get();
+        $start_cinema = StartCinema::where('cinema_id', $request->id_cinema)->orderBy('id', 'desc')->get();
         foreach ($start_cinema as $key => $startCinemaItem) {
-            ?>
+?>
 
-                <div style="padding : 10px ; box-shadow : 2px 2px 2px black ;border-bottom-right-radius: 10px;" class="row">
-                    <div class="col-sm-10 ">
-                       <h6   style="display:inline ; color : blue"> <?= $startCinemaItem -> user -> name ?></h6>
-                        <p  ><small> Đã bình luận</small> : <strong><?= $startCinemaItem -> content ?></strong> </p>
-                        <span class="badge badge-secondary"><?= $startCinemaItem -> created_at -> diffForHumans() ?></span>
-                    </div>
-                    <div class="col-sm-2">
-                        <p class="btn btn-success"><strong><?= $startCinemaItem -> start ?></strong> <i class="fas fa-star"></i>  </p>
-                    </div>
-                </div>
-                <hr>
-            <?php
+<div style="padding : 10px ; box-shadow : 2px 2px 2px black ;border-bottom-right-radius: 10px;" class="row">
+    <div class="col-sm-10 ">
+        <h6 style="display:inline ; color : blue"> <?= $startCinemaItem->user->name ?></h6>
+        <p><small> Đã bình luận</small> : <strong><?= $startCinemaItem->content ?></strong> </p>
+        <span class="badge badge-secondary"><?= $startCinemaItem->created_at->diffForHumans() ?></span>
+    </div>
+    <div class="col-sm-2">
+        <p class="btn btn-success"><strong><?= $startCinemaItem->start ?></strong> <i class="fas fa-star"></i> </p>
+    </div>
+</div>
+<hr>
+<?php
         }
     }
 
     public function search(Request $request)
     {
-        if($request -> value == '') return ;
+        if ($request->value == '') return;
         $dt = Carbon::now('Asia/Ho_Chi_Minh');
-        $films = Film::where('name' , 'like' , '%' . $request -> value. '%')->get();
+        $films = Film::where('name', 'like', '%' . $request->value . '%')->get();
         // $arrId = [];
         $arrSave = [];
-        foreach ($films as $film){
-            foreach($film -> showtime as $showtime ){  if($showtime -> show_date >= $dt->toDateString()) $arrSave[$film -> id_film] = $film ;   }
+        foreach ($films as $film) {
+            foreach ($film->showtime as $showtime) {
+                if ($showtime->show_date >= $dt->toDateString()) $arrSave[$film->id_film] = $film;
+            }
         }
-        $text = '<strong style="color : red">' . $request -> value . '</strong>';
-        if(count($arrSave) == 0){
+        $text = '<strong style="color : red">' . $request->value . '</strong>';
+        if (count($arrSave) == 0) {
+        ?>
+<p>Không có dữ liệu ...</p>
+<?php
+        } else {
+            foreach ($arrSave as $item) {
             ?>
-            <p>Không có dữ liệu ...</p>
-            <?php
-        }else{
-            foreach($arrSave as $item){
-                ?>
-                    <a
-                        href="<?= route('web.detailFim' , ['id_film' => $item -> id_film , 'slug' => Str::slug($item->name)]) ?>"
-                        style=" list-style : none ">
-                        <?= str_replace( $request -> value , $text ,  $item -> name )  ?>
-                        </a> <br>
-                <?php
+<a href="<?= route('web.detailFim', ['id_film' => $item->id_film, 'slug' => Str::slug($item->name)]) ?>"
+    style=" list-style : none ">
+    <?= str_replace($request->value, $text,  $item->name)  ?>
+</a> <br>
+<?php
             }
         }
     }

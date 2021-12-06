@@ -89,15 +89,15 @@
                             </button>
                         </div>
                         <div style="
-                                        color : white ;
-                                        text-transform:  uppercase;
-                                        height:100% ;
-                                        width : 40% ;
-                                        top : 20% ;
-                                        right:10%;
-                                        position: absolute;">
+                                                color : white ;
+                                                text-transform:  uppercase;
+                                                height:100% ;
+                                                width : 40% ;
+                                                top : 20% ;
+                                                right:10%;
+                                                position: absolute;">
                             <h2 style=" font-size: 50px ;
-                                            font-weight: bold;">{{ $filmHomeDeleted0->name }}</h2>
+                                                    font-weight: bold;">{{ $filmHomeDeleted0->name }}</h2>
                             <p>{{ $filmHomeDeleted0->nameTypeFilm }}</p>
                             <p>Thời gian : {{ date('h:i', strtotime($filmHomeDeleted0->time)) }}</p>
                             <small style="color : rgb(175, 175, 175)">
@@ -110,15 +110,15 @@
             <div class="swiper-pagination"></div>
         </div>
         <div style=" position:absolute;
-                    width : 70% ;
-                    height : 100px ; background : rgb(255, 255, 255) ;
-                    left: 50%;
-                    transform:  translate(-50% , -50%);
-                    bottom: -100px ;
-                    z-index:3 ;
-                    border-radius : 10px ;
-                    padding :10px ;
-                    display : grid ;    grid-template-columns: 1fr 1fr 1fr 100px">
+                            width : 70% ;
+                            height : 100px ; background : rgb(255, 255, 255) ;
+                            left: 50%;
+                            transform:  translate(-50% , -50%);
+                            bottom: -100px ;
+                            z-index:3 ;
+                            border-radius : 10px ;
+                            padding :10px ;
+                            display : grid ;    grid-template-columns: 1fr 1fr 1fr 100px">
 
             <div>
                 <label for=""> Phim</label>
@@ -200,19 +200,19 @@
                                             <a class="i-f-l links_{{ $filmHomeDeleted0->id_film }}"
                                                 href="{{ route('web.detailFim', ['id_film' => $filmHomeDeleted0->id_film, 'slug' => \Str::slug($filmHomeDeleted0->name)]) }}"
                                                 style="position: absolute ;
-                                                                        top : 0 ;
-                                                                        left : 0 ;
-                                                                        right : 0 ;
-                                                                        text-align: center ;
-                                                                        text-decoration: none ;
-                                                                        display : none ;
-                                                                        padding : 10px 10px ;
-                                                                        background-image : url({{ asset("$URL_IMG_FILM/$filmHomeDeleted0->avatar") }}) ;
-                                                                        color : white ;
-                                                                        font-weight : bold ;
-                                                                        cursor: pointer;
-                                                                        border-radius : 10px
-                                                                        ">Mua vé</a>
+                                                                                top : 0 ;
+                                                                                left : 0 ;
+                                                                                right : 0 ;
+                                                                                text-align: center ;
+                                                                                text-decoration: none ;
+                                                                                display : none ;
+                                                                                padding : 10px 10px ;
+                                                                                background-image : url({{ asset("$URL_IMG_FILM/$filmHomeDeleted0->avatar") }}) ;
+                                                                                color : white ;
+                                                                                font-weight : bold ;
+                                                                                cursor: pointer;
+                                                                                border-radius : 10px
+                                                                                ">Mua vé</a>
                                         </a>
 
                                         <p class="text-black">
@@ -280,7 +280,7 @@
 
                         @foreach ($clusterCinema as $key => $cluster)
 
-                            <a  data-toggle="pill" class="bg @if ($key + 1 == 1) {{ 'active' }} @endif" href="#menu{{ $key + 1 }}"
+                            <a data-toggle="pill" class="bg @if ($key + 1 == 1) {{ 'active' }} @endif" href="#menu{{ $key + 1 }}"
                                 style=" display: grid ;  grid-template-columns:  70px 1fr ; gap :10px ; margin:20px">
                                 <div>
                                     <img style="width:60px ; height : 60px ; border-radius:50%"
@@ -309,7 +309,8 @@
                                                     src="{{ URL::to('storage/' . $item->image) }}" alt="">
                                             </div>
                                             <div class="col-sm-10">
-                                                <a data-toggle="tab" href="#me-{{ $k+1 }}">{{ $item->name }}</a>
+                                                <a data-toggle="tab"
+                                                    href="#me-{{ $k + 1 }}">{{ $item->name }}</a>
                                                 <p style="color: blue"> Giờ mở cửa : {{ $item->cinema_open }} </p>
                                                 <small>{{ $item->address }}</small> <br>
                                                 <a href="{{ route('web.show.cinema', ['id' => $item->id, 'slug' => \Str::slug($item->name)]) }}"
@@ -320,9 +321,8 @@
                                     @endforeach
                                 @else
                                     <div class="row">
-                                        <h4
-                                            class="alert "
-                                            style="background-color:  black ; padding : 10px ; margin : 10px ; color:white" >
+                                        <h4 class="alert "
+                                            style="background-color:  black ; padding : 10px ; margin : 10px ; color:white">
                                             Hiện tại cụm rạp này chưa có rạp , bạn có thể xem rạp khác! </h4>
                                     </div>
                                 @endif
@@ -334,70 +334,75 @@
                 <div class="col-sm-4">
                     <div class="tab-content">
                         @foreach ($clusterCinema as $key => $cluster)
-                        @foreach ($cluster->cinema as $k => $item)
-                        <div id="me-{{ $k + 1}}" class="tab-pane fade m-3  ">
-                            @foreach ($item -> cinema_room   as $cinema_room)
-                                @foreach ($cinema_room -> show_time as $showtime)
-                                    @if ($showtime -> show_date >= \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->toDateString())
-                                        <h3>{{ $showtime -> film -> name }}</h3>
-                                        <p>Phòng số : {{ $cinema_room -> id_cinema_room }} </p>
-                                        <p> <button class="btn btn-warning">{{  $showtime -> start_time }}</button> : <button class="btn btn-warning">{{ $showtime -> time_ends }}</button> </p>
-                                    @endif
-                                @endforeach
+                            @foreach ($cluster->cinema as $k => $item)
+                                <div id="me-{{ $k + 1 }}" class="tab-pane fade m-3  ">
+                                    @foreach ($item->cinema_room as $cinema_room)
+                                        @foreach ($cinema_room->show_time as $showtime)
+                                            @if ($showtime->show_date >= \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->toDateString())
+                                                <h3>{{ $showtime->film->name }}</h3>
+                                                <p>Phòng số : {{ $cinema_room->id_cinema_room }} </p>
+                                                <p> <button class="btn btn-warning">{{ $showtime->start_time }}</button>
+                                                    :
+                                                    <button class="btn btn-warning">{{ $showtime->time_ends }}</button>
+                                                </p>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                </div>
                             @endforeach
-                            </div>
                         @endforeach
-                        @endforeach
-                      </div>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
+    <div class="container-fluid">
+        <div class="blog-container">
+            <div class="row">
+                @foreach ($typeBlogs as $typeBlog)
+                    <div class="col-xs-6 mb-5">
+                        <div class="blog-item">
 
-    <div class="blog-container">
-        <div class="row">
-            @foreach ($typeBlogs as $typeBlog)
-                <div class="col-xs-6 mb-5">
-                    <div class="blog-item">
-
-                        <div class="title-film">
-                            <div class="title-item">
-                                <a href="#">{{ $typeBlog->name }}</a>
+                            <div class="title-film">
+                                <div class="title-item">
+                                    <a href="#">{{ $typeBlog->name }}</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="comment-conten">
-                            @foreach ($typeBlog->blogss as $blog)
-                                <div class="item-comment ">
-                                    <a href="{{ route('web.detailBlog', ['id_blog' => $blog->id_blog]) }}">
-                                        <div style="background-image: url({{ asset("$URL_IMG_BLOG/$blog->mainimg_blog") }})"
-                                            class="item-comment_image">
-                                        </div>
-                                    </a>
-                                    <div class="item-comment_conten">
-                                        <div class="title-comment">
-                                            <a href="{{ route('web.detailBlog', ['id_blog' => $blog->id_blog]) }}">
-                                                {!! $blog->title_blog !!}
-                                            </a>
-                                        </div>
+                            <div class="comment-conten">
+                                @foreach ($typeBlog->blogss as $blog)
+                                    <div class="item-comment ">
+                                        <a href="{{ route('web.detailBlog', ['id_blog' => $blog->id_blog]) }}">
+                                            <div style="background-image: url({{ asset("$URL_IMG_BLOG/$blog->mainimg_blog") }})"
+                                                class="item-comment_image">
+                                            </div>
+                                        </a>
+                                        <div class="item-comment_conten">
+                                            <div class="title-comment">
+                                                <a href="{{ route('web.detailBlog', ['id_blog' => $blog->id_blog]) }}">
+                                                    {!! $blog->title_blog !!}
+                                                </a>
+                                            </div>
 
-                                        <div class="fb-like"
-                                            data-href="https://developers.facebook.com/docs/plugins/" data-width=""
-                                            data-layout="standard" data-action="like" data-size="small" data-share="true">
-                                        </div>
-                                        <div class="text">
-                                            {!! $blog->conten_blog !!}
+                                            <div class="fb-like"
+                                                data-href="https://developers.facebook.com/docs/plugins/" data-width=""
+                                                data-layout="standard" data-action="like" data-size="small"
+                                                data-share="true">
+                                            </div>
+                                            <div class="text">
+                                                {!! $blog->conten_blog !!}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
+
                         </div>
-
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
 
+        </div>
     </div>
 
     </div>
