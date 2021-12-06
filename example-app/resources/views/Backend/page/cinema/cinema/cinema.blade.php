@@ -19,7 +19,6 @@
                         <th scope="col">Ảnh </th>
                         <th scope="col">Địa chỉ cụ thể</th>
                         <th scope="col">Quận / Huyện </th>
-                        <th scope="col">Chi tiết </th>
                         <th scope="col">Số điện thoại</th>
                         <th scope="col">Email</th>
                         <th scope="col">Giờ mở cửa</th>
@@ -47,14 +46,13 @@
                                     @endif
                                 @endforeach
                             </td>
-                            <td>{{ $cinema->detail }}</td>
                             <td>{{ $cinema->phone }}</td>
                             <td>{{ $cinema->email }}</td>
                             <td>{{ $cinema->cinema_open }}</td>
                             <td>{{ $cinema->cinema_close }}</td>
                             <td>
-                                <a href="{{ route('cinema.update' , ['id' => $cinema->id]) }}" class="btn btn-success btn-rounded"
-                                  > Sửa</a>
+                                <a href="{{ route('cinema.update', ['id' => $cinema->id]) }}"
+                                    class="btn btn-success btn-rounded"> Sửa</a>
                             </td>
                             <td>
                                 <form action="{{ route('cinema.delete', ['id' => $cinema->id]) }}" method="post">
