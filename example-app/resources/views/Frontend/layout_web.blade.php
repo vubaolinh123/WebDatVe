@@ -37,7 +37,7 @@
 
 
 
-<div style="position: relative" class="container-fluid">
+<div style="position: relative">
 
     @yield('conten.web')
 

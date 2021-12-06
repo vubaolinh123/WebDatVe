@@ -106,7 +106,8 @@
         <span class="nav-text">Quản lý vé</span>
     </a>
     <ul aria-expanded="false">
-        <a class="has-arrow" href="{{ route('admin.comment.start.cinema') }}">Quản lý bình luận đánh giá </a>
+        <li><a href="{{ route('admin.typechair.list') }}">Danh sách</a></li>
+        <li><a href="{{ route('admin.typechair.addForm') }}">Thêm </a></li>
     </ul>
 </li>
 <li>
@@ -145,7 +146,7 @@
 </li>
 
 
-  <li class="nav-label">Apps</li>
+  {{-- <li class="nav-label">Apps</li>
 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-app-store"></i><span
             class="nav-text">Apps</span></a>
     <ul aria-expanded="false">
@@ -159,8 +160,8 @@
         </li>
         <li><a href="./app-calender.html">Calendar</a></li>
     </ul>
-</li>
-<li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-chart-bar-33"></i><span
+</li> --}}
+{{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-chart-bar-33"></i><span
             class="nav-text">Charts</span></a>
     <ul aria-expanded="false">
         <li><a href="./chart-flot.html">Flot</a></li>
@@ -170,21 +171,11 @@
         <li><a href="./chart-sparkline.html">Sparkline</a></li>
         <li><a href="./chart-peity.html">Peity</a></li>
     </ul>
-</li>
+</li> --}}
 @hasAdmin('admin')
 <li>
     <a class="has-arrow" href="{{ route('admin.manage.user') }}" >
         <span class="nav-text">Quản lý tài khoản</span>
     </a>
-</li>
-<li>
-    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-        <span class="nav-text">Quản lý tin tức</span>
-    </a>
-    <ul aria-expanded="false">
-        <li><a href="{{ route('admin.news.list') }}">Danh sách</a></li>
-        <li><a href="{{ route('admin.news.add') }}">Thêm </a></li>
-
-    </ul>
 </li>
 @endhasAdmin

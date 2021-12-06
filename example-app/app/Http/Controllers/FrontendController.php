@@ -8,6 +8,12 @@ use Carbon\Carbon;
 use App\Models\Film;
 use App\Models\Cinema;
 use App\Models\FilmType;
+use App\Models\Foods;
+use App\Models\News;
+use App\Models\Receipt_Detail;
+use App\Models\Receipt_Food;
+use App\Models\Showtime;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Models\ClusterCinema;
 use Illuminate\Support\Facades\Session;
@@ -75,14 +81,15 @@ class FrontendController extends Controller
                 'tbl_film.id_film',
             )
             ->get();
+            $news = News::get() ->take(4);
         return view('Frontend.page.home', [
             'typeBlogs' => $typeBlogs,
             'filmHomeDeleted0s' => $arrFilm,
             'clusterCinema' => $clusterCinema,
+            'news' => $news,
             'filmHomeDeleted1s' => $arrFilm1s
         ]);
     }
-
 
     public function detailFim(Request $request, $id_film, $slug)
     {
@@ -317,5 +324,14 @@ class FrontendController extends Controller
 <?php
             }
         }
+    }
+
+    public function news(){
+        $id_news = $_GET['id_news'];
+        // dd($id_news);
+        $news = News::find($id_news);
+        $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)->take(3)
+            ->get();
+        return view('Frontend.page.detail_news', compact('news', 'filmHomeDeleted0s'));
     }
 }
