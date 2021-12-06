@@ -102,17 +102,15 @@
     </ul>
 </li>
 <li>
-    <a class="has-arrow"  >
-        <span class="nav-text">Quản lý vé</span>
+    <a class="has-arrow" href="{{ route('admin.comment.start.cinema') }}" >
+        <span class="nav-text">Quản lý bình luận , đánh giá </span>
     </a>
-    <ul aria-expanded="false">
+    {{-- <ul aria-expanded="false">
         <li><a href="{{ route('admin.typechair.list') }}">Danh sách</a></li>
         <li><a href="{{ route('admin.typechair.addForm') }}">Thêm </a></li>
-    </ul>
+    </ul> --}}
 </li>
-<li>
-    <a class="has-arrow" href="{{ route('admin.comment.start.cinema') }}">Quản lý bình luận đánh giá </a>
-</li>
+
 <li>
     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
         <span class="nav-text">Quản lý Đồ Ăn</span>
