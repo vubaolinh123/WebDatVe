@@ -37,15 +37,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['cityAddress'])->group(function () {
     Route::prefix('')->group(function () {
         Route::get('/', [FrontendController::class, 'homeWeb'])->name('web.home');
+        Route::get('/home', [FrontendController::class, 'homeWeb'])->name('web.home');
         Route::get('/detail/{id_film}/{slug}', [FrontendController::class, 'detailFim'])->name('web.detailFim');
         Route::get('/detail-blog', [FrontendController::class, 'detailBlog'])->name('web.detailBlog');
         Route::get('/getCityAddress/{code}', [FrontendController::class, 'getCityAddress'])->name('web.getCityAddress');
         Route::get('/ordreFilm', [FrontendController::class, 'ordreFilm'])->name('web.ordreFilm');
 
 
-        Route::post('/select-film-a' , [FrontendController::class, 'select_film_ajax'])->name('web.aj.select.f');
-        Route::post('/select-cinema-a' , [FrontendController::class, 'select_cinema_ajax'])->name('web.aj.select.c');
-        Route::post('/search' , [FrontendController::class, 'search'])->name('web.search');
+        Route::post('/select-film-a', [FrontendController::class, 'select_film_ajax'])->name('web.aj.select.f');
+        Route::post('/select-cinema-a', [FrontendController::class, 'select_cinema_ajax'])->name('web.aj.select.c');
+        Route::post('/search', [FrontendController::class, 'search'])->name('web.search');
     });
     Route::middleware(['auth'])->group(function () {
         // Route::get('/ordreFilm/detail/{id_receipt}', [FrontendController::class, 'detailOrderFilm'])->name('web.detailOrderFilm');
@@ -67,7 +68,6 @@ Route::middleware(['cityAddress'])->group(function () {
 
         Route::post('/comment-cinema', [FrontendController::class, 'comment_cinema'])->name('web.comment.start');
         Route::post('/comment-show', [FrontendController::class, 'comment_cinema_show'])->name('web.comment.show');
-
     });
 });
 
@@ -172,12 +172,11 @@ Route::middleware(['hasAdmin'])->group(function () {
                 Route::put('/updated/{id}', [Cinema::class, 'update'])->name('cinema.updated');
             });
 
-            Route::get('/comment-start-cinema', [CommentStartController::class , 'index']) -> name('admin.comment.start.cinema');
-            Route::get('/delete-comment-start-cinema/{startCiname}', [CommentStartController::class , 'destroy']) -> name('admin.delete.comment.start.cinema');
+            Route::get('/comment-start-cinema', [CommentStartController::class, 'index'])->name('admin.comment.start.cinema');
+            Route::get('/delete-comment-start-cinema/{startCiname}', [CommentStartController::class, 'destroy'])->name('admin.delete.comment.start.cinema');
 
-            Route::get('/manage-user' , [BackendController::class , 'manage_user'] )->name('admin.manage.user');
-            Route::post('/change-role' , [BackendController::class , 'change_role'] )->name('admin.change.role');
-
+            Route::get('/manage-user', [BackendController::class, 'manage_user'])->name('admin.manage.user');
+            Route::post('/change-role', [BackendController::class, 'change_role'])->name('admin.change.role');
         });
         Route::prefix('category')->group(function () {
             Route::get('/list', [CategoryController::class, 'index'])->name('admin.category.list');
