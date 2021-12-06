@@ -19,8 +19,8 @@ class Admin
     }
 
     public function compose( View $view)
-    {
-        $receipt = Receipt::where('user_view_success' , 0) -> paginate(5);
+    { 
+        $receipt = Receipt::where('user_view_success' , 0) -> paginate(5); 
         return $view -> with([ 'receiptComposer' => $receipt]);
     }
 }

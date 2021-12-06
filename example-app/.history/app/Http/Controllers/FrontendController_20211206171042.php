@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Type_Blog;
 use App\Models\ClusterCinema as ModelsClusterCinema;
-
 class FrontendController extends Controller
 {
     use Book, AjaxSelect, AjaxBook, PayBook;
@@ -35,7 +34,7 @@ class FrontendController extends Controller
         $arrFilm = [];
         $arrFilm1s = [];
         $arrCount = [];
-        $filmHomeDeleted0s = Film::inRandomOrder()->where('status', 0)->where('deleted', 0)
+        $filmHomeDeleted0s = $this -> film::inRandomOrder()->where('status', 0)->where('deleted', 0)
             ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
             ->select(
                 'tbl_film_type.name as nameTypeFilm',
@@ -46,27 +45,26 @@ class FrontendController extends Controller
                 'tbl_film.trailer',
             )
             ->get();
-        foreach ($filmHomeDeleted0s  as   $valueByfilmHomeDeleted0s) {
-            if (count($valueByfilmHomeDeleted0s->showtimeNow) > 0 && !in_array($valueByfilmHomeDeleted0s->id_film, $arrCount)) {
-                foreach ($valueByfilmHomeDeleted0s->showtimeNow as $showtime) {
-                    if (
-                        $showtime->cinema_room->cinema->cluster_cinema->city_id == Session::get('cityAddress')
-                        && !in_array($valueByfilmHomeDeleted0s->id_film, $arrCount)
-                    ) {
-                        if ($showtime->show_date == $now->toDateString()) {
-                            array_push($arrFilm, $valueByfilmHomeDeleted0s);
-                        } else {
-                            array_push($arrFilm1s, $valueByfilmHomeDeleted0s);
+        foreach ( $filmHomeDeleted0s  as   $valueByfilmHomeDeleted0s) {
+            if(count($valueByfilmHomeDeleted0s-> showtimeNow) > 0 && !in_array($valueByfilmHomeDeleted0s -> id_film  , $arrCount)){
+                foreach ($valueByfilmHomeDeleted0s-> showtimeNow as $showtime){
+                    if($showtime -> cinema_room -> cinema -> cluster_cinema -> city_id == Session::get('cityAddress')
+                    && !in_array($valueByfilmHomeDeleted0s -> id_film  , $arrCount)
+                    ){
+                        if($showtime ->  show_date == $now -> toDateString()){
+                            array_push($arrFilm , $valueByfilmHomeDeleted0s);
+                        }else{
+                            array_push($arrFilm1s , $valueByfilmHomeDeleted0s);
                         }
                         // array_push($arrFilm , $valueByfilmHomeDeleted0s);
-                        array_push($arrCount, $valueByfilmHomeDeleted0s->id_film);
+                        array_push($arrCount ,$valueByfilmHomeDeleted0s -> id_film );
                     }
                 }
             }
         }
         $typeBlogs = Type_Blog::where('active', 0)->get();
         $clusterCinema = ModelsClusterCinema::where('city_id', Session::get('cityAddress'))->get();
-        $filmHomeDeleted1s = Film::inRandomOrder()->where('status', 0)->where('deleted', 1)
+        $filmHomeDeleted1s = $this -> film::inRandomOrder()->where('status', 0)->where('deleted', 1)
             ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
             ->select(
                 'tbl_film_type.name as nameTypeFilm',
@@ -75,12 +73,7 @@ class FrontendController extends Controller
                 'tbl_film.id_film',
             )
             ->get();
-        return view('Frontend.page.home', [
-            'typeBlogs' => $typeBlogs,
-            'filmHomeDeleted0s' => $arrFilm,
-            'clusterCinema' => $clusterCinema,
-            'filmHomeDeleted1s' => $arrFilm1s
-        ]);
+        return view('Frontend.page.home');
     }
 
 
@@ -276,18 +269,18 @@ class FrontendController extends Controller
         foreach ($start_cinema as $key => $startCinemaItem) {
 ?>
 
-            <div style="padding : 10px ; box-shadow : 2px 2px 2px black ;border-bottom-right-radius: 10px;" class="row">
-                <div class="col-sm-10 ">
-                    <h6 style="display:inline ; color : blue"> <?= $startCinemaItem->user->name ?></h6>
-                    <p><small> Đã bình luận</small> : <strong><?= $startCinemaItem->content ?></strong> </p>
-                    <span class="badge badge-secondary"><?= $startCinemaItem->created_at->diffForHumans() ?></span>
-                </div>
-                <div class="col-sm-2">
-                    <p class="btn btn-success"><strong><?= $startCinemaItem->start ?></strong> <i class="fas fa-star"></i> </p>
-                </div>
-            </div>
-            <hr>
-        <?php
+<div style="padding : 10px ; box-shadow : 2px 2px 2px black ;border-bottom-right-radius: 10px;" class="row">
+    <div class="col-sm-10 ">
+        <h6 style="display:inline ; color : blue"> <?= $startCinemaItem->user->name ?></h6>
+        <p><small> Đã bình luận</small> : <strong><?= $startCinemaItem->content ?></strong> </p>
+        <span class="badge badge-secondary"><?= $startCinemaItem->created_at->diffForHumans() ?></span>
+    </div>
+    <div class="col-sm-2">
+        <p class="btn btn-success"><strong><?= $startCinemaItem->start ?></strong> <i class="fas fa-star"></i> </p>
+    </div>
+</div>
+<hr>
+<?php
         }
     }
 
@@ -306,14 +299,15 @@ class FrontendController extends Controller
         $text = '<strong style="color : red">' . $request->value . '</strong>';
         if (count($arrSave) == 0) {
         ?>
-            <p>Không có dữ liệu ...</p>
-            <?php
+<p>Không có dữ liệu ...</p>
+<?php
         } else {
             foreach ($arrSave as $item) {
             ?>
-                <a href="<?= route('web.detailFim', ['id_film' => $item->id_film, 'slug' => Str::slug($item->name)]) ?>" style=" list-style : none ">
-                    <?= str_replace($request->value, $text,  $item->name)  ?>
-                </a> <br>
+<a href="<?= route('web.detailFim', ['id_film' => $item->id_film, 'slug' => Str::slug($item->name)]) ?>"
+    style=" list-style : none ">
+    <?= str_replace($request->value, $text,  $item->name)  ?>
+</a> <br>
 <?php
             }
         }
