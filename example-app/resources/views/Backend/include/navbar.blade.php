@@ -106,8 +106,7 @@
         <span class="nav-text">Quản lý bình luận , đánh giá </span>
     </a>
     <ul aria-expanded="false">
-        <li><a href="{{ route('admin.typechair.list') }}">Danh sách</a></li>
-        <li><a href="{{ route('admin.typechair.addForm') }}">Thêm </a></li>
+        <a class="has-arrow" href="{{ route('admin.comment.start.cinema') }}">Quản lý bình luận đánh giá </a>
     </ul>
 </li>
 
