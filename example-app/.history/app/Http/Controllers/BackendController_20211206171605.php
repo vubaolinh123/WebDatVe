@@ -10,8 +10,7 @@ use Illuminate\Http\Request;
 class BackendController extends Controller
 {
     public function dashboard()
-    {
-        $receipt = Receipt::where('user_view_success' , 0) -> paginate(5);
+    {    $receipt = Receipt::where('user_view_success' , 0) -> paginate(5);
         return view('Backend.layout_admin',[ 'receiptComposer' => $receipt]);
     }
 
