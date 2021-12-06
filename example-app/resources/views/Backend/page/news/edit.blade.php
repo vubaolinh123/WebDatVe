@@ -39,7 +39,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Avata cũ</label>
+                                        <label for="">Ảnh cũ</label>
                                         <img style="width:100%" src="{{ asset("$URL_IMG_BLOG/$news->image_news") }}" alt="">
                                     </div>
                                 </div>
@@ -78,10 +78,6 @@
                     content_news: {
                         required: true,
                     },
-                    image_news: {
-                        required: true,
-                        extension: "jpeg|png|jpg|gif",
-                    },
 
                 },
                 messages: {
@@ -90,10 +86,6 @@
                     },
                     content_news: {
                         required: 'Chưa có nội dung !!!',
-                    },
-                    image_news: {
-                        required: "Chưa chọn ảnh tin tức !!",
-                        extension: "Vui lòng chọn ảnh ở định dạng (jpeg,png,jpg,gif).",
                     },
                 }
             });

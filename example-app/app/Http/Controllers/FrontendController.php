@@ -11,6 +11,7 @@ use App\Models\ClusterCinema;
 use App\Models\Film;
 use App\Models\FilmType;
 use App\Models\Foods;
+use App\Models\News;
 use App\Models\Receipt;
 use App\Models\Receipt_Detail;
 use App\Models\Receipt_Food;
@@ -33,23 +34,21 @@ class FrontendController extends Controller
 
             ->get();
 
-
         $filmHomeDeleted1s = Film::where('status', 0)->where('deleted', 1)
 
             ->get();
 
-
-
         $typeBlogs = Type_Blog::where('active', 0)->get();
         // $blogs = Type_Blog::where('active', 0)->with('blogss')->get();
 
-
+        $news = News::get()-> take(4);
         // dd($blogs);
         // dd($typeBlogs);
         return view('Frontend.page.home', compact(
             'filmHomeDeleted0s',
             'filmHomeDeleted1s',
             'typeBlogs',
+            'news'
         ));
     }
     public function detailFim(Request $request, $id_film, $slug)
@@ -421,5 +420,13 @@ Hóa đơn ...
         $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)->take(3)
             ->get();
         return view('Frontend.page.detail_blog', compact('blog', 'filmHomeDeleted0s'));
+    }
+
+    public function news(){
+        $id_news = $_GET['id_news'];
+        $news = News::find($id_news);
+        $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)->take(3)
+            ->get();
+        return view('Frontend.page.detail_news', compact('news', 'filmHomeDeleted0s'));
     }
 }

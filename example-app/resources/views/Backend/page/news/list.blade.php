@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Danh sách thời gian chiếu phim</h2>
+                    <h2>Danh sách tin tức</h2>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

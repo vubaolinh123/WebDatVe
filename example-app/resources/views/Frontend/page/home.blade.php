@@ -133,58 +133,21 @@
             </div>
         </div>
         <div class="item-discout">
+            @foreach ($news as $new)
             <div class="item-discout-film">
-                <img src="{{ asset('frontend/img/discount.png') }}" alt="">
+                <img style="width:100%" src="{{ asset("$URL_IMG_BLOG/$new->image_news") }}" alt="">
                 <div class="text-discount">
                     <div class="text-detail">
-                        <p class="title-discount">Ngày thành viên</p>
-                        <p>Bước sang năm mới, Galaxy dành tặng các Stars thêm một ngày tràn đầy “yêu thương” – Milo Day.
-                        </p>
+                        <p class="title-discount">{!! $new->title_news !!}</p>
+                        <p> {!! Str::limit($new->content_news, 100) !!}</p>
                     </div>
                     <div class="view-more-discount">
-                        <button>Chi tiết</button>
+                        <a href="{{ route('web.detail_news', ['id_news'=>$new->id_news]) }}">Chi tiet</a>
                     </div>
                 </div>
             </div>
-            <div class="item-discout-film">
-                <img src="{{ asset('frontend/img/discount.png') }}" alt="">
-                <div class="text-discount">
-                    <div class="text-detail">
-                        <p class="title-discount">Ngày thành viên</p>
-                        <p>Bước sang năm mới, Galaxy dành tặng các Stars thêm một ngày tràn đầy “yêu thương” – Milo Day.
-                        </p>
-                    </div>
-                    <div class="view-more-discount">
-                        <button>Chi tiết</button>
-                    </div>
-                </div>
-            </div>
-            <div class="item-discout-film">
-                <img src="{{ asset('frontend/img/discount.png') }}" alt="">
-                <div class="text-discount">
-                    <div class="text-detail">
-                        <p class="title-discount">Ngày thành viên</p>
-                        <p>Bước sang năm mới, Galaxy dành tặng các Stars thêm một ngày tràn đầy “yêu thương” – Milo Day.
-                        </p>
-                    </div>
-                    <div class="view-more-discount">
-                        <button>Chi tiết</button>
-                    </div>
-                </div>
-            </div>
-            <div class="item-discout-film">
-                <img src="{{ asset('frontend/img/discount.png') }}" alt="">
-                <div class="text-discount">
-                    <div class="text-detail">
-                        <p class="title-discount">Ngày thành viên</p>
-                        <p>Bước sang năm mới, Galaxy dành tặng các Stars thêm một ngày tràn đầy “yêu thương” – Milo Day.
-                        </p>
-                    </div>
-                    <div class="view-more-discount">
-                        <button>Chi tiết</button>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+            
         </div>
     </div>
 

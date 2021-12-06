@@ -42,6 +42,7 @@ Route::middleware(['cityAddress'])->group(function () {
         Route::get('/detail-blog', [FrontendController::class, 'detailBlog'])->name('web.detailBlog');
         Route::get('/getCityAddress/{code}', [FrontendController::class, 'getCityAddress'])->name('web.getCityAddress');
         Route::get('/ordreFilm', [FrontendController::class, 'ordreFilm'])->name('web.ordreFilm');
+        Route::get('/news', [FrontendController::class, 'news'])->name('web.detail_news');
     });
     Route::middleware(['auth'])->group(function () {
         // Route::get('/ordreFilm/detail/{id_receipt}', [FrontendController::class, 'detailOrderFilm'])->name('web.detailOrderFilm');
