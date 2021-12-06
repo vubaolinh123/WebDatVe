@@ -210,7 +210,6 @@ Route::middleware(['hasAdmin'])->group(function () {
             Route::post('/store', [SizeFood::class, 'store'])->name('admin.size_food.store');
             Route::delete('/delete/{id}', [SizeFood::class, 'delete'])->name('admin.size_food.delete');
             Route::put('/updated/{id}', [SizeFood::class, 'update'])->name('admin.size_food.updated');
-        });
         Route::prefix('receipt')->group(function () {
             Route::get('/list-receipt', [Receipt::class, 'index'])->name('admin.receipt.list');
             Route::get('/show-receipt/{id}', [Receipt::class, 'show'])->name('admin.receipt.show');
