@@ -28,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
     {
 
         $citys = json_decode(Http::get('https://provinces.open-api.vn/api/'));
+
+
+
         View::share([
             'citys' => $citys,
         ]);

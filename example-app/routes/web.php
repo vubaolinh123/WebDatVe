@@ -10,9 +10,13 @@ use App\Http\Controllers\CinemaroomController;
 
 use App\Http\Controllers\Cinema;
 use App\Http\Controllers\ClusterCinema;
-
+use App\Http\Controllers\CommentStartController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\FilmTypeController;
+use App\Http\Controllers\food;
+use App\Http\Controllers\TypeFood;
+use App\Http\Controllers\SizeFood;
+
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Receipt;
@@ -38,31 +42,44 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['cityAddress'])->group(function () {
     Route::prefix('')->group(function () {
         Route::get('/', [FrontendController::class, 'homeWeb'])->name('web.home');
+        // Route::get('/home', [FrontendController::class, 'homeWeb'])->name('web.home');
         Route::get('/detail/{id_film}/{slug}', [FrontendController::class, 'detailFim'])->name('web.detailFim');
         Route::get('/detail-blog', [FrontendController::class, 'detailBlog'])->name('web.detailBlog');
         Route::get('/getCityAddress/{code}', [FrontendController::class, 'getCityAddress'])->name('web.getCityAddress');
         Route::get('/ordreFilm', [FrontendController::class, 'ordreFilm'])->name('web.ordreFilm');
         Route::get('/news', [FrontendController::class, 'news'])->name('web.detail_news');
+
+
+        Route::post('/select-film-a', [FrontendController::class, 'select_film_ajax'])->name('web.aj.select.f');
+        Route::post('/select-cinema-a', [FrontendController::class, 'select_cinema_ajax'])->name('web.aj.select.c');
+        Route::post('/search', [FrontendController::class, 'search'])->name('web.search');
     });
     Route::middleware(['auth'])->group(function () {
         // Route::get('/ordreFilm/detail/{id_receipt}', [FrontendController::class, 'detailOrderFilm'])->name('web.detailOrderFilm');
-
+        Route::get('/cinema/{id}/{slug}', [FrontendController::class, 'showCinema'])->name('web.show.cinema');
         Route::get('/book/{id}', [FrontendController::class, 'book'])->name('web.book');
         Route::get('/book-ghe/{id}', [FrontendController::class, 'book_ghe'])->name('web.book_ghe');
         Route::post('/render-book', [FrontendController::class, 'render_book'])->name('web.render_book');
         Route::get('/check-render-book', [FrontendController::class, 'check_render_book'])->name('web.check_render_book');
         Route::get('/render-book-show', [FrontendController::class, 'render_book_show'])->name('web.render_book_show');
+
         Route::get('/check-chair', [FrontendController::class, 'check_chair'])->name('web.check_chair');
         Route::get('/render-check-chair', [FrontendController::class, 'render_check_chair'])->name('web.render_check_chair');
         Route::get('/pay-ticket/{id}', [FrontendController::class, 'pay_ticket'])->name('web.pay_ticket');
         Route::get('/pay-success/{id}', [FrontendController::class, 'pay_success'])->name('web.pay_success');
         Route::post('/get-chair', [FrontendController::class, 'get_chair'])->name('web.get_chair');
+
+        Route::post('/change-name', [FrontendController::class, 'change_name'])->name('web.change.name');
+        Route::post('/change-pass', [FrontendController::class, 'change_pass'])->name('web.change.pass');
+
+        Route::post('/comment-cinema', [FrontendController::class, 'comment_cinema'])->name('web.comment.start');
+        Route::post('/comment-show', [FrontendController::class, 'comment_cinema_show'])->name('web.comment.show');
     });
 });
 
 
 
-
+Route::redirect('/home', '/');
 
 
 // back-end
@@ -136,6 +153,7 @@ Route::middleware(['hasAdmin'])->group(function () {
             Route::get('/', [TypeChairController::class, 'index'])->name('admin.typechair.list');
             Route::get('add-typechair', [TypeChairController::class, 'create'])->name('admin.typechair.addForm');
             Route::post('save-add-typechair', [TypeChairController::class, 'store'])->name('admin.typechair.addSave');
+            Route::delete('delete-typechair/{typeChair}', [TypeChairController::class, 'destroy'])->name('admin.typechair.delete');
         });
         Route::prefix('chair')->group(function () {
             Route::get('/', [ChairController::class, 'index'])->name('admin.chair.list');
@@ -144,22 +162,56 @@ Route::middleware(['hasAdmin'])->group(function () {
             Route::post('create-chair-vip', [ChairController::class, 'create_chair_vip'])->name('admin.chair.create_chair_vip');
         });
 
+        //  Chỉ admin mới có quền còn lại là cộng tác viên
+        Route::middleware(['hasRolesAdmin'])->group(function () {
 
-        Route::prefix('cinema')->group(function () {
-            Route::get('/cluster', [ClusterCinema::class, 'index'])->name('cinema.cluster');
-            Route::post('/cluster/created', [ClusterCinema::class, 'store'])->name('cinema.cluster.create');
-            Route::delete('/cluster/delete/{id}', [ClusterCinema::class, 'destroy'])->name('cinema.cluster.delete');
-            Route::put('/cluster/updated/{id}', [ClusterCinema::class, 'update'])->name('cinema.cluster.updated');
+            Route::prefix('cinema')->group(function () {
+                Route::get('/cluster', [ClusterCinema::class, 'index'])->name('cinema.cluster');
+                Route::post('/cluster/created', [ClusterCinema::class, 'store'])->name('cinema.cluster.create');
+                Route::delete('/cluster/delete/{id}', [ClusterCinema::class, 'destroy'])->name('cinema.cluster.delete');
+                Route::put('/cluster/updated/{id}', [ClusterCinema::class, 'update'])->name('cinema.cluster.updated');
 
-            Route::get('/', [Cinema::class, 'index'])->name('cinema');
-            Route::get('/created', [Cinema::class, 'create'])->name('cinema.create');
-            Route::get('/updated/{id}', [Cinema::class, 'edit'])->name('cinema.update');
-            Route::delete('/delete/{id}', [Cinema::class, 'destroy'])->name('cinema.delete');
-            Route::put('/updated/{id}', [Cinema::class, 'update'])->name('cinema.updated');
+                Route::get('/', [Cinema::class, 'index'])->name('cinema');
+                Route::get('/created', [Cinema::class, 'create'])->name('cinema.create');
+                Route::get('/updated/{id}', [Cinema::class, 'edit'])->name('cinema.update');
+                Route::delete('/delete/{id}', [Cinema::class, 'destroy'])->name('cinema.delete');
+                Route::put('/updated/{id}', [Cinema::class, 'update'])->name('cinema.updated');
+            });
+
+            Route::get('/comment-start-cinema', [CommentStartController::class, 'index'])->name('admin.comment.start.cinema');
+            Route::get('/delete-comment-start-cinema/{startCiname}', [CommentStartController::class, 'destroy'])->name('admin.delete.comment.start.cinema');
+
+            Route::get('/manage-user', [BackendController::class, 'manage_user'])->name('admin.manage.user');
+            Route::post('/change-role', [BackendController::class, 'change_role'])->name('admin.change.role');
         });
         Route::prefix('category')->group(function () {
             Route::get('/list', [CategoryController::class, 'index'])->name('admin.category.list');
             Route::get('/add', [CategoryController::class, 'create'])->name('admin.category.add');
+        });
+        Route::prefix('food')->group(function () {
+            Route::get('/list', [food::class, 'index'])->name('admin.food.list');
+            Route::get('/add', [food::class, 'create'])->name('admin.food.add');
+            Route::get('/edit/{id}', [food::class, 'edit'])->name('admin.food.edit');
+            Route::post('/store', [food::class, 'store'])->name('admin.food.store');
+            Route::delete('/delete/{id}', [food::class, 'delete'])->name('admin.food.delete');
+            Route::put('/updated/{id}', [food::class, 'update'])->name('admin.food.updated');
+        });
+        Route::prefix('typefood')->group(function () {
+            Route::get('/list', [TypeFood::class, 'index'])->name('admin.type_food.list');
+            Route::get('/add', [TypeFood::class, 'create'])->name('admin.type_food.add');
+            Route::get('/edit/{id}', [TypeFood::class, 'edit'])->name('admin.type_food.edit');
+            Route::post('/store', [TypeFood::class, 'store'])->name('admin.type_food.store');
+            Route::delete('/delete/{id}', [TypeFood::class, 'delete'])->name('admin.type_food.delete');
+            Route::put('/updated/{id}', [TypeFood::class, 'update'])->name('admin.type_food.updated');
+        });
+
+        Route::prefix('sizefood')->group(function () {
+            Route::get('/list', [SizeFood::class, 'index'])->name('admin.size_food.list');
+            Route::get('/add', [SizeFood::class, 'create'])->name('admin.size_food.add');
+            Route::get('/edit/{id}', [SizeFood::class, 'edit'])->name('admin.size_food.edit');
+            Route::post('/store', [SizeFood::class, 'store'])->name('admin.size_food.store');
+            Route::delete('/delete/{id}', [SizeFood::class, 'delete'])->name('admin.size_food.delete');
+            Route::put('/updated/{id}', [SizeFood::class, 'update'])->name('admin.size_food.updated');
         });
         Route::prefix('receipt')->group(function () {
             Route::get('/list-receipt', [Receipt::class, 'index'])->name('admin.receipt.list');
@@ -203,5 +255,6 @@ Route::middleware(['hasAdmin'])->group(function () {
         });
     });
 });
+
 
 Route::get('/confirm/{links}', [Receipt::class, 'confirm'])->name('confirm.receipt.movie');

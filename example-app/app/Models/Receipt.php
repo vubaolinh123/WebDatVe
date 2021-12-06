@@ -30,7 +30,10 @@ class Receipt extends Model
     {
         return $this->hasMany(Receipt_Detail::class, 'receipt_id', 'id_receipt');
     }
-
+    // public function receipt_detail()
+    // {
+    //     return $this->hasMany(Receipt_Detail::class, 'receipt_id', 'id_receipt');
+    // }
     public function receiptDetail()
     {
         return $this->belongsTo(Receipt_Detail::class, 'receipt_id', 'id_receipt');

@@ -7,10 +7,12 @@
                 </a>
             </div>
         </div>
-        <div class="header-search">
-            <input type="text" placeholder="Tìm tên phim..." />
+        <div style="position : relative" class="header-search">
+            <input class="ip-search" type="text" placeholder="Tìm tên phim..." />
             <i class="fas fa-search"></i>
+            <div  class="p-3 show-sr"></div>
         </div>
+
 
 
         <div class=" row">
@@ -21,8 +23,8 @@
                         <div class="col-xs-12">
                             <div style="">
 
-                                <div><i class="far fa-user"></i>
-                                    <span>{{ Auth::user()->name }}</span>
+                                <div >
+                                    <span class="btn btn-dark text-primary" id="name_us"><i class="far fa-user"></i>{{ Auth::user()->name }}</span>
                                 </div>
                                 <a style="color:white;font-size:10px;background:rgb(132, 132, 132) ;padding:3px; border-radius:10px;
                 margin-left: 20px;
@@ -71,34 +73,20 @@
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
     </div>
     <div class="header-menu">
         <ul class="menu-level-1">
             <li class="menu-level-1-item"><a href="{{ route('web.home') }}">Trang chủ</a></li>
             <li class="menu-level-1-item"><a href="">Mua vé</a></li>
             <li class="menu-level-1-item"><a href="">Phim</a></li>
-            <li class="menu-level-1-item">
-                <a href="">góc điện ảnh</a>
+            {{-- <li class="menu-level-1-item">
+                <a href="">điện ảnh</a>
                 <ul class="menu-level-2">
                     @foreach ($type_blogs as $type_blog)
                         <li><a href="">{{ $type_blog->name }}</a></li>
                     @endforeach
                 </ul>
-            </li>
-            <li class="menu-level-1-item"><a href="">rạp/giá vé</a></li>
-            <li class="menu-level-1-item"><a href="">Hỗ trợ</a></li>
-            <li class="menu-level-1-item"><a href="">Thành viên</a></li>
+            </li> --}}
         </ul>
     </div>
 </header>

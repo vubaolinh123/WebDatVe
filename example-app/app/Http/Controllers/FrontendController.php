@@ -2,55 +2,93 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\PayTicketEmail;
-use App\Mail\PayMail;
+
 use App\Models\Blog;
-use App\Models\Cinema;
-use App\Models\Cinemaroom;
-use App\Models\ClusterCinema;
+use Carbon\Carbon;
 use App\Models\Film;
+use App\Models\Cinema;
 use App\Models\FilmType;
 use App\Models\Foods;
 use App\Models\News;
-use App\Models\Receipt;
 use App\Models\Receipt_Detail;
 use App\Models\Receipt_Food;
 use App\Models\Showtime;
 use App\Models\Ticket;
-use App\Models\Type_Blog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
+use App\Models\ClusterCinema;
 use Illuminate\Support\Facades\Session;
-use Carbon\Carbon;
-use Illuminate\Contracts\Session\Session as SessionSession;
+use App\Http\Controllers\Traits\Frontend\Book;
+use App\Http\Controllers\Traits\Frontend\AjaxBook;
+use App\Http\Controllers\Traits\Frontend\AjaxSelect;
+use App\Http\Controllers\Traits\Frontend\PayBook;
+use App\Models\Receipt;
+use App\Models\StartCinema;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+// use Str;
+use Illuminate\Support\Str;
+use App\Models\Type_Blog;
+use App\Models\ClusterCinema as ModelsClusterCinema;
 
 class FrontendController extends Controller
 {
+    use Book, AjaxSelect, AjaxBook, PayBook;
+
     public function homeWeb()
     {
-        $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)
-
+        $now = Carbon::now('Asia/Ho_Chi_Minh');
+        $arrFilm = [];
+        $arrFilm1s = [];
+        $arrCount = [];
+        $filmHomeDeleted0s = Film::inRandomOrder()->where('status', 0)->where('deleted', 0)
+            ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
+            ->select(
+                'tbl_film_type.name as nameTypeFilm',
+                'tbl_film.name',
+                'tbl_film.cast',
+                'tbl_film.avatar',
+                'tbl_film.id_film',
+                'tbl_film.trailer',
+            )
             ->get();
-
-        $filmHomeDeleted1s = Film::where('status', 0)->where('deleted', 1)
-
-            ->get();
-
+        foreach ($filmHomeDeleted0s  as   $valueByfilmHomeDeleted0s) {
+            if (count($valueByfilmHomeDeleted0s->showtimeNow) > 0 && !in_array($valueByfilmHomeDeleted0s->id_film, $arrCount)) {
+                foreach ($valueByfilmHomeDeleted0s->showtimeNow as $showtime) {
+                    if (
+                        $showtime->cinema_room->cinema->cluster_cinema->city_id == Session::get('cityAddress')
+                        && !in_array($valueByfilmHomeDeleted0s->id_film, $arrCount)
+                    ) {
+                        if ($showtime->show_date == $now->toDateString()) {
+                            array_push($arrFilm, $valueByfilmHomeDeleted0s);
+                        } else {
+                            array_push($arrFilm1s, $valueByfilmHomeDeleted0s);
+                        }
+                        // array_push($arrFilm , $valueByfilmHomeDeleted0s);
+                        array_push($arrCount, $valueByfilmHomeDeleted0s->id_film);
+                    }
+                }
+            }
+        }
         $typeBlogs = Type_Blog::where('active', 0)->get();
-        // $blogs = Type_Blog::where('active', 0)->with('blogss')->get();
-
-        $news = News::get()-> take(4);
-        // dd($blogs);
-        // dd($typeBlogs);
-        return view('Frontend.page.home', compact(
-            'filmHomeDeleted0s',
-            'filmHomeDeleted1s',
-            'typeBlogs',
-            'news'
-        ));
+        $clusterCinema = ModelsClusterCinema::where('city_id', Session::get('cityAddress'))->get();
+        $filmHomeDeleted1s = Film::inRandomOrder()->where('status', 0)->where('deleted', 1)
+            ->join('tbl_film_type', 'tbl_film_type.id_film_type', 'tbl_film.film_type_id')
+            ->select(
+                'tbl_film_type.name as nameTypeFilm',
+                'tbl_film.name',
+                'tbl_film.avatar',
+                'tbl_film.id_film',
+            )
+            ->get();
+        return view('Frontend.page.home', [
+            'typeBlogs' => $typeBlogs,
+            'filmHomeDeleted0s' => $arrFilm,
+            'clusterCinema' => $clusterCinema,
+            'filmHomeDeleted1s' => $arrFilm1s
+        ]);
     }
+
     public function detailFim(Request $request, $id_film, $slug)
     {
 
@@ -66,8 +104,8 @@ class FrontendController extends Controller
         // dd($film->showtime->where('show_date',$time)->where('star_time'  , Carbon::now('Asia/Ho_Chi_Minh')->toTimeString() ) );
 
         foreach ($film->showtime->where('show_date', $time) as $room) {
-
-            if ($room->start_time < Carbon::now('Asia/Ho_Chi_Minh')->toTimeString()) continue;
+            // if ($room->start_time < Carbon::now('Asia/Ho_Chi_Minh')->toTimeString()) continue;
+            // dd($room);
 
             if (!in_array($room->cinema_room->id_cinema_room, $checkRoom)) {
                 array_push($cinemaRooms, $room->cinema_room);
@@ -105,312 +143,61 @@ class FrontendController extends Controller
         Session::put('cityAddress', $code);
         return redirect()->back();
     }
-    public function book(Request $request, $id)
-    {
-        $request->session()->forget('book1');
-        $show_time = Showtime::find($id);
-        $tickets = Ticket::all();
-        $foods = Foods::where('status', 0)->get();
-        return view('Frontend.page.book', [
-            'show_time' => $show_time,
-            'tickets' => $tickets,
-            'id' => $id,
-            'foods' => $foods
-        ]);
-    }
-    public function book_ghe(Request $request, $id)
-    {
-        $request->session()->forget('chair');
-        $show_time = Showtime::find($id);
-        $text = 'A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z';
-        $arr = explode("|", $text);
 
-
-        return view('Frontend.page.bookGhe', [
-            'show_time' => $show_time,
-            'id' => $id,
-            'arr' => $arr,
-        ]);
-    }
-    public function render_book(Request $request)
-    {
-
-        $arr = [];
-        $arr[$request->type][$request->id] = $request->value;
-        if ($request->session()->has('book1')) {
-            $dataOld = $request->session()->get('book1');
-            $dataOld[$request->type][$request->id] = $request->value;
-            $request->session()->put('book1', $dataOld);
-        } else {
-            $request->session()->put('book1', $arr);
-        }
-        $request->session()->save();
-        dd($request->session()->get('book1'));
-    }
-
-    public function check_render_book(Request $request)
-    {
-
-        if ($request->session()->has('book1')) {
-            $dataOld = $request->session()->get('book1');
-            if (array_key_exists('ticket', $dataOld)) return 1;
-            return 0;
-        } else {
-            return 0;
-        }
-    }
-
-    public function render_book_show(Request $request)
-    {
-        $prFoods = 0;
-        $prTicket = 0;
-        if ($request->session()->has('book1')) {
-            foreach ($request->session()->get('book1') as $key => $value) {
-                if ($key == 'ticket') {
-                    foreach ($value as $k => $v) {
-                        $ticket = Ticket::where('id_price_ticket', $k)->first();
-                        $prTicket += $ticket->unit_price * $v;
-?>
-<p> <?php echo $ticket->name; ?> | Số lượng : <?= $v ?> | Tổng : <?php echo $ticket->unit_price * $v; ?></p>
-<?php
-                    }
-                }
-            };
-            foreach ($request->session()->get('book1') as $key => $value) {
-                if ($key == 'food') {
-
-                    foreach ($value as  $k => $v) {
-                        $food = Foods::where('id_food', $k)->first();
-                        $prFoods += $food->price * $v;
-                    ?>
-<p> <?php echo $food->name ?> | Số lượng : <?= $v ?>| Tổng : <?php echo  $food->price * $v  ?> </p>
-<?php
-                    }
-                }
-            }
-        } else {
-            ?>
-Hóa đơn ...
-<?php
-        }
-        ?>
-<h2>Tổng : <?= number_format($prFoods + $prTicket) ?> VND</h2>
-<?php
-    }
-
-    public function get_chair(Request $request)
-    {
-        // $request->session()->forget('chair');
-        // dd(0);
-        $flag = false;
-        $arr = [
-            'chair' => $request->number_chair,
-            'status' => $request->number_vip,
-        ];
-        if ($request->session()->has('chair')) {
-
-            $dataOld = $request->session()->get('chair');
-            $arrLoc = [];
-            foreach ($dataOld as $val) {
-                if (($val['chair'] == $request->number_chair)) {
-                    $flag = true;
-                } else {
-                    array_push($arrLoc, $val);
-                };
-            }
-            if (!$flag) array_push($arrLoc, $arr);
-
-            $request->session()->put('chair', $arrLoc);
-            $request->session()->save();
-        } else {
-            $request->session()->put('chair', []);
-            $dataOld = $request->session()->get('chair');
-            array_push($dataOld, $arr);
-            $request->session()->put('chair', $dataOld);
-        }
-        $request->session()->save();
-        dd($request->session()->get('chair'));
-    }
-
-    public function check_chair(Request $request)
-    {
-        $data = $request->session()->get('chair');
-        if ($data == null || count($data) == 0) {
-            return 0;
-        } else {
-            return 1;
-        }
-    }
-
-    public function render_check_chair(Request $request)
-    {
-
-        if ($request->session()->has('chair')) {
-            foreach ($request->session()->get('chair') as $value) {
-        ?>
-<p>Bạn đã đặt ghế <?php if ($value['status'] == 1) {
-                                        echo 'VIP';
-                                    } else {
-                                        echo 'thường';
-                                    } ?> : <?= $value['chair'] ?></p>
-<?php
-            }
-        }
-    }
-
-    /**
-     * @param \App\Models\Showtime $show_time
-     */
-    public function pay_ticket(Showtime $showtimes, $id)
-    {
-        $show_time = $showtimes::find($id);
-        return view('Frontend.page.pay-ticket', [
-            'show_time' => $show_time,
-            'id' => $show_time->id_showtime
-        ]);
-    }
-
-    /**
-     * @param \App\Models\Ticket $tickets
-     * @param \App\Models\Foods $foods
-     * @param \App\Models\Receipt $receipt
-     * @param \App\Models\Receipt_Detail $receipt_Detail
-     * @param \App\Models\Receipt_Food $receipt_Food
-     */
-    public function pay_success(
-        Ticket $tickets,
-        Foods $foods,
-        Receipt $receipt,
-        Receipt_Detail $receipt_Detail,
-        Receipt_Food $receipt_Food,
-        Request $request,
-        $id
-    ) {
-        $prFoods = 0;
-        $prTicket = 0;
-
-        if ($request->session()->has('book1')) {
-
-            foreach ($request->session()->get('book1') as $key => $value) {
-                if ($key == 'ticket') {
-                    foreach ($value as $k => $v) {
-                        $ticket = $tickets::where('id_price_ticket', $k)->first();
-                        $prTicket += $ticket->unit_price * $v;
-                    }
-                } elseif ($key == 'food') {
-                    foreach ($value as  $k => $v) {
-                        $food = $foods::where('id_food', $k)->first();
-                        $prFoods += $food->price * $v;
-                    }
-                }
-            };
-        }
-
-        $total = $prFoods + $prTicket;
-        $token = uniqid() . time();
-        $receipt::create([
-            'id_receipt' => $token,
-            'user_id' => Auth::user()->id,
-            'date_pay' => Carbon::now('Asia/Ho_Chi_Minh'),
-            'total' => $total,
-            'showtime_id' => $id
-        ]);
-
-
-        foreach ($request->session()->get('book1') as $key => $value) {
-
-            if ($key == 'ticket') {
-
-                foreach ($value as $k => $v) {
-
-                    foreach ($request->session()->get('chair') as $value) {
-
-                        $ticket = $tickets::where('id_price_ticket', $k)->first();
-                        if ($ticket->status == $value['status']) {
-                            $receipt_Detail::create([
-                                'ticket_id' => $k,
-                                'chair_code' => $value['chair'],
-                                'showtime_id' => $id,
-                                'receipt_id' => $token
-                            ]);
-                        }
-                    }
-                }
-            } elseif ($key == 'food') {
-
-                foreach ($value as  $k => $v) {
-                    $receipt_Food::create([
-                        'quantity' => $v,
-                        'food_id' => $k,
-                        'receipt_id' => $token
-                    ]);
-                }
-            }
-        };
-
-        Mail::to(Auth::user()->email)->send(new PayMail($id));
-        $request->session()->forget('chair');
-        $request->session()->forget('book1');
-        return redirect('/');
-    }
     public function ordreFilm()
     {
-
         if (!isset(Auth::user()->id)) {
             $null = 'Bạn chưa đăng nhập tài khoản !!';
             return view('Frontend.page.ordreFilm', compact('null'));
         } else {
             $id_user = Auth::user()->id;
             $receipts = Receipt::where('user_id', $id_user)
-                // ->pluck(
-                //     'id_receipt',
-                //     'date_pay',
-                //     'total',
-                //     'user_view_success',
-                //     'showtime_id'
-                // );
-                ->join('tbl_receipt_details as receiptDetail', 'receiptDetail.receipt_id', 'tbl_receipt.id_receipt')
-                ->leftJoin('tbl_showtime', 'tbl_showtime.id_showtime', 'receiptDetail.showtime_id')
-                ->join('tbl_film as film', 'film.id_film', 'tbl_showtime.film_id')
-                ->select(
-                    'film.avatar as img_film',
-                    'film.name as name_film',
-                    'tbl_showtime.show_date',
-                    'tbl_showtime.start_time',
-                    'receiptDetail.chair_code',
-                    'tbl_receipt.total',
-                    'film.id_film',
-                )
-
+                // ->with('showtime')
+                // ->join('tbl_receipt_details as receiptDetail', 'receiptDetail.receipt_id', 'tbl_receipt.id_receipt')
+                // ->leftJoin('tbl_showtime', 'tbl_showtime.id_showtime', 'receiptDetail.showtime_id')
+                // ->join('tbl_film as film', 'film.id_film', 'tbl_showtime.film_id')
+                // ->select(
+                //     'film.avatar as img_film',
+                //     'film.name as name_film',
+                //     'tbl_showtime.show_date',
+                //     'tbl_showtime.start_time',
+                //     'receiptDetail.chair_code',
+                //     'tbl_receipt.total',
+                //     'tbl_receipt.id_receipt',
+                //     'film.id_film',
+                // )
                 ->get();
+            // dump($id_user);
             // dd($receipts);
-            $receiptsVl = [];
+            // $receiptsVl = [];
 
-            foreach ($receipts as $key => $receipt) {
-                // echo  $receipt->show_date;
-                if (!in_array($receipt->name_film, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->name_film);
-                }
-                if (!in_array($receipt->id_film, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->id_film);
-                }
-                if (!in_array($receipt->total, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->total);
-                }
-                if (!in_array($receipt->img_film, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->img_film);
-                }
-                array_push($receiptsVl, $receipt->show_date);
-                if (!in_array($receipt->start_time, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->start_time);
-                }
-                if (!in_array($receipt->chair_code, $receiptsVl)) {
-                    array_push($receiptsVl, $receipt->chair_code);
-                }
-            }
-            $receiptsVl = array_chunk($receiptsVl, 9);
+            // foreach ($receipts as $key => $receipt) {
+
+            //     // echo  $receipt->show_date;
+            //     // if (!in_array($receipt->name_film, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->name_film);
+            //     // }
+            //     // if (!in_array($receipt->id_film, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->id_film);
+            //     // }
+            //     // if (!in_array($receipt->total, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->total);
+            //     // }
+            //     // if (!in_array($receipt->img_film, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->img_film);
+            //     // }
+            //     // array_push($receiptsVl, $receipt->show_date);
+            //     // if (!in_array($receipt->start_time, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->start_time);
+            //     // }
+            //     // if (!in_array($receipt->chair_code, $receiptsVl)) {
+            //     //     array_push($receiptsVl, $receipt->chair_code);
+            //     // }
+            // }
+            // // $receiptsVl = array_chunk($receiptsVl, 9);
             // dd($receiptsVl);
-            return view('Frontend.page.ordreFilm', compact('receiptsVl'));
+            // dd($receiptsVl);
+            return view('Frontend.page.ordreFilm', compact('receipts'));
         }
     }
     public function detailBlog(Request $request)
@@ -420,6 +207,121 @@ Hóa đơn ...
         $filmHomeDeleted0s = Film::where('status', 0)->where('deleted', 0)->take(3)
             ->get();
         return view('Frontend.page.detail_blog', compact('blog', 'filmHomeDeleted0s'));
+    }
+
+    public function change_name(Request $request)
+    {
+        if (Auth::check()) {
+            User::find(Auth::user()->id)->update(['name' => $request->value]);
+        }
+    }
+    public function showCinema(Request $request, $id, $slug)
+    {
+        $clusterCinema = ClusterCinema::where('city_id', Session::get('cityAddress'))->get();
+        $cinema = Cinema::where('id', $id)->first();
+        $countStart = StartCinema::where('cinema_id', $id)->count();
+        $numStart = StartCinema::where('cinema_id', $id)->sum('start');
+
+        return view('Frontend.page.show_cinema', [
+            'cinema' => $cinema,
+            'clusterCinema' => $clusterCinema,
+            'countStart' => $countStart,
+            'numStart' => $numStart
+        ]);
+    }
+
+
+    public function change_pass(Request $request)
+    {
+
+        if (Auth::attempt(['email' => Auth::user()->email, 'password' => $request->passwordOld])) {
+            User::find(Auth::user()->id)->update(['password' => Hash::make($request->passwordConfirm)]);
+            return 'Đổi mật khẩu hoàn tất ';
+        } else {
+            return 'Mật khẩu không chính xác !';
+        }
+    }
+
+    public function comment_cinema(Request $request)
+    {
+        if (Auth::check()) {
+            if (StartCinema::where('user_id', auth()->user()->id)->where('cinema_id', $request->cinema_id)->exists()) {
+                return 1;
+            } else {
+                $flag = false;
+                $cinema = Cinema::where('id', $request->cinema_id)->first();
+                foreach ($cinema->cinema_room as $ci) {
+                    foreach ($ci->show_time as $show) {
+                        foreach ($show->receipts as $receipt) {
+                            if (auth()->user()->id == $receipt->user_id) {
+                                $flag = true;
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) break;
+                }
+                if ($flag == true) {
+                    StartCinema::create([
+                        'content' => $request->content,
+                        'start' => $request->start,
+                        'user_id' => auth()->user()->id,
+                        'cinema_id' => $request->cinema_id
+                    ]);
+                    return 0;
+                }
+                return 3;
+            }
+        }
+    }
+
+    public function comment_cinema_show(Request $request)
+    {
+        $start_cinema = StartCinema::where('cinema_id', $request->id_cinema)->orderBy('id', 'desc')->get();
+        foreach ($start_cinema as $key => $startCinemaItem) {
+?>
+
+            <div style="padding : 10px ; box-shadow : 2px 2px 2px black ;border-bottom-right-radius: 10px;" class="row">
+                <div class="col-sm-10 ">
+                    <h6 style="display:inline ; color : blue"> <?= $startCinemaItem->user->name ?></h6>
+                    <p><small> Đã bình luận</small> : <strong><?= $startCinemaItem->content ?></strong> </p>
+                    <span class="badge badge-secondary"><?= $startCinemaItem->created_at->diffForHumans() ?></span>
+                </div>
+                <div class="col-sm-2">
+                    <p class="btn btn-success"><strong><?= $startCinemaItem->start ?></strong> <i class="fas fa-star"></i> </p>
+                </div>
+            </div>
+            <hr>
+        <?php
+        }
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->value == '') return;
+        $dt = Carbon::now('Asia/Ho_Chi_Minh');
+        $films = Film::where('name', 'like', '%' . $request->value . '%')->get();
+        // $arrId = [];
+        $arrSave = [];
+        foreach ($films as $film) {
+            foreach ($film->showtime as $showtime) {
+                if ($showtime->show_date >= $dt->toDateString()) $arrSave[$film->id_film] = $film;
+            }
+        }
+        $text = '<strong style="color : red">' . $request->value . '</strong>';
+        if (count($arrSave) == 0) {
+        ?>
+            <p>Không có dữ liệu ...</p>
+            <?php
+        } else {
+            foreach ($arrSave as $item) {
+            ?>
+                <a href="<?= route('web.detailFim', ['id_film' => $item->id_film, 'slug' => Str::slug($item->name)]) ?>" style=" list-style : none ">
+                    <?= str_replace($request->value, $text,  $item->name)  ?>
+                </a> <br>
+<?php
+            }
+        }
     }
 
     public function news(){
