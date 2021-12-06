@@ -144,7 +144,7 @@
 </li>
 
 
-  {{-- <li class="nav-label">Apps</li>
+  <li class="nav-label">Apps</li>
 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-app-store"></i><span
             class="nav-text">Apps</span></a>
     <ul aria-expanded="false">
@@ -158,7 +158,7 @@
         </li>
         <li><a href="./app-calender.html">Calendar</a></li>
     </ul>
-</li> --}}
+</li>
 {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-chart-bar-33"></i><span
             class="nav-text">Charts</span></a>
     <ul aria-expanded="false">

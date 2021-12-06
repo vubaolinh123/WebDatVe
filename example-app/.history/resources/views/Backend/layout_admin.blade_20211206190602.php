@@ -73,7 +73,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <ul class="list-unstyled">
-                                        {{-- @foreach ($receiptComposer as $item)
+                                        @foreach ($receiptComposer as $item)
                                             <li class="media dropdown-item">
                                                 <span class="success"><i class="ti-user"></i></span>
                                                 <div class="media-body">
@@ -85,7 +85,7 @@
                                                 </div>
                                                 <span class="notify-time">{{    $item -> date_pay }}</span>
                                             </li>
-                                        @endforeach --}}
+                                        @endforeach
                                     </ul>
                                     <a class="all-notification" href="#">See all notifications <i
                                             class="ti-arrow-right"></i></a>
