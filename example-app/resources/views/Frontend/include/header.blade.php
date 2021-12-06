@@ -73,17 +73,6 @@
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
     </div>
     <div class="header-menu">
         <ul class="menu-level-1">

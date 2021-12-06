@@ -14,10 +14,12 @@ class Receipt_Detail extends Model
     protected $primaryKey = "id_receipt_detail";
     protected $guarded = [];
 
-    public function ticket(){
-        return $this->belongsTo(Ticket::class , 'ticket_id');
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class, 'ticket_id');
     }
-    public function showtime(){
-        return $this->belongsTo(Showtime::class , 'showtime_id');
+    public function showtime()
+    {
+        return $this->belongsTo(Showtime::class, 'showtime_id');
     }
 }

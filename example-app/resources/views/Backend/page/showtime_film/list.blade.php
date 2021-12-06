@@ -5,6 +5,7 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Danh sách thời gian chiếu phim</h2>
+                    <h3>Ngày hôm nay : {{ $today }}</h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -34,25 +35,34 @@
                                                 src="{{ asset("$URL_IMG_FILM/$showtimeFilm->imgFilm") }}" alt="">
                                         </th>
                                         <th>{{ $showtimeFilm->nameFilm }}</th>
+                                        {{-- @php
+                                            $today = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
+                                            $time = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->format('H:i');
+                                        @endphp --}}
                                         <th>
-                                            {{-- @if ((date('d-m-Y ', strtotime($showtimeFilm->show_date)))>$today)
-                                            chưa chiếu
-                                        @else
-                                            đã chiếu
-                                @endif --}}
-                                            <?php
-                                            if ($showtimeFilm->show_date > $today) {
-                                                echo '<button class="btn btn-rounded btn-danger">Chưa chiếu</button>';
-                                            } elseif ($showtimeFilm->show_date = $today || ($showtimeFilm->start_time = $time)) {
-                                                echo '<button class="btn btn-rounded btn-info">Đang chiếu </button>';
-                                            } else {
-                                                echo '<button class="btn btn-rounded btn-primary">Đã chiếu</button>';
-                                            }
-                                            
-                                            ?>
-                                            {{-- <button class="btn btn-rounded btn-danger">Chưa chiếu</button> --}}
+                                            {{-- {{ $today }} --}}
+                                            {{-- @if ($today = $showtimeFilm->show_date)
+                                                <button class="btn btn-rounded btn-info">Đang chiếu </button>
+
+                                            @endif --}}
+                                            @if (strtotime($showtimeFilm->show_date) > strtotime($today))
+                                                <button class="btn btn-rounded btn-danger">Chưa chiếu</button>
+                                            @elseif ( strtotime($showtimeFilm->show_date) == strtotime($today) )
+                                                <button class="btn btn-rounded btn-info">Đang chiếu </button>
+                                            @elseif (strtotime($showtimeFilm->show_date) < strtotime($today)) <button
+                                                    class="btn btn-rounded btn-primary">Đã chiếu</button>
+                                            @endif
+                                            @php
+                                                // if (strtotime($showtimeFilm->show_date) > strtotime($today)) {
+                                                //     echo 'Chưa chiếu';
+                                                // } elseif (strtotime($showtimeFilm->show_date) == strtotime($today)) {
+                                                //     echo 'Đang chiếu';
+                                                // }
+                                            @endphp
+
                                         </th>
                                         <th>{{ date('d-m-Y ', strtotime($showtimeFilm->show_date)) }}</th>
+
                                         <th>{{ date('H:i', strtotime($showtimeFilm->start_time)) }}</th>
                                         <th>{{ date('H:i', strtotime($showtimeFilm->time_ends)) }}</th>
                                         <th>{{ $showtimeFilm->cinema_room_id }}</th>
