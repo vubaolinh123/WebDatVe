@@ -66,7 +66,7 @@
 
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown notification_dropdown">
-                                <a class=" " style="border:1px solid #593bdb ; padding : 10px ; border-redius : 10px ; color:black" href="{{ route('web.home') }}">Xem website</a>
+                                <a class="btn " href="{{ route('web.home') }}">Xem website</a>
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-bell"></i>
                                     <div class="pulse-css"></div>
