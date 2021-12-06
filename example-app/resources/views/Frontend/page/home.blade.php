@@ -102,9 +102,7 @@
                                                 {!! $blog->title_blog !!}
                                             </a>
                                         </div>
-                                        <div id="fb-root"></div>
-                                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0"
-                                                                                nonce="J9qJac5o"></script>
+
                                         <div class="fb-like"
                                             data-href="https://developers.facebook.com/docs/plugins/" data-width=""
                                             data-layout="standard" data-action="like" data-size="small" data-share="true">

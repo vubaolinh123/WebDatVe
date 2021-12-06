@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{{ asset('frontend/icofont/icofont.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
     @yield('css.web')
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0"
+        nonce="J9qJac5o"></script>
 </head>
 
 <body>

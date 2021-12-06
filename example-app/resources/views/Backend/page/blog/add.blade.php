@@ -91,7 +91,7 @@
                     title_blog: {
                         required: true,
                     },
-                    conten_blog; {
+                    conten_blog: {
                         required: true,
 
                     },
@@ -109,7 +109,7 @@
                     title_blog: {
                         required: 'Chưa có tiêu đề !!!',
                     },
-                    conten_blog; {
+                    conten_blog: {
                         required: 'Chưa có nội dung !!!',
 
                     },
