@@ -136,7 +136,6 @@
     <div>
         @include('Backend.include.file_scrip_js')
     </div>
-
 </body>
-
+ // tìm trên youtube á tìm thay đổi nền vs code thay lâu r k nhớ ô hhh 
 </html>

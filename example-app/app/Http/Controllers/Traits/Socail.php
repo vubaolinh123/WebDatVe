@@ -10,8 +10,6 @@ use Socialite;
 
 trait Socail
 {
-
-
     public function driver()
     {
     }
